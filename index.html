@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<script>try{var _t=localStorage.getItem('metrados_tema')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.dataset.theme=_t}catch(e){}</script>
+<script>
+var PALS=[
+{id:'jade',n:'Jade',h:172,k:258,j:38,s:1},
+{id:'oliva',n:'Oliva',h:84,k:56,j:196,s:.9},
+{id:'niebla',n:'Azul niebla',h:214,k:236,j:166,s:1},
+{id:'durazno',n:'Durazno',h:20,k:38,j:268,s:1},
+{id:'lavanda',n:'Lavanda',h:266,k:288,j:190,s:1},
+{id:'menta',n:'Menta',h:142,k:168,j:48,s:1},
+{id:'arena',n:'Arena dorada',h:40,k:22,j:190,s:.9},
+{id:'cielo',n:'Cielo',h:196,k:218,j:150,s:1},
+{id:'ciruela',n:'Ciruela',h:306,k:326,j:190,s:.9},
+{id:'pizarra',n:'Pizarra',h:222,k:242,j:172,s:.3}];
+function palVars(P,d){var s=P.s,H=P.h,K=P.k,c=function(h,sat,l,a){return 'hsl('+h+' '+Math.round(sat*s)+'% '+l+'%'+(a!=null?' / '+a:'')+')'};
+ if(!d)return{'--accent':c(H,40,35),'--accent-dk':c(H,44,25),'--accent-soft':c(H,38,94),'--cat':c(K,45,96),'--cat2':c(K,42,91),'--cat-line':c(K,36,86),'--cat-ink':c(K,32,42),
+  '--bg':c(H,22,96),'--line':c(H,14,89),'--line2':c(H,16,80),'--soft':c(H,16,94),'--fill':c(H,20,97.5),'--ink':c(H,30,14),'--text':c(H,22,20),'--muted':c(H,12,36),'--subtle':c(H,10,45)};
+ return{'--accent':c(H,55,76),'--accent-dk':c(H,60,84),'--accent-soft':c(H,32,22),'--cat':c(K,24,18.5),'--cat2':c(K,26,24.5),'--cat-line':c(K,24,31),'--cat-ink':c(K,70,86),
+  '--bg':c(H,26,10.5),'--panel':c(H,22,15.5),'--line':c(H,18,26),'--line2':c(H,18,35),'--soft':c(H,20,20),'--fill':c(H,20,18),'--ink':c(H,30,98),'--text':c(H,30,94),'--muted':c(H,20,80),'--subtle':c(H,16,70),
+  '--g1':c(K,60,65,.16),'--g2':c(H,55,62,.12),'--g3':c(K,50,60,.10),'--b1':c(H,70,78),'--b2':c(K,62,82),'--b1h':c(H,72,84),'--b2h':c(K,64,87),'--bt':c(H,45,14)}}
+var _pv=palVars;palVars=function(P,d){var v=_pv(P,d),s=Math.max(P.s,.6),H=P.h,K=P.k,J=P.j||P.h,c=function(h,sa,l,a){return 'hsl('+h+' '+Math.round(sa*s)+'% '+l+'% / '+a+')'};
+ if(d){v['--m1']=c(H,70,46,.26);v['--m2']=c(K,65,50,.22);v['--m3']=c(J,65,48,.20);v['--m4']=c(H,60,42,.16)}
+ else{v['--m1']=c(H,80,78,.55);v['--m2']=c(K,75,84,.55);v['--m3']=c(J,75,80,.50);v['--m4']=c(H,70,86,.50)}
+ v['--h1']=H;v['--h2']=K;v['--h3']=J;return v};
+function applyPal(){var r=document.documentElement,id='jade';try{id=localStorage.getItem('metrados_paleta')||id}catch(e){}
+ var P=PALS.filter(function(x){return x.id===id})[0]||PALS[0],v=palVars(P,r.dataset.theme==='dark');
+ for(var k in v)r.style.setProperty(k,v[k]);
+ if(r.dataset.theme!=='dark')['--panel','--g1','--g2','--g3','--b1','--b2','--b1h','--b2h','--bt'].forEach(function(k){r.style.removeProperty(k)});
+ r.dataset.pal=P.id}
+function smooth(fn){var r=document.documentElement;
+ if(matchMedia('(prefers-reduced-motion:reduce)').matches){fn();return}
+ if(document.startViewTransition){document.startViewTransition(fn);return}
+ r.classList.add('tx');fn();clearTimeout(smooth.t);smooth.t=setTimeout(function(){r.classList.remove('tx')},650)}
+applyPal();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f4f1" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#15172b" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Metrados"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<title>METRADOS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f172a;--text:#1e293b;--muted:#475569;--subtle:#64748b;--bg:#f5f4f1;--panel:#fff;--line:#e3e6eb;--soft:#eef1f5;--fill:#f8fafc;--accent:#0f766e;--accent-dk:#0b5c56;--accent-soft:#e6f4f2;--danger:#b42318;--dsoft:#fef3f2;
+--cat:#f1eefb;--cat2:#e5dff8;--cat-line:#ddd6f2;--cat-ink:#5a4a9b;--r:14px;--rs:9px;--font:"IBM Plex Sans","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;}
+*{box-sizing:border-box}
+html{height:100%;-webkit-text-size-adjust:100%}
+body{margin:0;height:100%;display:flex;flex-direction:column;font-family:var(--font);background:var(--bg);color:var(--text);font-size:14.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+b{font-weight:600}
+svg.ic{width:1.15em;height:1.15em;flex:none;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg.ic.sm{width:1.02em;height:1.02em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font-family:inherit;background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:var(--rs);padding:0 14px;min-height:38px;font-size:13.5px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;justify-content:center;gap:.5em;transition:background .15s,border-color .15s,color .15s,transform .15s;white-space:nowrap}
+button:hover{background:#1e293b}button:active{transform:scale(.97)}
+button.secondary,button.ghost{background:#fff;color:var(--ink);border-color:#cbd5e1}
+button.secondary:hover,button.ghost:hover{background:var(--fill);border-color:#94a3b8}
+button.sm{min-height:32px;padding:0 11px;font-size:12.5px}
+button.dangerf{background:var(--danger);border-color:var(--danger)}button.dangerf:hover{background:#912018}
+button:disabled{opacity:.35;cursor:default;transform:none}
+select,input{font-family:inherit;background:#fff;color:var(--ink);border:1px solid #cbd5e1;border-radius:var(--rs);padding:9px 12px;font-size:14px;min-height:38px;transition:border-color .15s,box-shadow .15s;max-width:100%}
+input::placeholder{color:#8a97a8}input:hover:not(:disabled){border-color:#94a3b8}
+input:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(15,118,110,.18)}
+input[type=number]{-moz-appearance:textfield}input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* encabezado */
+header{display:flex;align-items:center;gap:14px;padding:10px 24px;min-height:62px;background:var(--panel);border-bottom:1px solid var(--line);flex:none;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:13px}
+.mark{--h:200;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:hsl(var(--h) 40% 21%);color:#fff;font-size:20px;box-shadow:0 0 0 4px hsl(var(--h) 60% 92%);transition:background .5s,box-shadow .5s}
+.mark.swap svg{animation:pop .55s cubic-bezier(.3,1.4,.5,1)}
+@keyframes pop{0%{transform:rotate(-80deg) scale(.3);opacity:0}100%{transform:none;opacity:1}}
+.word{font-weight:700;font-size:18px;letter-spacing:.24em;color:var(--ink)}
+#projChip{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--muted);background:var(--fill);border:1px solid var(--line);border-radius:var(--rs);padding:6px 12px;min-width:0}
+#projChip:empty{display:none}#projChip b{color:var(--ink)}#projChip span{color:var(--subtle);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+header .sp{flex:1}.actions{display:flex;gap:8px}
+#saved{font-size:12.5px;color:var(--accent-dk);display:inline-flex;align-items:center;gap:5px;opacity:0;transform:translateY(3px);transition:.3s}#saved.on{opacity:1;transform:none}
+body[data-view=home] #btnExp,body[data-view=home] #btnX,body[data-view=home] #btnP,body[data-view=home] #saved,body[data-view=home] .tabwrap{display:none}
+
+/* especialidades */
+.tabwrap{display:flex;align-items:stretch;background:var(--panel);border-bottom:1px solid var(--line);flex:none}
+.arr{background:#fff;color:var(--muted);border:none;border-radius:0;min-height:52px;width:42px;padding:0;font-size:16px}
+.arr:hover{background:var(--fill);color:var(--ink)}
+.tabbar{position:relative;display:flex;align-items:stretch;gap:2px;overflow-x:auto;flex:1;scrollbar-width:none;padding:0 4px}
+.tabbar::-webkit-scrollbar{display:none}
+.ind{position:absolute;left:0;bottom:0;height:3px;width:0;border-radius:3px 3px 0 0;background:var(--accent);transition:transform .38s cubic-bezier(.3,.8,.3,1),width .38s cubic-bezier(.3,.8,.3,1),background .38s;pointer-events:none}
+.gl{flex:none;align-self:center;font-size:10.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:#a0aab8;padding:0 12px 0 14px;border-left:1px solid var(--line);margin-left:6px;line-height:1.1}
+.gl:first-child{border:none;margin:0}
+button.tab{--h:200;background:transparent;color:var(--muted);border:none;border-radius:0;padding:0 13px;min-height:52px;font-size:13.5px;font-weight:500;gap:8px;flex:none}
+button.tab:hover{background:transparent;color:var(--ink)}
+button.tab.active{color:var(--ink);font-weight:600}
+.tab .cod{font-size:11.5px;font-weight:700;padding:2px 7px;border-radius:6px;background:hsl(var(--h) 60% 94%);color:hsl(var(--h) 45% 30%);transition:transform .25s}
+.tab.active .cod{transform:scale(1.07)}
+.tab .n{background:var(--soft);color:var(--muted);border-radius:99px;padding:0 7px;font-size:11.5px;font-weight:600}
+
+/* estructura */
+main{display:grid;grid-template-columns:370px 1fr;flex:1;min-height:0}
+main.noaside{grid-template-columns:1fr}
+section.content{padding:26px;overflow-y:auto}
+section.content.inR{animation:inR .42s cubic-bezier(.2,.8,.2,1)}
+section.content.inL{animation:inL .42s cubic-bezier(.2,.8,.2,1)}
+section.content.inF{animation:inF .4s ease}
+@keyframes inR{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+@keyframes inL{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:none}}
+@keyframes inF{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* catálogo (pastel) */
+aside{background:var(--cat);border-right:1px solid var(--cat-line);padding:18px 14px;overflow-y:auto}
+aside[hidden]{display:none}
+.ah{display:flex;justify-content:space-between;align-items:center;margin:0 4px 10px}
+.ah h3{margin:0;font-size:12px;font-weight:700;color:var(--cat-ink);letter-spacing:.09em;text-transform:uppercase}
+.acts{display:flex;gap:4px}
+button.mini{background:transparent;color:var(--cat-ink);border:none;min-height:26px;padding:0 8px;font-size:12px;border-radius:6px}
+button.mini:hover{background:var(--cat2)}
+.cat-title{display:flex;gap:9px;align-items:baseline;margin:0 4px 12px;padding:10px 12px;background:#fff;border:1px solid var(--cat-line);border-radius:10px;font-weight:600;color:var(--ink);line-height:1.35;font-size:13.5px}
+.cat-title .cod{color:var(--cat-ink)}
+.search-wrap{position:relative;margin-bottom:10px}
+.search-wrap .ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#8d82bd;pointer-events:none}
+.search-wrap input{width:100%;padding-left:36px;border-color:var(--cat-line)}
+.search-wrap input:focus{border-color:#8b7bd1;box-shadow:0 0 0 3px rgba(139,123,209,.22)}
+.ti{display:flex;align-items:flex-start;gap:9px;padding:7px 10px;border-radius:var(--rs);font-size:13.2px;line-height:1.4}
+.ti .cod{flex:none;font-variant-numeric:tabular-nums;font-weight:600;color:#8176b8}
+.ti .tx{flex:1;min-width:0}
+.hd{cursor:pointer;color:var(--ink);font-weight:600;user-select:none}
+.hd:hover{background:var(--cat2)}
+.hd .ic{margin-top:2px;color:#9a90c8;transition:transform .25s}
+.grp.open>.hd .ic{transform:rotate(90deg)}
+.hd.lv2{margin-top:8px;font-size:13.8px}.hd.lv2 .cod{color:var(--cat-ink)}
+.hd.lv3{font-weight:600;color:#2d2a4a}.hd.lv3,.hd.lv4{padding-left:18px}
+.part{cursor:pointer;color:var(--text);padding-left:calc(14px + var(--lv)*9px);transition:background .12s;position:relative}
+.part:hover{background:var(--cat2)}
+.part .u{flex:none;background:#fff;border:1px solid var(--cat-line);color:var(--cat-ink);border-radius:6px;padding:0 7px;font-size:11.5px;font-weight:600}
+.part .pl{flex:none;opacity:0;color:var(--cat-ink);margin-top:1px;transition:opacity .15s}
+.part:hover .pl{opacity:1}
+.part.used .cod::after{content:"●";color:#7fbf9f;margin-left:5px;font-size:9px}
+.gb{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.grp.open>.gb{grid-template-rows:1fr}
+.gi{overflow:hidden;min-height:0}
+.empty{color:var(--muted);text-align:center;padding:40px 20px;line-height:1.6}
+.empty .ic{display:block;width:34px;height:34px;margin:0 auto 12px;color:#94a3b8;stroke-width:1.5}
+.empty.sm{padding:20px}
+
+/* contenido */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 1px 3px rgba(15,23,42,.05);padding:22px;margin-bottom:20px}
+.card h2{font-size:15.5px;margin:0 0 16px;display:flex;align-items:center;gap:.6em;color:var(--ink)}
+.card h2 svg{color:var(--accent)}
+.thead{--h:200;display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.tcode{font-size:15px;font-weight:700;padding:7px 12px;border-radius:10px;background:hsl(var(--h) 60% 93%);color:hsl(var(--h) 45% 28%)}
+.thead h2{margin:0;font-size:20px;color:var(--ink);letter-spacing:-.2px;line-height:1.25}.thead p{margin:0;color:var(--subtle);font-size:13px}
+.blk{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 1px 3px rgba(15,23,42,.05);margin-bottom:16px;overflow:hidden;animation:inF .35s ease}
+.bh{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);background:linear-gradient(#fff,#fafbfc);flex-wrap:wrap}
+.bt{display:flex;gap:10px;font-weight:600;color:var(--ink);min-width:0}.bt .cod{color:var(--accent-dk);flex:none}
+.bm{display:flex;align-items:center;gap:10px}
+.tot{display:flex;flex-direction:column;align-items:flex-end;line-height:1.15;padding:0 6px}.tot small{font-size:10.5px;color:var(--subtle);text-transform:uppercase;letter-spacing:.07em}.tot b{font-size:16px;color:var(--ink);font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:2px 9px;border-radius:6px;font-size:12px;background:var(--soft);color:#334155;font-weight:600}
+select.usel{min-height:32px;padding:3px 8px;font-size:12.5px;border-color:#e9b44c;background:#fffaf0}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;min-width:780px;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid #f0f2f5;vertical-align:middle}
+th{background:var(--fill);color:#334155;font-weight:600;font-size:12.5px;white-space:nowrap}
+th.na{color:#b9c0cc;font-weight:500;text-decoration:line-through}
+tbody tr:last-child td{border-bottom:none}
+tbody tr{transition:background .8s}tr.hl{background:#fff6d6}
+td input{width:76px;padding:6px 9px;min-height:34px;font-size:13.5px}
+td input.desc{width:100%;min-width:150px}td input.num,.num{text-align:right}
+.nacell input{width:76px;background:repeating-linear-gradient(135deg,#f4f5f7 0 6px,#eceef2 6px 12px);border-color:#eceef2;cursor:not-allowed;text-align:center;color:#b3bac6}
+button.del-row{background:transparent;border:1px solid transparent;color:var(--subtle);width:34px;min-height:34px;height:34px;padding:0}
+button.del-row:hover{background:var(--dsoft);color:var(--danger)}
+.pv{font-size:14px}
+table.plain{min-width:640px}table.plain th,table.plain td{padding:10px 12px}
+.cod2{font-weight:600;color:var(--accent-dk)}
+.bar{background:#e8edf3;border-radius:99px;overflow:hidden;height:8px;width:calc(100% - 50px);display:inline-block;vertical-align:middle}
+.bar i{display:block;background:var(--accent);height:100%;border-radius:99px;transition:width .6s}
+.pct{display:inline-block;width:44px;text-align:right;font-size:12.5px;color:var(--muted);vertical-align:middle}
+tr.lnk{cursor:pointer}tr.lnk:hover td{background:var(--fill)}
+.toolbar{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+label{display:block;font-size:12.5px;font-weight:600;color:var(--text);margin:14px 0 5px}label i{color:var(--danger);font-style:normal}
+.two input,.three input,.modal>input{width:100%}
+
+/* proyectos */
+.home{max-width:1180px;margin:0 auto}
+.home-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.home h1{font-size:28px;margin:0;letter-spacing:-.4px;color:var(--ink)}.home-head p{margin:2px 0 0;color:var(--subtle)}
+.home-head .tools{display:flex;gap:10px;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:16px}
+.pcard{--h:200;position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 18px 14px;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s;animation:inF .5s both;animation-delay:calc(var(--i,0)*50ms);display:flex;flex-direction:column;gap:6px}
+.pcard::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:hsl(var(--h) 55% 62%)}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(15,23,42,.1);border-color:hsl(var(--h) 40% 78%)}
+.pc-top{display:flex;justify-content:space-between;align-items:center}
+.pc-ic{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:hsl(var(--h) 60% 92%);color:hsl(var(--h) 45% 28%);font-size:19px}
+.pc-btns{display:flex;gap:2px;opacity:.55;transition:opacity .2s}.pcard:hover .pc-btns{opacity:1}
+.pcard h3{margin:8px 0 0;font-size:16.5px;color:var(--ink);line-height:1.3}.pc-loc{margin:0;color:var(--subtle);font-size:13px}
+.pc-stats{display:flex;gap:16px;font-size:12.5px;color:var(--muted);margin-top:6px}
+.pc-chips{display:flex;gap:5px;flex-wrap:wrap;min-height:22px}.pc-chips span{--h:200;font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px;background:hsl(var(--h) 60% 94%);color:hsl(var(--h) 45% 30%)}
+.pc-foot{display:flex;justify-content:space-between;gap:8px;margin-top:6px;padding-top:10px;border-top:1px solid var(--soft);font-size:12px;color:var(--subtle)}
+.pcard.newc{border:2px dashed #cbd5e1;background:transparent;align-items:center;justify-content:center;text-align:center;color:var(--muted);min-height:200px;gap:10px}
+.pcard.newc::before{display:none}.pcard.newc:hover{border-color:var(--accent);color:var(--accent-dk);background:var(--accent-soft)}
+.pcard.newc .pc-ic{width:50px;height:50px;font-size:24px;background:#fff;color:var(--accent)}
+.home .search{width:230px}
+
+/* ventanas */
+.modal-bg{position:fixed;inset:0;background:rgba(15,23,42,.45);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px;animation:fade .2s}
+@keyframes fade{from{opacity:0}}
+.modal{background:#fff;border-radius:18px;padding:26px;width:540px;max-width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 24px 56px rgba(15,23,42,.22);animation:up .3s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes up{from{opacity:0;transform:translateY(18px) scale(.97)}}
+.modal h2{font-size:20px;margin:0 0 4px;color:var(--ink)}.mp{margin:0 0 6px;color:var(--subtle);font-size:13.5px}
+.modal .actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
+.err{color:var(--danger);font-size:12.5px;min-height:0;margin-top:4px}
+.shake{animation:shake .35s}@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg button{background:#fff;color:var(--text);border:1.5px solid #cbd5e1;min-height:52px;flex-direction:column;gap:0;font-weight:600}
+.seg button small{font-weight:700;color:var(--subtle);font-size:11px;letter-spacing:.08em}
+.seg button.on{border-color:var(--accent);background:var(--accent-soft);color:var(--accent-dk)}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:99px;font-size:13.5px;opacity:0;pointer-events:none;transition:.3s;z-index:60}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+.hidden{display:none}
+
+@media (max-width:860px){
+ body{height:auto;min-height:100%;display:block}
+ main,main.noaside{display:flex;flex-direction:column}
+ aside{order:2;border-right:none;border-top:1px solid var(--cat-line);max-height:60vh}
+ section.content{padding:16px;overflow:visible}
+ header{padding:10px 16px}#projChip{order:3;flex-basis:100%}
+}
+@media (max-width:640px){.actions .lbl{display:none}.actions button{width:42px;padding:0}.two{grid-template-columns:1fr}.word{font-size:16px}.arr{width:34px}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.est{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:99px;white-space:nowrap;background:var(--soft);color:var(--muted)}
+.est.e-ok{background:#e6f4ea;color:#1e6b3a}.est.e-warn{background:#fff4d6;color:#8a5a00}.est.e-err{background:var(--dsoft);color:var(--danger)}.est.e-info{background:#e8f0fe;color:#2b5cb8}.est.e-pend{background:transparent;color:var(--subtle);font-weight:500}
+.pv.neg{color:var(--danger)}td.st{min-width:150px}
+.tab .n.al{background:#fff4d6;color:#8a5a00}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--fill);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.kpi b{font-size:26px;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}.kpi span{font-size:12.5px;color:var(--subtle)}
+.kpi.bad{background:var(--dsoft);border-color:#f5c6c1}.kpi.bad b{color:var(--danger)}.kpi.warn{background:#fffaf0;border-color:#f3dba5}.kpi.warn b{color:#8a5a00}
+.sub{margin:-6px 0 14px;color:var(--muted);font-size:13.5px}.sub .bad{color:var(--danger)}
+tr.gh td{background:var(--cat);font-weight:600;color:var(--ink)}tr.gh.l1 td{background:var(--cat2)}tr.gh td.cod2{color:var(--cat-ink)}
+tr.tt td{background:var(--fill);border-top:2px solid var(--line)}
+.crit{margin:0;padding-left:20px;color:var(--text);font-size:13.5px;line-height:1.7}.src{margin:12px 0 0;font-size:12px;color:var(--subtle)}
+table{min-width:900px}
+/* ---------- modo oscuro pastel ---------- */
+html[data-theme=dark]{color-scheme:dark;
+--ink:#f3f1fc;--text:#dcdff0;--muted:#aeb4d0;--subtle:#8f96b8;--bg:#15172b;--panel:#1f2240;--line:#32365c;--soft:#2a2e52;--fill:#252949;
+--accent:#8fd9cb;--accent-dk:#a8e9dd;--accent-soft:#1d3b49;--danger:#ff9f98;--dsoft:#3a2335;
+--cat:#28264f;--cat2:#352f65;--cat-line:#443f7c;--cat-ink:#c8bcff}
+html[data-theme=dark] body{background:radial-gradient(900px 520px at 8% -8%,rgba(167,139,250,.20),transparent 60%),radial-gradient(800px 560px at 100% 0%,rgba(94,200,190,.14),transparent 60%),radial-gradient(900px 600px at 70% 110%,rgba(244,160,190,.13),transparent 60%),#15172b;background-attachment:fixed}
+html[data-theme=dark] header,html[data-theme=dark] .tabwrap{background:rgba(31,34,64,.82);backdrop-filter:blur(10px)}
+html[data-theme=dark] button{background:linear-gradient(135deg,#9aa8f7,#c0a3f2);border-color:transparent;color:#17172e}
+html[data-theme=dark] button:hover{background:linear-gradient(135deg,#aab6fa,#cdb4f6)}
+html[data-theme=dark] button.secondary,html[data-theme=dark] button.ghost,html[data-theme=dark] .arr,html[data-theme=dark] .seg button{background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+html[data-theme=dark] .arr{border:none}
+html[data-theme=dark] button.secondary:hover,html[data-theme=dark] button.ghost:hover,html[data-theme=dark] .arr:hover{background:var(--soft);border-color:#4a4f7e}
+html[data-theme=dark] button.tab,html[data-theme=dark] button.del-row,html[data-theme=dark] button.mini{background:transparent;color:var(--muted)}
+html[data-theme=dark] button.tab:hover,html[data-theme=dark] button.tab.active{color:var(--ink)}
+html[data-theme=dark] button.dangerf{background:#ff9f98;color:#2a1020}
+html[data-theme=dark] .seg button.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-dk)}
+html[data-theme=dark] select,html[data-theme=dark] input{background:#181b35;color:var(--ink);border-color:var(--line)}
+html[data-theme=dark] input::placeholder{color:#6f77a0}
+html[data-theme=dark] input:focus,html[data-theme=dark] select:focus{box-shadow:0 0 0 3px rgba(143,217,203,.22)}
+html[data-theme=dark] select.usel{background:#3a3322;border-color:#8a7436;color:#ffe3a1}
+html[data-theme=dark] .card,html[data-theme=dark] .blk,html[data-theme=dark] .pcard,html[data-theme=dark] .modal,html[data-theme=dark] .cat-title,html[data-theme=dark] .part .u,html[data-theme=dark] .pcard.newc .pc-ic{background:var(--panel);border-color:var(--line)}
+html[data-theme=dark] .card,html[data-theme=dark] .blk{box-shadow:0 6px 22px rgba(5,6,20,.35)}
+html[data-theme=dark] .bh{background:linear-gradient(var(--fill),var(--panel))}
+html[data-theme=dark] .pcard.newc{background:transparent;border-color:#454a78}
+html[data-theme=dark] .pcard.newc:hover{background:var(--accent-soft)}
+html[data-theme=dark] .pcard:hover{box-shadow:0 14px 30px rgba(5,6,20,.5)}
+html[data-theme=dark] th,html[data-theme=dark] td{border-bottom-color:rgba(255,255,255,.06)}
+html[data-theme=dark] th{color:var(--muted)}html[data-theme=dark] th.na{color:#55597f}
+html[data-theme=dark] .nacell input{background:repeating-linear-gradient(135deg,#1a1d38 0 6px,#20233f 6px 12px);border-color:#252949;color:#4f5479}
+html[data-theme=dark] tr.hl{background:rgba(255,226,140,.14)}
+html[data-theme=dark] .bar{background:var(--soft)}
+html[data-theme=dark] .bar i{background:linear-gradient(90deg,#8fd9cb,#a9b8ff)}
+html[data-theme=dark] .mark{background:hsl(var(--h) 38% 30%);box-shadow:0 0 0 4px hsl(var(--h) 35% 22%)}
+html[data-theme=dark] .tab .cod,html[data-theme=dark] .tcode,html[data-theme=dark] .pc-ic,html[data-theme=dark] .pc-chips span{background:hsl(var(--h) 32% 27%);color:hsl(var(--h) 75% 84%)}
+html[data-theme=dark] .gl{color:#6d749a}
+html[data-theme=dark] .est{background:var(--soft)}
+html[data-theme=dark] .est.e-ok{background:rgba(120,220,160,.16);color:#9fe8bb}
+html[data-theme=dark] .est.e-warn,html[data-theme=dark] .tab .n.al{background:rgba(255,214,120,.16);color:#ffd98c}
+html[data-theme=dark] .est.e-err{background:rgba(255,140,130,.16);color:var(--danger)}
+html[data-theme=dark] .est.e-info{background:rgba(130,170,255,.16);color:#adc6ff}
+html[data-theme=dark] .est.e-pend{background:transparent;color:var(--subtle)}
+html[data-theme=dark] .kpi.bad{border-color:#6a3a50}html[data-theme=dark] .kpi.warn{background:#2f2c33;border-color:#6b5a38}html[data-theme=dark] .kpi.warn b{color:#ffd98c}
+html[data-theme=dark] .modal-bg{background:rgba(8,9,24,.62)}
+html[data-theme=dark] #toast{background:#3b3f70;color:#fff}
+html[data-theme=dark] ::-webkit-scrollbar{width:10px;height:10px}html[data-theme=dark] ::-webkit-scrollbar-thumb{background:#3a3f6a;border-radius:9px}html[data-theme=dark] ::-webkit-scrollbar-track{background:transparent}
+/* contraste reforzado */
+html[data-theme=dark]{--ink:#ffffff;--text:#f0f2ff;--muted:#cdd2ea;--subtle:#b0b7d6;--line:#3d4272;--cat-ink:#d6ccff}
+html[data-theme=dark] body{font-size:15px}
+html[data-theme=dark] table{font-size:14.5px}
+html[data-theme=dark] td{color:#f4f5ff}
+html[data-theme=dark] th{color:#e1e5fa;background:#2c3058;font-size:13px}
+html[data-theme=dark] input,html[data-theme=dark] select{background:#12142b;color:#fff;border-color:#4d5389;font-weight:500}
+html[data-theme=dark] input::placeholder{color:#8e96c0}
+html[data-theme=dark] input:hover:not(:disabled){border-color:#7a82c0}
+html[data-theme=dark] td input.num,html[data-theme=dark] .pv,html[data-theme=dark] .tv,html[data-theme=dark] .num b{font-weight:700;color:#fff}
+html[data-theme=dark] .pv{font-size:15px}html[data-theme=dark] .pv.neg{color:#ffaaa3}
+html[data-theme=dark] .tot b{font-size:18px;color:#a8f0e2}
+html[data-theme=dark] .tot small{color:#c3c9e6}
+html[data-theme=dark] .kpi b{font-size:30px;color:#fff}html[data-theme=dark] .kpi span{color:#d3d8f0;font-size:13px}
+html[data-theme=dark] .pill{background:#3a3f78;color:#f0f2ff}
+html[data-theme=dark] .part .u{color:#e4dcff;border-color:#5a549a}
+html[data-theme=dark] .ti{color:#f0f2ff}
+html[data-theme=dark] .ti .cod{color:#bfb2f5}
+html[data-theme=dark] .hd,html[data-theme=dark] .hd.lv3{color:#fff}
+html[data-theme=dark] .hd .ic{color:#c3b8f2}
+html[data-theme=dark] .hd.lv2 .cod,html[data-theme=dark] .cat-title .cod{color:#d6ccff}
+html[data-theme=dark] .cod2,html[data-theme=dark] .bt .cod{color:#a8f0e2}
+html[data-theme=dark] .pct{color:#d3d8f0}
+html[data-theme=dark] .gl{color:#a3abd0}
+html[data-theme=dark] button.tab{color:#cdd2ea}
+html[data-theme=dark] .tab .n{background:#3a3f78;color:#f0f2ff}
+html[data-theme=dark] .thead p,html[data-theme=dark] .home-head p,html[data-theme=dark] .mp,html[data-theme=dark] .pc-loc,html[data-theme=dark] .pc-foot,html[data-theme=dark] .src{color:#b9c0de}
+html[data-theme=dark] label{color:#e1e5fa}
+html[data-theme=dark] .est{font-size:12.5px}
+html[data-theme=dark] .est.e-ok{color:#b4f3cb}html[data-theme=dark] .est.e-warn,html[data-theme=dark] .tab .n.al{color:#ffe3a1}
+html[data-theme=dark] .est.e-err{color:#ffb4ae}html[data-theme=dark] .est.e-info{color:#c4d6ff}
+html[data-theme=dark] tr.gh td{color:#fff}html[data-theme=dark] tr.gh td.cod2{color:#d6ccff}
+html[data-theme=dark] .crit{color:#f0f2ff}
+body,header,.card,.blk,.tabwrap{transition:background-color .3s,border-color .3s}
+#printDoc{display:none}
+@media print{
+ @page{margin:14mm}
+ body.printing>:not(#printDoc){display:none!important}
+ body.printing #printDoc{display:block;color:#111;background:#fff;font-size:11px;line-height:1.35}
+ #printDoc h1{font-size:22px;margin:0 0 10px;color:#0f766e}#printDoc h2{font-size:14px;margin:18px 0 6px;padding-bottom:3px;border-bottom:2px solid #0f766e}#printDoc h2.pb{break-before:page}
+ #printDoc table{width:100%;min-width:0;border-collapse:collapse;margin:0 0 12px;font-size:10.5px}
+ #printDoc th,#printDoc td{border:1px solid #c9d1dc;padding:3px 6px;color:#111;background:#fff;text-align:left}
+ #printDoc th{background:#e6f4f2;font-weight:700}#printDoc .r{text-align:right}
+ #printDoc .pd-info th{width:34%}#printDoc caption{text-align:left;font-size:11px;padding:4px 0}
+ #printDoc .pd-t{break-inside:auto}#printDoc tr{break-inside:avoid}#printDoc tr.tot td{background:#eef1f5;font-weight:700}
+ #printDoc .sig td{height:34px}
+}
+@media print{
+ body{display:block;height:auto;background:#fff}
+ header,.tabwrap,aside,.toolbar,.del-row,#modalRoot,.bm button,#toast{display:none!important}
+ main{display:block}section.content{padding:0;overflow:visible}
+ .card,.blk{box-shadow:none;break-inside:avoid}table{min-width:0}
+ td input{border:none;background:transparent;padding:0;width:auto;min-height:0}.nacell input{background:none}
+}
+
+/* ===== minimalista v2: jerarquía y espacios ===== */
+body[data-view=home] #btnEdit{display:none}
+.tview{--tc:hsl(var(--h) 42% 34%);--tb:hsl(var(--h) 35% 86%);--tl:hsl(var(--h) 45% 96%);max-width:1100px}
+.thead{display:flex;align-items:center;gap:16px;margin:2px 0 40px;padding-bottom:22px;border-bottom:2px solid var(--tb)}
+.thead .tinfo{flex:1;min-width:0}
+.thead h2{font-size:22px;font-weight:600;letter-spacing:-.3px}
+.thead p{margin-top:2px}
+.tcode{background:var(--tc);color:#fff;border-radius:8px;padding:6px 12px;font-size:14px;letter-spacing:.02em}
+.vt{display:inline-flex;background:var(--soft);border-radius:10px;padding:3px;gap:2px;flex:none}
+.vt button{background:transparent;color:var(--muted);border:none;min-height:32px;padding:0 12px;font-size:13px;border-radius:8px;font-weight:500}
+.vt button:hover{background:rgba(15,23,42,.06);color:var(--ink)}
+.vt button.on{background:#fff;color:var(--tc);font-weight:600;box-shadow:0 1px 2px rgba(15,23,42,.14)}
+.sh{display:flex;gap:10px;align-items:baseline}
+.sh .cod{font-variant-numeric:tabular-nums;font-weight:700}
+.sh.l2{margin:52px 0 18px;padding:0 0 9px;font-size:16.5px;font-weight:700;color:var(--tc);border-bottom:1px solid var(--tb)}
+.sh.l3{margin:36px 0 14px 14px;padding-left:11px;font-size:14.5px;font-weight:600;color:var(--ink);border-left:3px solid var(--tc)}
+.sh.l3 .cod{color:var(--tc)}
+.sh.l4{margin:28px 0 12px 28px;font-size:13.2px;font-weight:600;color:var(--muted)}
+.sh.l4 .cod{color:var(--tc);opacity:.85}
+.blk{box-shadow:none;border-radius:12px;margin-bottom:26px;animation:none}
+.bh{background:transparent;border-bottom:none;padding:16px 18px 8px}
+.bt{font-weight:600;font-size:14.5px;align-items:baseline;gap:12px}
+.bt .cod{color:var(--tc)}
+.tot b{font-size:15px}
+.tot small{font-size:10px}
+.blk table{min-width:820px}
+th{background:transparent;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--subtle);border-bottom:1px solid var(--line);padding:10px}
+td{border-bottom:1px solid var(--soft);padding:6px 10px}
+td input{border-color:transparent;background:transparent}
+td input:hover:not(:disabled){border-color:var(--line)}
+td input:focus{background:#fff;border-color:var(--accent)}
+.nacell input{background:none;border-color:transparent;color:#c9cfd9}
+.est{background:transparent!important;padding:0;font-weight:500}
+.card{box-shadow:none}
+.card.cons{padding:6px 4px 4px;border:none;background:transparent;margin-bottom:0}
+.sub{margin:0 0 18px}
+tr.gh td{background:transparent!important;padding-top:26px;border-bottom:1px solid var(--line)}
+tr.gh.l1 td{font-size:15.5px;font-weight:700;color:hsl(var(--h) 42% 34%)}
+tr.gh.l2 td{font-weight:700;color:var(--ink);padding-top:22px}
+tr.gh.l3 td{font-weight:600;color:var(--muted);padding-top:16px;font-size:13px}
+html[data-theme=dark] .tview{--tc:hsl(var(--h) 70% 80%);--tb:hsl(var(--h) 25% 30%)}
+html[data-theme=dark] .vt button{background:transparent;color:var(--muted);border:none}
+html[data-theme=dark] .vt button:hover{background:rgba(255,255,255,.07);color:#fff}
+html[data-theme=dark] .vt button.on{background:var(--panel);color:var(--tc)}
+html[data-theme=dark] .tcode{background:hsl(var(--h) 32% 27%);color:hsl(var(--h) 75% 84%)}
+html[data-theme=dark] .bh{background:transparent}
+html[data-theme=dark] td input{background:transparent;border-color:transparent}
+html[data-theme=dark] td input:hover:not(:disabled){border-color:var(--line)}
+html[data-theme=dark] td input:focus{background:#12142b;border-color:var(--accent)}
+html[data-theme=dark] th{background:transparent;color:var(--subtle)}
+html[data-theme=dark] tr.gh.l1 td{color:hsl(var(--h) 75% 82%)}
+html[data-theme=dark] tr.gh.l2 td{color:#fff}
+html[data-theme=dark] tr.gh.l3 td{color:var(--muted)}
+@media (max-width:640px){.thead{flex-wrap:wrap}.vt{width:100%}.vt button{flex:1}.sh.l3{margin-left:6px}.sh.l4{margin-left:12px}.lvw{margin-left:0!important}}
+@media print{.vt{display:none}}
+
+/* ===== paletas de color ===== */
+:root{--line2:#cbd5e1;--g1:transparent;--g2:transparent;--g3:transparent;--b1:#9aa8f7;--b2:#c0a3f2;--b1h:#aab6fa;--b2h:#cdb4f6;--bt:#17172e}
+html{transition:background-color .4s ease}
+button:hover{background:color-mix(in srgb,var(--ink) 82%,var(--bg))}
+button.secondary,button.ghost{border-color:var(--line2)}
+button.secondary:hover,button.ghost:hover{background:var(--fill);border-color:var(--subtle)}
+select,input{border-color:var(--line2)}
+input:hover:not(:disabled){border-color:var(--subtle)}
+input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.search-wrap input:focus{border-color:var(--cat-ink);box-shadow:0 0 0 3px color-mix(in srgb,var(--cat-ink) 24%,transparent)}
+.search-wrap .ic,.hd .ic{color:var(--cat-ink);opacity:.75}
+.ti .cod{color:var(--cat-ink)}
+.hd.lv3{color:var(--ink)}
+.pill{color:var(--text)}
+.bar{background:var(--soft)}
+.seg button,.pcard.newc{border-color:var(--line2)}
+td input:hover:not(:disabled){border-color:var(--line)}
+td input:focus{background:var(--panel);border-color:var(--accent)}
+html[data-theme=dark] body{background:radial-gradient(900px 520px at 8% -8%,var(--g1),transparent 60%),radial-gradient(800px 560px at 100% 0%,var(--g2),transparent 60%),radial-gradient(900px 600px at 70% 112%,var(--g3),transparent 60%),var(--bg)}
+html[data-theme=dark] header,html[data-theme=dark] .tabwrap{background:color-mix(in srgb,var(--panel) 82%,transparent)}
+html[data-theme=dark] button{background:linear-gradient(135deg,var(--b1),var(--b2));color:var(--bt)}
+html[data-theme=dark] button:hover{background:linear-gradient(135deg,var(--b1h),var(--b2h))}
+html[data-theme=dark] select,html[data-theme=dark] input{background:var(--bg);color:var(--ink);border-color:var(--line2)}
+html[data-theme=dark] input:hover:not(:disabled){border-color:var(--subtle)}
+html[data-theme=dark] input:focus,html[data-theme=dark] select:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+html[data-theme=dark] td input:focus{background:var(--bg);border-color:var(--accent)}
+html[data-theme=dark] .pill,html[data-theme=dark] .tab .n{background:var(--cat2);color:var(--ink)}
+html[data-theme=dark] .nacell input{background:repeating-linear-gradient(135deg,var(--panel) 0 6px,var(--fill) 6px 12px);border-color:transparent;color:var(--line2)}
+html[data-theme=dark] .bar i{background:linear-gradient(90deg,var(--accent),var(--cat-ink))}
+html[data-theme=dark] .cod2,html[data-theme=dark] .tot b{color:var(--accent-dk)}
+html[data-theme=dark] .tview .bt .cod{color:var(--tc)}
+html[data-theme=dark] .ti .cod,html[data-theme=dark] .hd .ic,html[data-theme=dark] .hd.lv2 .cod,html[data-theme=dark] .cat-title .cod,html[data-theme=dark] tr.gh td.cod2{color:var(--cat-ink)}
+html[data-theme=dark] .part .u{color:var(--cat-ink);border-color:var(--cat-line)}
+html[data-theme=dark] .pcard.newc,html[data-theme=dark] .seg button{border-color:var(--line2)}
+html[data-theme=dark] #toast{background:var(--cat2);color:var(--ink)}
+html[data-theme=dark] ::-webkit-scrollbar-thumb{background:var(--cat-line)}
+/* selector de temas */
+#palPop{position:fixed;top:66px;right:16px;width:min(340px,calc(100vw - 24px));z-index:40;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 18px 48px rgba(15,23,42,.18);opacity:0;transform:translateY(-8px) scale(.97);transform-origin:top right;transition:opacity .2s ease,transform .28s cubic-bezier(.2,.9,.3,1.1),background-color .4s,border-color .4s;pointer-events:none}
+#palPop.on{opacity:1;transform:none;pointer-events:auto}
+#palPop[hidden]{display:none}
+.pp-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 2px 12px}
+.pp-h b{font-size:13px;color:var(--ink);font-weight:600}
+.pp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.pal{display:flex;flex-direction:column;align-items:stretch;gap:7px;padding:8px;min-height:0;background:transparent;color:var(--text);border:1px solid var(--line);border-radius:12px;font-weight:500;font-size:13px;white-space:normal;text-align:left;transition:transform .2s cubic-bezier(.3,1.3,.5,1),border-color .25s,box-shadow .25s,background-color .25s}
+.pal:hover{background:var(--fill);border-color:var(--line2);transform:translateY(-2px)}
+.pal:active{transform:scale(.97)}
+.pal.on{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 30%,transparent)}
+.sw{display:flex;height:34px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.sw i{flex:1;transition:flex .3s}
+.pal:hover .sw i:first-child{flex:3}
+.pn{padding:0 2px}
+html[data-theme=dark] .pal{background:transparent;color:var(--text);border:1px solid var(--line)}
+html[data-theme=dark] .pal:hover{background:var(--fill);border-color:var(--line2)}
+html[data-theme=dark] .pal.on{border-color:var(--accent)}
+html[data-theme=dark] #palPop{box-shadow:0 18px 48px rgba(5,6,20,.55)}
+/* transición fluida al cambiar de tema */
+html.tx *,html.tx *::before,html.tx *::after{transition:background-color .5s ease,color .5s ease,border-color .5s ease,box-shadow .5s ease,fill .5s ease,stroke .5s ease!important}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.55s;animation-timing-function:cubic-bezier(.4,0,.2,1)}
+@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+@media print{#palPop{display:none!important}}
+
+/* ===== v3: color, orden, animación y estabilidad ===== */
+:root{--ease:cubic-bezier(.22,1,.36,1);--m1:transparent;--m2:transparent;--m3:transparent;--m4:transparent;--h1:200;--h2:240;--h3:40}
+body,html[data-theme=dark] body{background:radial-gradient(900px 620px at 0% 0%,var(--m1),transparent 62%),radial-gradient(800px 620px at 100% 6%,var(--m2),transparent 62%),radial-gradient(900px 700px at 88% 104%,var(--m3),transparent 62%),radial-gradient(700px 520px at 6% 98%,var(--m4),transparent 62%),var(--bg);background-attachment:fixed}
+header,.tabwrap,html[data-theme=dark] header,html[data-theme=dark] .tabwrap{background:color-mix(in srgb,var(--panel) 70%,transparent);backdrop-filter:blur(16px) saturate(1.3);position:relative;z-index:5}
+.arr{background:transparent}
+.card,.blk,.pcard,html[data-theme=dark] .card,html[data-theme=dark] .blk,html[data-theme=dark] .pcard{background:color-mix(in srgb,var(--panel) 84%,transparent);backdrop-filter:blur(8px)}
+aside{background:linear-gradient(180deg,var(--cat),color-mix(in srgb,var(--cat2) 65%,var(--cat)))}
+.home h1{background:linear-gradient(100deg,var(--ink) 35%,hsl(var(--h2) 60% 46%));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+html[data-theme=dark] .home h1{background:linear-gradient(100deg,#fff 35%,hsl(var(--h2) 85% 78%));-webkit-background-clip:text;background-clip:text}
+.pcard::before{background:linear-gradient(90deg,hsl(var(--h) 60% 62%),hsl(calc(var(--h) + 55) 62% 66%))}
+.kpi{--kh:var(--h1);background:linear-gradient(135deg,hsl(var(--kh) 60% 92% / .75),var(--fill))}
+.kpi:nth-child(2){--kh:var(--h2)}.kpi:nth-child(3){--kh:var(--h3)}.kpi:nth-child(4){--kh:var(--h1)}.kpi:nth-child(5){--kh:var(--h2)}
+html[data-theme=dark] .kpi{background:linear-gradient(135deg,hsl(var(--kh) 45% 26% / .7),var(--fill))}
+.kpi.bad,.kpi.warn{background:var(--dsoft)}.kpi.warn{background:#fffaf0}html[data-theme=dark] .kpi.bad{background:#3a2335}html[data-theme=dark] .kpi.warn{background:#2f2c33}
+
+/* layout estable: el panel derecho ya no se corre al abrir */
+main{grid-template-columns:370px minmax(0,1fr);transition:grid-template-columns .65s var(--ease),opacity .9s var(--ease) .15s,transform .9s var(--ease) .15s}
+main.noaside{grid-template-columns:0px minmax(0,1fr)}
+aside,aside[hidden]{display:block;min-width:0;overflow:hidden auto;padding:18px 14px;transition:opacity .5s var(--ease),padding .65s var(--ease),border-color .4s}
+aside>*{min-width:340px}
+main.noaside aside{opacity:0;visibility:hidden;padding-left:0;padding-right:0;border-right-color:transparent}
+section.content{min-width:0;overflow-x:hidden;overflow-y:auto;scrollbar-gutter:stable;padding:28px clamp(16px,3vw,40px)}
+.tview{margin:0 auto}
+section.content.go .rs{animation:rise .75s var(--ease) both;animation-delay:calc(var(--d,0)*55ms)}
+@keyframes rise{from{opacity:0;transform:translate3d(var(--dx,0px),16px,0)}to{opacity:1;transform:none}}
+
+/* apertura */
+#intro{position:fixed;inset:0;z-index:100;display:grid;place-content:center;justify-items:center;gap:22px;cursor:pointer;background:radial-gradient(900px 620px at 18% 8%,var(--m1),transparent 60%),radial-gradient(800px 600px at 86% 92%,var(--m2),transparent 60%),radial-gradient(700px 500px at 90% 6%,var(--m3),transparent 60%),var(--bg);transition:opacity .85s var(--ease),transform .85s var(--ease),filter .85s var(--ease)}
+#intro.out{opacity:0;transform:scale(1.06);filter:blur(8px);pointer-events:none}
+.in-mark{width:68px;height:68px;border-radius:20px;display:grid;place-items:center;font-size:32px;color:#fff;background:linear-gradient(135deg,hsl(var(--h1) 55% 36%),hsl(var(--h2) 55% 46%));box-shadow:0 0 0 8px color-mix(in srgb,var(--accent) 16%,transparent),0 18px 40px -10px hsl(var(--h1) 60% 30% / .5);animation:imk 1.1s var(--ease) both}
+@keyframes imk{from{opacity:0;transform:scale(.4) rotate(-90deg)}}
+.in-word{font-weight:700;font-size:22px;color:var(--ink);letter-spacing:.24em;padding-left:.24em;animation:iw 1.2s var(--ease) .25s both}
+@keyframes iw{from{opacity:0;letter-spacing:.7em;filter:blur(6px)}}
+.in-bar{width:120px;height:2px;border-radius:2px;background:var(--line);overflow:hidden}
+.in-bar i{display:block;height:100%;background:linear-gradient(90deg,hsl(var(--h1) 60% 50%),hsl(var(--h3) 65% 55%));animation:ib 1.1s var(--ease) .2s both}
+@keyframes ib{from{transform:translateX(-100%)}}
+body.boot header,body.boot .tabwrap,body.boot main{opacity:0;transform:translateY(-10px)}
+header,.tabwrap{transition:opacity .9s var(--ease),transform .9s var(--ease),background-color .4s,border-color .4s}
+
+/* menú de vistas (arriba a la izquierda) */
+.vmenu{position:relative;flex:none}body[data-view=home] .vmenu{display:none}
+.vbtn,html[data-theme=dark] .vbtn{position:relative;width:40px;padding:0}
+.vdot{position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:hsl(var(--h3) 75% 52%);animation:vp 2.4s ease-in-out 3}
+@keyframes vp{0%,100%{box-shadow:0 0 0 0 hsl(var(--h3) 75% 52% / .55)}50%{box-shadow:0 0 0 7px transparent}}
+.vhint{position:absolute;top:calc(100% + 10px);left:0;z-index:30;white-space:nowrap;font-size:12px;padding:5px 11px;border-radius:99px;background:var(--ink);color:var(--bg);opacity:0;pointer-events:none;animation:vh 6.5s ease 1.6s both}
+@keyframes vh{0%{opacity:0;transform:translateY(-5px)}10%,78%{opacity:1;transform:none}100%{opacity:0}}
+.vmenu.seen .vdot,.vmenu.seen .vhint{display:none}
+#vPop{position:fixed;top:66px;left:16px;width:min(310px,calc(100vw - 24px));z-index:40;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:6px;box-shadow:0 18px 48px rgba(15,23,42,.18);opacity:0;transform:translateY(-8px) scale(.97);transform-origin:top left;transition:opacity .22s,transform .4s var(--ease);pointer-events:none}
+#vPop.on{opacity:1;transform:none;pointer-events:auto}#vPop[hidden]{display:none}
+.vi,html[data-theme=dark] .vi{width:100%;justify-content:flex-start;text-align:left;white-space:normal;gap:12px;padding:10px 12px;border-radius:11px;background:transparent;color:var(--text);border:none;font-weight:400}
+.vi:hover,html[data-theme=dark] .vi:hover{background:var(--soft)}
+.vi.on,html[data-theme=dark] .vi.on{background:var(--accent-soft)}
+.vi .ic{font-size:19px;color:var(--accent)}.vi b{display:block;font-size:13.5px;color:var(--ink);font-weight:600}.vi small{display:block;font-size:12px;color:var(--subtle);margin-top:1px}
+html[data-theme=dark] #vPop{box-shadow:0 18px 48px rgba(5,6,20,.55)}
+
+/* metrados: más limpios */
+.lvw{margin-left:0!important}
+.sh.l2{display:flex;align-items:center;gap:12px;margin:46px 0 14px;padding:0;border:none;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tc)}
+.sh.l2::after{content:"";flex:1;height:1px;background:var(--tb)}
+.sh.l2 .cod{opacity:.7}
+.blk{border-radius:16px;margin-bottom:18px}
+.tview .blk{border-top:2px solid hsl(var(--h) 55% 68% / .65)}
+.bh{padding:14px 18px 10px}
+.bt{cursor:pointer;align-items:flex-start;user-select:none}
+.bt .ic{margin-top:3px;color:var(--subtle);transform:rotate(90deg);transition:transform .4s var(--ease)}
+.blk.collapsed .bt .ic{transform:none}
+.bn{display:block;min-width:0}.crumb{display:block;font-weight:400;font-size:11.5px;color:var(--subtle);margin-top:2px}
+.bbody{display:grid;grid-template-rows:1fr;transition:grid-template-rows .5s var(--ease)}
+.blk.collapsed .bbody{grid-template-rows:0fr}
+.bbody>.tbl-wrap{min-height:0;overflow-y:hidden}
+.blk table{min-width:660px}
+td.st{min-width:0;width:1%;white-space:nowrap}.est{white-space:normal;font-size:12px}
+.est.e-ok{background:transparent;color:var(--accent)!important}.est.e-pend{opacity:.45}
+tbody tr:hover td{background:color-mix(in srgb,var(--accent) 6%,transparent)}
+tbody tr{transition:background .6s}
+td input.desc{min-width:130px}
+
+/* animaciones finas */
+button{transition:background .2s,border-color .2s,color .2s,transform .25s var(--ease),box-shadow .25s}
+.toolbar button:hover,.home-head button:hover{transform:translateY(-1px);box-shadow:0 8px 18px -8px color-mix(in srgb,var(--ink) 40%,transparent)}
+.pcard{transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s}
+.pcard:hover{transform:translateY(-5px) scale(1.01)}
+.ti{transition:background .2s,transform .25s var(--ease)}.part:hover{transform:translateX(3px)}
+.gb{transition:grid-template-rows .45s var(--ease)}
+.modal-bg{animation:fade .3s}.modal{animation:up .5s var(--ease)}
+@keyframes up{from{opacity:0;transform:translateY(22px) scale(.96)}}
+#toast{transition:opacity .4s var(--ease),transform .5s var(--ease)}
+@media (max-width:860px){main,main.noaside{display:flex;flex-direction:column}main.noaside aside{display:none}aside>*{min-width:0}aside,aside[hidden]{max-height:60vh}section.content{overflow:visible}}
+@media print{#intro,.vmenu,#vPop{display:none!important}body.boot main{opacity:1;transform:none}}
+
+/* ===== v4: app móvil ===== */
+.bnav,#scrim{display:none}
+@media (max-width:860px){
+html,body{overscroll-behavior:none}
+body,body[data-view]{display:flex;flex-direction:column;height:100%;height:100dvh;overflow:hidden;-webkit-tap-highlight-color:transparent;font-size:15px}
+body.lock{overflow:hidden}
+header{padding:calc(8px + env(safe-area-inset-top)) 14px 8px;min-height:0;gap:8px}
+.mark{width:34px;height:34px;font-size:17px;border-radius:10px}.word{font-size:15px;letter-spacing:.2em}
+.actions{margin-left:auto}
+.actions [data-act=home],.actions [data-act=import],#btnEdit,#btnX,#btnP{display:none!important}
+#projChip{padding:4px 10px;font-size:12.5px}
+.arr{display:none}.tabbar{padding:0 10px}button.tab{min-height:46px}
+main,main.noaside{display:block;flex:1;min-height:0;position:relative;transition:none}
+section.content{height:100%;overflow-x:hidden;overflow-y:auto;scrollbar-gutter:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:16px 14px calc(94px + env(safe-area-inset-bottom))}
+body[data-view=home] section.content{padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+input,select,.desc{font-size:16px}button{min-height:44px}
+/* catálogo = panel inferior */
+aside,aside[hidden]{position:fixed;left:0;right:0;bottom:0;z-index:46;height:80dvh;max-height:none;border-radius:22px 22px 0 0;border:1px solid var(--cat-line);padding:10px 14px calc(18px + env(safe-area-inset-bottom));transform:translateY(105%);visibility:hidden;opacity:1;box-shadow:0 -20px 50px rgba(15,23,42,.25);transition:transform .55s var(--ease),visibility 0s .55s}
+aside.open{transform:none;visibility:visible;transition-delay:0s}
+main.noaside aside{display:none}
+aside::before{content:"";display:block;width:40px;height:4px;border-radius:4px;background:var(--cat-line);margin:0 auto 12px}
+aside>*{min-width:0}
+#scrim{display:block;position:fixed;inset:0;z-index:45;background:rgba(10,12,30,.45);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .4s}
+#scrim.on{opacity:1;pointer-events:auto}
+.ti{padding:10px}
+/* barra inferior */
+body[data-view=project] .bnav{display:flex}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:30;gap:2px;padding:6px 6px calc(6px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--panel) 82%,transparent);backdrop-filter:blur(18px) saturate(1.4);border-top:1px solid var(--line)}
+.bnav button,html[data-theme=dark] .bnav button{flex:1;flex-direction:column;gap:3px;min-height:52px;padding:4px 0;background:transparent;border:none;color:var(--muted);font-size:11px;font-weight:500;border-radius:12px}
+.bnav button .ic{font-size:21px;transition:transform .35s var(--ease)}
+.bnav button.on,html[data-theme=dark] .bnav button.on{color:var(--accent);background:var(--accent-soft)}
+.bnav button.on .ic{transform:translateY(-1px) scale(1.12)}
+/* filas de medición como tarjetas */
+.blk table,.blk tbody{display:block;min-width:0;width:100%}.blk thead{display:none}
+.blk tbody tr{display:flex;flex-wrap:wrap;gap:8px;padding:12px;margin:0 12px 10px;border:1px solid var(--line);border-radius:14px;background:var(--fill)}
+.blk td{display:block;padding:0;border:none;flex:1 1 56px;min-width:0}
+.blk td:first-child{flex:1 1 100%}.blk td.nacell{display:none}
+.blk td.num,.blk td.st{flex:1 1 40%;text-align:left}
+.blk td:nth-last-child(2){flex:1 1 calc(100% - 56px)}
+.blk td:last-child{flex:0 0 44px;align-self:flex-end}
+.blk td[data-l]::before{content:attr(data-l);display:block;font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--subtle);margin-bottom:3px}
+.blk td input,html[data-theme=dark] .blk td input{width:100%;min-height:44px;background:var(--panel);border-color:var(--line2)}
+.blk td .pv{font-size:19px}
+.bh{padding:12px 14px 8px}.bm{width:100%;justify-content:space-between}
+.bbody>.tbl-wrap{overflow-x:hidden}
+.thead{margin-bottom:22px}.home h1{font-size:24px}.grid{grid-template-columns:1fr}
+.home-head .tools{width:100%}.home .search{width:100%;flex:1}.kpis{grid-template-columns:1fr 1fr}
+/* ventanas como panel inferior */
+.modal-bg{align-items:flex-end;padding:0}
+.modal{width:100%;max-height:90dvh;border-radius:24px 24px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom));animation:sheetup .5s var(--ease)}
+@keyframes sheetup{from{transform:translateY(100%)}}
+#toast{bottom:calc(88px + env(safe-area-inset-bottom))}
+#palPop{left:12px;right:12px!important;width:auto}
+}
+@media (hover:none){.pcard:hover,.part:hover{transform:none}.toolbar button:hover,.home-head button:hover{transform:none;box-shadow:none}}
+@media print{.bnav,#scrim{display:none!important}}
+</style>
+</head>
+<body data-view="home" class="boot">
+<div id="intro"><div class="in-mark" id="inMark"></div><div class="in-word">METRADOS</div><div class="in-bar"><i></i></div></div>
+<header>
+  <div class="vmenu" id="vmenuWrap"><button type="button" class="ghost vbtn" id="btnV" data-act="vmenu" aria-haspopup="menu" aria-expanded="false" title="Consolidado y resumen"><span data-i="menu"></span><i class="vdot"></i></button><span class="vhint" id="vhint">Consolidado y resumen</span></div>
+  <div class="brand"><span class="mark" id="mark"></span><span class="word">METRADOS</span></div>
+  <div id="projChip"></div>
+  <div class="sp"></div>
+  <span id="saved"><span data-i="check"></span>Guardado</span>
+  <div class="actions">
+    <button class="ghost" id="btnPal" data-act="pal" title="Temas de color" aria-haspopup="dialog" aria-expanded="false"><span data-i="palette"></span><span class="lbl">Colores</span></button>
+    <button class="ghost" id="btnTheme" data-act="theme" title="Cambiar tema"></button>
+    <button class="ghost" data-act="home" title="Mis proyectos"><span data-i="folder"></span><span class="lbl">Proyectos</span></button>
+    <button class="ghost" id="btnEdit" data-act="editdatos" title="Editar datos del proyecto"><span data-i="edit"></span><span class="lbl">Datos</span></button>
+    <button class="ghost" id="btnX" data-act="xlsx" title="Descargar planilla en Excel (.xlsx)"><span data-i="save"></span><span class="lbl">Excel</span></button>
+    <button class="ghost" id="btnP" data-act="print" title="Guardar planilla en PDF"><span data-i="printer"></span><span class="lbl">PDF</span></button>
+    <button class="ghost" data-act="import" title="Importar archivo de proyecto"><span data-i="upload"></span><span class="lbl">Importar</span></button>
+  </div>
+  <input type="file" id="fileInput" accept=".json" class="hidden">
+</header>
+
+<div class="tabwrap">
+  <button class="arr" id="tPrev" data-act="prev" aria-label="Especialidad anterior"><span data-i="left"></span></button>
+  <div class="tabbar" id="tabbar" role="tablist"></div>
+  <button class="arr" id="tNext" data-act="next" aria-label="Especialidad siguiente"><span data-i="chev"></span></button>
+</div>
+
+<main class="noaside">
+  <aside id="aside" hidden>
+    <div class="ah"><h3>Catálogo</h3><div class="acts"><button class="mini" id="exAll">Expandir</button><button class="mini" id="coAll">Contraer</button></div></div>
+    <div class="cat-title" id="catTitle"></div>
+    <div class="search-wrap"><span data-i="search"></span><input id="buscador" placeholder="Buscar por nombre o código" aria-label="Buscar partida"></div>
+    <div id="tree"></div>
+  </aside>
+  <section class="content" id="content"></section>
+</main>
+<nav class="bnav" id="bnav" aria-label="Navegación">
+  <button type="button" data-act="mmed" data-n="med"><span data-i="ruler"></span>Medir</button>
+  <button type="button" data-act="cat"><span data-i="list"></span>Catálogo</button>
+  <button type="button" data-act="goview" data-t="consolidado" data-n="con"><span data-i="chart"></span>Consolidado</button>
+  <button type="button" data-act="goview" data-t="resumen" data-n="res"><span data-i="info"></span>Resumen</button>
+  <button type="button" data-act="more"><span data-i="menu"></span>Más</button>
+</nav>
+<div id="scrim" data-act="scrim"></div>
+<div id="modalRoot"></div>
+<div id="printDoc"></div>
+<div id="toast" role="status"></div>
+
+<script>
+const CATALOGO = [{"c":"OE.1","n":1,"t":"ENCABEZADO","d":"Obras Provisionales, Trabajos Preliminares, Seguridad Y Salud","u":null,"cat":"OE.1","p":null},{"c":"OE.1.1","n":2,"t":"ENCABEZADO","d":"Obras Provisionales Y Trabajos Preliminares","u":null,"cat":"OE.1","p":"Obras Provisionales, Trabajos Preliminares, Seguridad Y Salud"},{"c":"OE.1.1.1","n":3,"t":"ENCABEZADO","d":"Construcciones Provisionales","u":null,"cat":"OE.1","p":"Obras Provisionales Y Trabajos Preliminares"},{"c":"OE.1.1.1.1","n":4,"t":"PARTIDA","d":"Oficinas","u":"Metro cuadrado (m2)","cat":"OE.1","p":"Construcciones Provisionales"},{"c":"OE.1.1.1.2","n":4,"t":"PARTIDA","d":"Almacenes","u":"Metro cuadrado (m2)","cat":"OE.1","p":"Construcciones Provisionales"},{"c":"OE.1.1.1.3","n":4,"t":"PARTIDA","d":"Casetas De Guardianía","u":"Metro cuadrado (m2)","cat":"OE.1","p":"Construcciones Provisionales"},{"c":"OE.1.1.1.4","n":4,"t":"PARTIDA","d":"Comedores","u":"Metro cuadrado (m2)","cat":"OE.1","p":"Construcciones Provisionales"},{"c":"OE.1.1.1.5","n":4,"t":"PARTIDA","d":"Vestuarios","u":"Metro cuadrado (m2)","cat":"OE.1","p":"Construcciones Provisionales"},{"c":"OE.1.1.1.6","n":4,"t":"PARTIDA","d":"Servicios Higiénicos","u":"Metro cuadrado (m2)","cat":"OE.1","p":"Construcciones Provisionales"},{"c":"OE.1.1.1.7","n":4,"t":"PARTIDA","d":"Cercos","u":"Metro (m)","cat":"OE.1","p":"Construcciones Provisionales"},{"c":"OE.1.1.1.8","n":4,"t":"PARTIDA","d":"Carteles","u":"Unidad (Und.)","cat":"OE.1","p":"Construcciones Provisionales"},{"c":"OE.1.1.2","n":3,"t":"ENCABEZADO","d":"Instalaciones Provisionales","u":null,"cat":"OE.1","p":"Obras Provisionales Y Trabajos Preliminares"},{"c":"OE.1.1.2.1","n":4,"t":"PARTIDA","d":"Agua Para La Construcción","u":null,"cat":"OE.1","p":"Instalaciones Provisionales"},{"c":"OE.1.1.2.2","n":4,"t":"PARTIDA","d":"Desagüe Para La Construcción","u":"Global (Glb.)","cat":"OE.1","p":"Instalaciones Provisionales"},{"c":"OE.1.1.2.3","n":4,"t":"PARTIDA","d":"Energía Eléctrica Provisional","u":"Global (Glb.)","cat":"OE.1","p":"Instalaciones Provisionales"},{"c":"OE.1.1.2.4","n":4,"t":"PARTIDA","d":"Instalación Telefónica Y Comunicación Provisional","u":"Global (Glb.)","cat":"OE.1","p":"Instalaciones Provisionales"},{"c":"OE.1.1.3","n":3,"t":"ENCABEZADO","d":"Trabajos Preliminares","u":null,"cat":"OE.1","p":"Obras Provisionales Y Trabajos Preliminares"},{"c":"OE.1.1.3.1","n":4,"t":"PARTIDA","d":"Limpieza Del Terreno","u":null,"cat":"OE.1","p":"Trabajos Preliminares"},{"c":"OE.1.1.4","n":3,"t":"ENCABEZADO","d":"Eliminación De Obstrucciones","u":null,"cat":"OE.1","p":"Obras Provisionales Y Trabajos Preliminares"},{"c":"OE.1.1.4.1","n":4,"t":"PARTIDA","d":"Tala De Árboles","u":"Unidad (Und.)","cat":"OE.1","p":"Eliminación De Obstrucciones"},{"c":"OE.1.1.4.2","n":4,"t":"PARTIDA","d":"Eliminación De Raíces","u":"Unidad (Und.)","cat":"OE.1","p":"Eliminación De Obstrucciones"},{"c":"OE.1.1.4.3","n":4,"t":"PARTIDA","d":"Eliminación De Rocas","u":"Metro cúbico (m3)","cat":"OE.1","p":"Eliminación De Obstrucciones"},{"c":"OE.1.1.4.4","n":4,"t":"PARTIDA","d":"Eliminación De Elementos Enterrados","u":"Unidad (Und.)","cat":"OE.1","p":"Eliminación De Obstrucciones"},{"c":"OE.1.1.5","n":3,"t":"PARTIDA","d":"Remociones","u":"Metro cuadrado (m2)","cat":"OE.1","p":"Obras Provisionales Y Trabajos Preliminares"},{"c":"OE.1.1.6","n":3,"t":"ENCABEZADO","d":"Demoliciones","u":null,"cat":"OE.1","p":"Obras Provisionales Y Trabajos Preliminares"},{"c":"OE.1.1.6.1","n":4,"t":"PARTIDA","d":"Eliminacion De Demoliciones","u":"Metro cúbico (m3)","cat":"OE.1","p":"Demoliciones"},{"c":"OE.1.1.7","n":3,"t":"PARTIDA","d":"Movilización De Campamento, Maquinaria Y Herramientas","u":"Global (Glb.)","cat":"OE.1","p":"Obras Provisionales Y Trabajos Preliminares"},{"c":"OE.1.1.8","n":3,"t":"PARTIDA","d":"Apuntalamientos De Construcciones Existentes","u":"Global (Glb.)","cat":"OE.1","p":"Obras Provisionales Y Trabajos Preliminares"},{"c":"OE.1.1.9","n":3,"t":"ENCABEZADO","d":"Trazos, Niveles Y Replanteo","u":null,"cat":"OE.1","p":"Obras Provisionales Y Trabajos Preliminares"},{"c":"OE.1.1.9.1","n":4,"t":"PARTIDA","d":"Trazo, Niveles Y Replanteo Preliminar","u":"Metro cuadrado (m2)","cat":"OE.1","p":"Trazos, Niveles Y Replanteo"},{"c":"OE.1.1.9.2","n":4,"t":"PARTIDA","d":"Replanteo Durante El Proceso","u":"Metro cuadrado (m2)","cat":"OE.1","p":"Trazos, Niveles Y Replanteo"},{"c":"OE.1.2","n":2,"t":"ENCABEZADO","d":"Seguridad Y Salud","u":null,"cat":"OE.1","p":"Obras Provisionales, Trabajos Preliminares, Seguridad Y Salud"},{"c":"OE.1.2.1","n":3,"t":"ENCABEZADO","d":"Elaboración, Implementación Y Administración Del Plan De Seguridad Y Salud En El Trabajo","u":null,"cat":"OE.1","p":"Seguridad Y Salud"},{"c":"OE.1.2.1.1","n":4,"t":"PARTIDA","d":"Equipos De Protección Individual","u":null,"cat":"OE.1","p":"Elaboración, Implementación Y Administración Del Plan De Seguridad Y Salud En El Trabajo"},{"c":"OE.1.2.1.2","n":4,"t":"PARTIDA","d":"Equipos De Protección Colectiva","u":null,"cat":"OE.1","p":"Elaboración, Implementación Y Administración Del Plan De Seguridad Y Salud En El Trabajo"},{"c":"OE.1.2.1.3","n":4,"t":"PARTIDA","d":"Señalización Temporal De Seguridad","u":null,"cat":"OE.1","p":"Elaboración, Implementación Y Administración Del Plan De Seguridad Y Salud En El Trabajo"},{"c":"OE.1.2.1.4","n":4,"t":"PARTIDA","d":"Capacitación En Seguridad Y Salud","u":null,"cat":"OE.1","p":"Elaboración, Implementación Y Administración Del Plan De Seguridad Y Salud En El Trabajo"},{"c":"OE.1.2.2","n":3,"t":"PARTIDA","d":"Recursos Para Respuestas Ante Emergencias En Seguridad Y Salud Durante El Trabajo","u":null,"cat":"OE.1","p":"Seguridad Y Salud"},{"c":"OE.2","n":1,"t":"ENCABEZADO","d":"Estructuras","u":null,"cat":"OE.2","p":null},{"c":"OE.2.1","n":2,"t":"ENCABEZADO","d":"Movimiento De Tierras","u":null,"cat":"OE.2","p":"Estructuras"},{"c":"OE.2.1.1","n":3,"t":"ENCABEZADO","d":"Nivelación De Terreno","u":null,"cat":"OE.2","p":"Movimiento De Tierras"},{"c":"OE.2.1.1.1","n":4,"t":"PARTIDA","d":"Nivelación","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Nivelación De Terreno"},{"c":"OE.2.1.1.2","n":4,"t":"PARTIDA","d":"Nivelado Apisonado","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Nivelación De Terreno"},{"c":"OE.2.1.2","n":3,"t":"ENCABEZADO","d":"Excavaciones","u":null,"cat":"OE.2","p":"Movimiento De Tierras"},{"c":"OE.2.1.2.1","n":4,"t":"PARTIDA","d":"Excavaciones Masivas","u":"Metro cúbico (m3)","cat":"OE.2","p":"Excavaciones"},{"c":"OE.2.1.2.1","n":4,"t":"PARTIDA","d":"Excavaciones Simples","u":"Metro cúbico (m3)","cat":"OE.2","p":"Excavaciones"},{"c":"OE.2.1.3","n":3,"t":"PARTIDA","d":"Cortes","u":"Metro cúbico (m3)","cat":"OE.2","p":"Movimiento De Tierras"},{"c":"OE.2.1.4","n":3,"t":"ENCABEZADO","d":"Rellenos","u":null,"cat":"OE.2","p":"Movimiento De Tierras"},{"c":"OE.2.1.4.1","n":4,"t":"PARTIDA","d":"Relleno Con Material Propio","u":"Metro cúbico (m3)","cat":"OE.2","p":"Rellenos"},{"c":"OE.2.1.4.2","n":4,"t":"PARTIDA","d":"Rellenos Con Material De Préstamo","u":"Metro cúbico (m3)","cat":"OE.2","p":"Rellenos"},{"c":"OE.2.1.5","n":3,"t":"PARTIDA","d":"Nivelación Interior Y Apisonado","u":null,"cat":"OE.2","p":"Movimiento De Tierras"},{"c":"OE.2.1.6","n":3,"t":"PARTIDA","d":"Eliminación De Material Excedente","u":"Metro cúbico (M3)","cat":"OE.2","p":"Movimiento De Tierras"},{"c":"OE.2.1.7","n":3,"t":"ENCABEZADO","d":"Tablaestacado O Entibado","u":null,"cat":"OE.2","p":"Movimiento De Tierras"},{"c":"OE.2.1.7.1","n":4,"t":"PARTIDA","d":"Tablaestacado Para Excavaciones, Estructuras, Pozos, Cámaras Subterráneas, Etc","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Tablaestacado O Entibado"},{"c":"OE.2.1.7.1","n":4,"t":"PARTIDA","d":"Tablaestacado Para Excavaciones De Zanjas","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Tablaestacado O Entibado"},{"c":"OE.2.2","n":2,"t":"ENCABEZADO","d":"Obras De Concreto Simple","u":null,"cat":"OE.2","p":"Estructuras"},{"c":"OE.2.2.1","n":3,"t":"PARTIDA","d":"Cimientos Corridos","u":"Metro cúbico (m3)","cat":"OE.2","p":"Obras De Concreto Simple"},{"c":"OE.2.2.2","n":3,"t":"ENCABEZADO","d":"Sub Zapatas O Falsa Zapata","u":null,"cat":"OE.2","p":"Obras De Concreto Simple"},{"c":"OE.2.2.2.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Sub Zapatas O Falsa Zapata"},{"c":"OE.2.2.2.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":null,"cat":"OE.2","p":"Sub Zapatas O Falsa Zapata"},{"c":"OE.2.2.3","n":3,"t":"PARTIDA","d":"Solados","u":null,"cat":"OE.2","p":"Obras De Concreto Simple"},{"c":"OE.2.2.4","n":3,"t":"ENCABEZADO","d":"Bases De Concreto","u":null,"cat":"OE.2","p":"Obras De Concreto Simple"},{"c":"OE.2.2.4.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Bases De Concreto"},{"c":"OE.2.2.4.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":null,"cat":"OE.2","p":"Bases De Concreto"},{"c":"OE.2.2.5","n":3,"t":"ENCABEZADO","d":"Estructuras De Sostenimiento De Excavaciones","u":null,"cat":"OE.2","p":"Obras De Concreto Simple"},{"c":"OE.2.2.5.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Estructuras De Sostenimiento De Excavaciones"},{"c":"OE.2.2.5.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":null,"cat":"OE.2","p":"Estructuras De Sostenimiento De Excavaciones"},{"c":"OE.2.2.6","n":3,"t":"ENCABEZADO","d":"Sobrecimientos","u":null,"cat":"OE.2","p":"Obras De Concreto Simple"},{"c":"OE.2.2.6.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Sobrecimientos"},{"c":"OE.2.2.6.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":null,"cat":"OE.2","p":"Sobrecimientos"},{"c":"OE.2.2.7","n":3,"t":"ENCABEZADO","d":"Gradas","u":null,"cat":"OE.2","p":"Obras De Concreto Simple"},{"c":"OE.2.2.7.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Gradas"},{"c":"OE.2.2.7.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado En Gradas","u":null,"cat":"OE.2","p":"Gradas"},{"c":"OE.2.2.8","n":3,"t":"ENCABEZADO","d":"Rampas","u":null,"cat":"OE.2","p":"Obras De Concreto Simple"},{"c":"OE.2.2.8.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Rampas"},{"c":"OE.2.2.8.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado En Rampas","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Rampas"},{"c":"OE.2.2.9","n":3,"t":"PARTIDA","d":"Falsopiso","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Obras De Concreto Simple"},{"c":"OE.2.3","n":2,"t":"ENCABEZADO","d":"Obras De Concreto Armado","u":null,"cat":"OE.2","p":"Estructuras"},{"c":"OE.2.3.1","n":3,"t":"ENCABEZADO","d":"Cimientos Reforzados","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.1.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Cimientos Reforzados"},{"c":"OE.2.3.1.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Kilogramo (kg)","cat":"OE.2","p":"Cimientos Reforzados"},{"c":"OE.2.3.1.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Cimientos Reforzados"},{"c":"OE.2.3.2","n":3,"t":"ENCABEZADO","d":"Zapatas","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.2.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Zapatas"},{"c":"OE.2.3.2.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Kilogramo (kg)","cat":"OE.2","p":"Zapatas"},{"c":"OE.2.3.2.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Zapatas"},{"c":"OE.2.3.3","n":3,"t":"ENCABEZADO","d":"Vigas De Cimentación","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.3.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Vigas De Cimentación"},{"c":"OE.2.3.3.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Kilogramo (kg)","cat":"OE.2","p":"Vigas De Cimentación"},{"c":"OE.2.3.3.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Vigas De Cimentación"},{"c":"OE.2.3.4","n":3,"t":"ENCABEZADO","d":"Losas De Cimentación","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.4.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Losas De Cimentación"},{"c":"OE.2.3.4.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Losas De Cimentación"},{"c":"OE.2.3.4.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Losas De Cimentación"},{"c":"OE.2.3.5","n":3,"t":"ENCABEZADO","d":"Sobrecimientos Reforzados","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.5.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Sobrecimientos Reforzados"},{"c":"OE.2.3.5.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Sobrecimientos Reforzados"},{"c":"OE.2.3.5.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Sobrecimientos Reforzados"},{"c":"OE.2.3.6","n":3,"t":"ENCABEZADO","d":"Muros Reforzados","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.6.1","n":4,"t":"PARTIDA","d":"Muros De Contención","u":null,"cat":"OE.2","p":"Muros Reforzados"},{"c":"OE.2.3.6.2","n":4,"t":"PARTIDA","d":"Muros De Concreto, Tabiques De Concreto Y Placas","u":null,"cat":"OE.2","p":"Muros Reforzados"},{"c":"OE.2.3.6.3","n":4,"t":"PARTIDA","d":"Pantallas, Barandas Y Similares","u":"Metro cúbico (m3)","cat":"OE.2","p":"Muros Reforzados"},{"c":"OE.2.3.7","n":3,"t":"ENCABEZADO","d":"Columnas","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.7.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Columnas"},{"c":"OE.2.3.7.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Columnas"},{"c":"OE.2.3.7.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Columnas"},{"c":"OE.2.3.8","n":3,"t":"ENCABEZADO","d":"Vigas","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.8.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Vigas"},{"c":"OE.2.3.8.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Vigas"},{"c":"OE.2.3.8.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Vigas"},{"c":"OE.2.3.9","n":3,"t":"ENCABEZADO","d":"Losas","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.9.1","n":4,"t":"PARTIDA","d":"Losas Macizas","u":null,"cat":"OE.2","p":"Losas"},{"c":"OE.2.3.9.2","n":4,"t":"PARTIDA","d":"Losas Aligeradas Convencionales","u":null,"cat":"OE.2","p":"Losas"},{"c":"OE.2.3.9.3","n":4,"t":"PARTIDA","d":"Losas Aligeradas Con Viguetas Prefabricadas","u":null,"cat":"OE.2","p":"Losas"},{"c":"OE.2.3.9.4","n":4,"t":"PARTIDA","d":"Losas Nervadas","u":"Metro cúbico (m3)","cat":"OE.2","p":"Losas"},{"c":"OE.2.3.9.5","n":4,"t":"PARTIDA","d":"Losas Cáscara","u":null,"cat":"OE.2","p":"Losas"},{"c":"OE.2.3.9.6","n":4,"t":"PARTIDA","d":"Losa Hongo","u":null,"cat":"OE.2","p":"Losas"},{"c":"OE.2.3.9.7","n":4,"t":"PARTIDA","d":"Losas Especiales","u":null,"cat":"OE.2","p":"Losas"},{"c":"OE.2.3.10","n":3,"t":"ENCABEZADO","d":"Escaleras","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.10.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Escaleras"},{"c":"OE.2.3.10.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Kilogramo (kg)","cat":"OE.2","p":"Escaleras"},{"c":"OE.2.3.10.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Escaleras"},{"c":"OE.2.3.11","n":3,"t":"ENCABEZADO","d":"Caja De Ascensores Y Similares","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.11.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Caja De Ascensores Y Similares"},{"c":"OE.2.3.11.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Kilogramo (kg)","cat":"OE.2","p":"Caja De Ascensores Y Similares"},{"c":"OE.2.3.11.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Caja De Ascensores Y Similares"},{"c":"OE.2.3.12","n":3,"t":"ENCABEZADO","d":"Cisternas Subterráneas","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.12.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Cisternas Subterráneas"},{"c":"OE.2.3.12.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Kilogramo (kg)","cat":"OE.2","p":"Cisternas Subterráneas"},{"c":"OE.2.3.12.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Cisternas Subterráneas"},{"c":"OE.2.3.13","n":3,"t":"ENCABEZADO","d":"Tanques Elevados","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.13.1","n":4,"t":"PARTIDA","d":"Para El Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Tanques Elevados"},{"c":"OE.2.3.13.2","n":4,"t":"PARTIDA","d":"Para El Encofrado Y Desencofrado","u":"Kilogramo (kg)","cat":"OE.2","p":"Tanques Elevados"},{"c":"OE.2.3.13.3","n":4,"t":"PARTIDA","d":"Para La Armadura De Acero","u":"Kilogramo (kg)","cat":"OE.2","p":"Tanques Elevados"},{"c":"OE.2.3.14","n":3,"t":"ENCABEZADO","d":"Pilotes","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.14.1","n":4,"t":"PARTIDA","d":"Para Los Pilotes","u":"Metro (m)","cat":"OE.2","p":"Pilotes"},{"c":"OE.2.3.15","n":3,"t":"ENCABEZADO","d":"Caissones","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.15.1","n":4,"t":"PARTIDA","d":"Para Concreto","u":"Metro cúbico (m3)","cat":"OE.2","p":"Caissones"},{"c":"OE.2.3.15.2","n":4,"t":"PARTIDA","d":"Para Encofrado","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Caissones"},{"c":"OE.2.3.15.3","n":4,"t":"PARTIDA","d":"Para Armadura","u":"Kilogramo (kg)","cat":"OE.2","p":"Caissones"},{"c":"OE.2.3.16","n":3,"t":"ENCABEZADO","d":"Estructuras De Concreto Pretensado O Postensado","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.3.16.1","n":4,"t":"PARTIDA","d":"Vigas","u":null,"cat":"OE.2","p":"Estructuras De Concreto Pretensado O Postensado"},{"c":"OE.2.3.16.2","n":4,"t":"PARTIDA","d":"Losas","u":"Metro cúbico (m3)","cat":"OE.2","p":"Estructuras De Concreto Pretensado O Postensado"},{"c":"OE.2.3.17","n":3,"t":"PARTIDA","d":"Estructuras Prefabricadas","u":null,"cat":"OE.2","p":"Obras De Concreto Armado"},{"c":"OE.2.4","n":2,"t":"ENCABEZADO","d":"Estructuras Metálicas","u":null,"cat":"OE.2","p":"Estructuras"},{"c":"OE.2.4.1","n":3,"t":"ENCABEZADO","d":"Columnas O Pilares","u":null,"cat":"OE.2","p":"Estructuras Metálicas"},{"c":"OE.2.4.1.1","n":4,"t":"PARTIDA","d":"Para Armado","u":"Unidad (Und.)","cat":"OE.2","p":"Columnas O Pilares"},{"c":"OE.2.4.1.2","n":4,"t":"PARTIDA","d":"Para Montaje","u":"Unidad (Und.)","cat":"OE.2","p":"Columnas O Pilares"},{"c":"OE.2.4.2","n":3,"t":"ENCABEZADO","d":"Vigas","u":null,"cat":"OE.2","p":"Estructuras Metálicas"},{"c":"OE.2.4.2.1","n":4,"t":"PARTIDA","d":"Para Armado","u":"Unidad (Und.)","cat":"OE.2","p":"Vigas"},{"c":"OE.2.4.2.2","n":4,"t":"PARTIDA","d":"Para Montaje","u":"Unidad (Und.)","cat":"OE.2","p":"Vigas"},{"c":"OE.2.4.3","n":3,"t":"ENCABEZADO","d":"Viguetas","u":null,"cat":"OE.2","p":"Estructuras Metálicas"},{"c":"OE.2.4.3.1","n":4,"t":"PARTIDA","d":"Para Armado","u":"Unidad (Und.)","cat":"OE.2","p":"Viguetas"},{"c":"OE.2.4.3.2","n":4,"t":"PARTIDA","d":"Para Montaje","u":"Unidad (Und.)","cat":"OE.2","p":"Viguetas"},{"c":"OE.2.4.4","n":3,"t":"ENCABEZADO","d":"Tijerales Y Reticulados","u":null,"cat":"OE.2","p":"Estructuras Metálicas"},{"c":"OE.2.4.4.1","n":4,"t":"PARTIDA","d":"Para Armado","u":"Unidad (Und.)","cat":"OE.2","p":"Tijerales Y Reticulados"},{"c":"OE.2.4.4.2","n":4,"t":"PARTIDA","d":"Para Montaje","u":"Unidad (Und.)","cat":"OE.2","p":"Tijerales Y Reticulados"},{"c":"OE.2.4.5","n":3,"t":"ENCABEZADO","d":"Correas","u":null,"cat":"OE.2","p":"Estructuras Metálicas"},{"c":"OE.2.4.5.1","n":4,"t":"PARTIDA","d":"Para Armado","u":"Unidad (Und.)","cat":"OE.2","p":"Correas"},{"c":"OE.2.4.5.2","n":4,"t":"PARTIDA","d":"Para Montaje","u":"Unidad (Und.)","cat":"OE.2","p":"Correas"},{"c":"OE.2.4.6","n":3,"t":"ENCABEZADO","d":"Coberturas","u":null,"cat":"OE.2","p":"Estructuras Metálicas"},{"c":"OE.2.4.6.1","n":4,"t":"PARTIDA","d":"Con Planchas Corrugadas Galvanizadas","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Coberturas"},{"c":"OE.2.4.6.2","n":4,"t":"PARTIDA","d":"Con Planchas Corrugadas De Fibro-Cemento","u":null,"cat":"OE.2","p":"Coberturas"},{"c":"OE.2.4.6.3","n":4,"t":"PARTIDA","d":"Con Planchas Corrugadas De Aluminio","u":null,"cat":"OE.2","p":"Coberturas"},{"c":"OE.2.4.6.4","n":4,"t":"PARTIDA","d":"Con Planchas Corrugadas Plásticas","u":null,"cat":"OE.2","p":"Coberturas"},{"c":"OE.2.4.6.5","n":4,"t":"PARTIDA","d":"Con Tejas","u":null,"cat":"OE.2","p":"Coberturas"},{"c":"OE.2.4.6.6","n":4,"t":"PARTIDA","d":"Con Ladrillos De Vidrio","u":null,"cat":"OE.2","p":"Coberturas"},{"c":"OE.2.4.6.7","n":4,"t":"PARTIDA","d":"Con Vidrio","u":null,"cat":"OE.2","p":"Coberturas"},{"c":"OE.2.4.7","n":3,"t":"ENCABEZADO","d":"Elementos Para Aguas Pluviales","u":null,"cat":"OE.2","p":"Estructuras Metálicas"},{"c":"OE.2.4.7.1","n":4,"t":"PARTIDA","d":"Para Cumbreras","u":"Metro (m)","cat":"OE.2","p":"Elementos Para Aguas Pluviales"},{"c":"OE.2.4.7.2","n":4,"t":"PARTIDA","d":"A Canaletas","u":"Metro (m)","cat":"OE.2","p":"Elementos Para Aguas Pluviales"},{"c":"OE.2.4.7.3","n":4,"t":"PARTIDA","d":"Para Bajantes","u":"Metro (m)","cat":"OE.2","p":"Elementos Para Aguas Pluviales"},{"c":"OE.2.5","n":2,"t":"ENCABEZADO","d":"Estructura De Madera","u":null,"cat":"OE.2","p":"Estructuras"},{"c":"OE.2.5.1","n":3,"t":"PARTIDA","d":"Columnas O Pilares","u":"Unidad (Und.)","cat":"OE.2","p":"Estructura De Madera"},{"c":"OE.2.5.2","n":3,"t":"PARTIDA","d":"Vigas","u":"Unidad (Und.)","cat":"OE.2","p":"Estructura De Madera"},{"c":"OE.2.5.3","n":3,"t":"PARTIDA","d":"Tijerales Y Reticulados","u":"Unidad (Und.)","cat":"OE.2","p":"Estructura De Madera"},{"c":"OE.2.5.4","n":3,"t":"PARTIDA","d":"Correas","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Estructura De Madera"},{"c":"OE.2.5.5","n":3,"t":"ENCABEZADO","d":"Coberturas","u":null,"cat":"OE.2","p":"Estructura De Madera"},{"c":"OE.2.5.5.1","n":4,"t":"PARTIDA","d":"Con Planchas Corrugas Galvanizadas","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Coberturas"},{"c":"OE.2.5.5.2","n":4,"t":"PARTIDA","d":"Con Planchas Corrugadas De Fibro-Cemento","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Coberturas"},{"c":"OE.2.5.5.3","n":4,"t":"PARTIDA","d":"Con Planchas Corrugadas De Aluminio","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Coberturas"},{"c":"OE.2.5.5.4","n":4,"t":"PARTIDA","d":"Con Planchas Corrugadas Plásticas","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Coberturas"},{"c":"OE.2.5.5.5","n":4,"t":"PARTIDA","d":"Con Tejas","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Coberturas"},{"c":"OE.2.5.5.6","n":4,"t":"PARTIDA","d":"Con Madera","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Coberturas"},{"c":"OE.2.5.5.7","n":4,"t":"PARTIDA","d":"Con Diversas Planchas Lisas","u":"Metro cuadrado (m2)","cat":"OE.2","p":"Coberturas"},{"c":"OE.2.5.6","n":3,"t":"PARTIDA","d":"Pilotes De Madera","u":"Unidad (Und.)","cat":"OE.2","p":"Estructura De Madera"},{"c":"OE.2.6","n":2,"t":"ENCABEZADO","d":"Varios","u":null,"cat":"OE.2","p":"Estructuras"},{"c":"OE.2.6.1","n":3,"t":"PARTIDA","d":"Juntas","u":null,"cat":"OE.2","p":"Varios"},{"c":"OE.3","n":1,"t":"ENCABEZADO","d":"Arquitectura","u":null,"cat":"OE.3","p":null},{"c":"OE.3.1","n":2,"t":"ENCABEZADO","d":"Muros Y Tabiques De Albañileria","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.1.1","n":3,"t":"PARTIDA","d":"Muros De Ladrillo King Kong De Arcilla (A Maquina O Artesanalmente)","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.2","n":3,"t":"PARTIDA","d":"Muros De Ladrillo Corriente De Arcilla (A Maquina O Artesanalmente)","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.3","n":3,"t":"PARTIDA","d":"Muros De Ladrillo Pandereta De Arcilla","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.4","n":3,"t":"PARTIDA","d":"Muros De Block Sílico-Calcáreo K.K. Standard","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.5","n":3,"t":"PARTIDA","d":"Muros De Block Sílico-Calcáreo Tabiques (Tres Huecos)","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.6","n":3,"t":"PARTIDA","d":"Muros De Ladrillo De Concreto","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.7","n":3,"t":"PARTIDA","d":"Muros De Bloques Huecos De Concreto","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.8","n":3,"t":"PARTIDA","d":"Muros De Albañilería Armada","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.9","n":3,"t":"PARTIDA","d":"Muros De Albañilería Confinada","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.10","n":3,"t":"PARTIDA","d":"Muros Con El Sistema De Construcción En Seco (Sistema Dry Wall O Similar)","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.11","n":3,"t":"PARTIDA","d":"Muros De Piedra","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.12","n":3,"t":"PARTIDA","d":"Muros De Adobe (Simple O Estabilizado)","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.13","n":3,"t":"PARTIDA","d":"Tabiques Con Elementos Leves (Fibrocemento, Quincha, Etc.)","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.14","n":3,"t":"PARTIDA","d":"Otros Tipos De Muros O Tabiques","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.15","n":3,"t":"PARTIDA","d":"Barandas Y Parapetos","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.16","n":3,"t":"PARTIDA","d":"Arcos","u":"Unidad (Und.)","cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.17","n":3,"t":"PARTIDA","d":"Estufas","u":null,"cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.1.18","n":3,"t":"PARTIDA","d":"Aceros De Amarre","u":"Kilogramo (kg)","cat":"OE.3","p":"Muros Y Tabiques De Albañileria"},{"c":"OE.3.2","n":2,"t":"ENCABEZADO","d":"Revoques Y Revestimientos","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.2.1","n":3,"t":"PARTIDA","d":"Tarrajeo Rayado Primario","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.2","n":3,"t":"PARTIDA","d":"Tarrajeo En Interiores","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.3","n":3,"t":"PARTIDA","d":"Tarrajeo En Exteriores","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.4","n":3,"t":"PARTIDA","d":"Tarrajeo Fino","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.5","n":3,"t":"PARTIDA","d":"Tarrajeo En Columnas","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.6","n":3,"t":"PARTIDA","d":"Tarrajeo En Vigas","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.7","n":3,"t":"PARTIDA","d":"Tarrajeo De Muros De Concreto","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.8","n":3,"t":"PARTIDA","d":"Tarrajeo Con Impermeabilizantes","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.9","n":3,"t":"PARTIDA","d":"Tarrajeo Salpicado O Escarchado","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.10","n":3,"t":"PARTIDA","d":"Tarrajeo Especiales","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.11","n":3,"t":"PARTIDA","d":"Vestiduras De Derrames","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.12","n":3,"t":"PARTIDA","d":"Vestidura De Elementos De Fachada","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.13","n":3,"t":"PARTIDA","d":"Empastado De Muros De Adobe","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.14","n":3,"t":"PARTIDA","d":"Tarrajeo Sobre Malla Metálica En Muros De Adobe","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.15","n":3,"t":"PARTIDA","d":"Tarrajeo De Ductos","u":"Metro Cuadrado (m2)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.16","n":3,"t":"ENCABEZADO","d":"Enlucido De Yeso","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.16.1","n":4,"t":"PARTIDA","d":"Enlucido De Yeso Sobre Muros De Adobe","u":null,"cat":"OE.3","p":"Enlucido De Yeso"},{"c":"OE.3.2.16.2","n":4,"t":"PARTIDA","d":"Enlucido De Yeso Sobre Muros De Concreto","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Enlucido De Yeso"},{"c":"OE.3.2.16.3","n":4,"t":"PARTIDA","d":"Enlucido De Yeso Sobre Muros De Ladrillo","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Enlucido De Yeso"},{"c":"OE.3.2.17","n":3,"t":"PARTIDA","d":"Enlucido De Cuarzo En Paramento","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.18","n":3,"t":"PARTIDA","d":"Unión De Muros Y Cielorraso","u":"Metro (m)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.19","n":3,"t":"PARTIDA","d":"Bruñas","u":"Metro (m)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.20","n":3,"t":"PARTIDA","d":"Tarrajeo En Fondo De Escalera","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.21","n":3,"t":"PARTIDA","d":"Preparación De Gradas De Concreto","u":"Metro (m)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.22","n":3,"t":"PARTIDA","d":"Preparación De Descansos","u":"Metro (m)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.22","n":3,"t":"PARTIDA","d":"Gradas","u":"Metro (m)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.23","n":3,"t":"PARTIDA","d":"Descansos","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.24","n":3,"t":"ENCABEZADO","d":"Enchapes","u":null,"cat":"OE.3","p":"Revoques Y Revestimientos"},{"c":"OE.3.2.24.1","n":4,"t":"PARTIDA","d":"Solaqueo De Muros","u":null,"cat":"OE.3","p":"Enchapes"},{"c":"OE.3.3","n":2,"t":"ENCABEZADO","d":"Cielorrasos","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.3.1","n":3,"t":"PARTIDA","d":"Cielorraso Con Yeso","u":null,"cat":"OE.3","p":"Cielorrasos"},{"c":"OE.3.3.2","n":3,"t":"PARTIDA","d":"Yeso En Vigas","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Cielorrasos"},{"c":"OE.3.3.3","n":3,"t":"PARTIDA","d":"Cielorraso Con Mezcla","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Cielorrasos"},{"c":"OE.3.3.4","n":3,"t":"PARTIDA","d":"Cielorraso Pegado","u":null,"cat":"OE.3","p":"Cielorrasos"},{"c":"OE.3.3.5","n":3,"t":"PARTIDA","d":"Cielorraso Con El Sistema De Construcción En Seco","u":null,"cat":"OE.3","p":"Cielorrasos"},{"c":"OE.3.3.6","n":3,"t":"ENCABEZADO","d":"Falso Cielorraso","u":null,"cat":"OE.3","p":"Cielorrasos"},{"c":"OE.3.3.6.1","n":4,"t":"PARTIDA","d":"De Malla Metálica","u":null,"cat":"OE.3","p":"Falso Cielorraso"},{"c":"OE.3.3.6.2","n":4,"t":"PARTIDA","d":"De Paneles","u":null,"cat":"OE.3","p":"Falso Cielorraso"},{"c":"OE.3.4","n":2,"t":"ENCABEZADO","d":"Pisos Y Pavimentos","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.4.1","n":3,"t":"PARTIDA","d":"Contrapisos","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos Y Pavimentos"},{"c":"OE.3.4.2","n":3,"t":"ENCABEZADO","d":"Pisos","u":null,"cat":"OE.3","p":"Pisos Y Pavimentos"},{"c":"OE.3.4.2.1","n":4,"t":"PARTIDA","d":"Loseta Corriente","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.2","n":4,"t":"PARTIDA","d":"Loseta Veneciana","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.3","n":4,"t":"PARTIDA","d":"Loseta Tipo Corcho","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.4","n":4,"t":"PARTIDA","d":"Loseta De Mármol Reconstruido","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.5","n":4,"t":"PARTIDA","d":"Losetas De Canto Rodado","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.6","n":4,"t":"PARTIDA","d":"Losetas De Acabados Especiales","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.7","n":4,"t":"PARTIDA","d":"Baldosa Asfáltica","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.8","n":4,"t":"PARTIDA","d":"Baldosa Vinílica","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.9","n":4,"t":"PARTIDA","d":"Terrazo","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.10","n":4,"t":"PARTIDA","d":"Mármol","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.11","n":4,"t":"PARTIDA","d":"Mayólica","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.12","n":4,"t":"PARTIDA","d":"Pepelma","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.13","n":4,"t":"PARTIDA","d":"Cantos Rodados","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.14","n":4,"t":"PARTIDA","d":"Granito Lavado","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.15","n":4,"t":"PARTIDA","d":"Laja","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.16","n":4,"t":"PARTIDA","d":"Madera Machihembrada","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.17","n":4,"t":"PARTIDA","d":"Parquet","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.18","n":4,"t":"PARTIDA","d":"Imitación Madera","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.19","n":4,"t":"PARTIDA","d":"Pisos Laminados","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.20","n":4,"t":"PARTIDA","d":"Porcelanatos","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.21","n":4,"t":"PARTIDA","d":"Cerámicos","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.22","n":4,"t":"PARTIDA","d":"Losetas De Cemento","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.2.23","n":4,"t":"PARTIDA","d":"Otros","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos"},{"c":"OE.3.4.3","n":3,"t":"PARTIDA","d":"Pisos De Concreto","u":null,"cat":"OE.3","p":"Pisos Y Pavimentos"},{"c":"OE.3.4.4","n":3,"t":"PARTIDA","d":"Acabado De Concreto En Pisos","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos Y Pavimentos"},{"c":"OE.3.4.5","n":3,"t":"PARTIDA","d":"Sardineles","u":"Metro (m)","cat":"OE.3","p":"Pisos Y Pavimentos"},{"c":"OE.3.4.6","n":3,"t":"PARTIDA","d":"Veredas","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos Y Pavimentos"},{"c":"OE.3.4.7","n":3,"t":"PARTIDA","d":"Pistas","u":null,"cat":"OE.3","p":"Pisos Y Pavimentos"},{"c":"OE.3.4.8","n":3,"t":"PARTIDA","d":"Sobrepiso O “Piso Técnico”","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pisos Y Pavimentos"},{"c":"OE.3.5","n":2,"t":"ENCABEZADO","d":"Zocalos Y Contrazócalos","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.5.1","n":3,"t":"ENCABEZADO","d":"Zocalos","u":null,"cat":"OE.3","p":"Zocalos Y Contrazócalos"},{"c":"OE.3.5.1.1","n":4,"t":"PARTIDA","d":"Pepelma","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.2","n":4,"t":"PARTIDA","d":"Mármol","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.3","n":4,"t":"PARTIDA","d":"Granito Artificial","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.4","n":4,"t":"PARTIDA","d":"De Cemento Simple","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.5","n":4,"t":"PARTIDA","d":"De Cantos Rodados","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.6","n":4,"t":"PARTIDA","d":"De Madera","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.7","n":4,"t":"PARTIDA","d":"De Planchas Plásticas","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.8","n":4,"t":"PARTIDA","d":"De Ladrillos Decorativos","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.9","n":4,"t":"PARTIDA","d":"Revestimiento Especiales","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.10","n":4,"t":"PARTIDA","d":"Porcelanato","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.11","n":4,"t":"PARTIDA","d":"Cerámico","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.12","n":4,"t":"PARTIDA","d":"Aluminio","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.1.13","n":4,"t":"PARTIDA","d":"Otros","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Zocalos"},{"c":"OE.3.5.2","n":3,"t":"ENCABEZADO","d":"Contrazocalos","u":null,"cat":"OE.3","p":"Zocalos Y Contrazócalos"},{"c":"OE.3.5.2.1","n":4,"t":"PARTIDA","d":"Loseta","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.5.2.2","n":4,"t":"PARTIDA","d":"Granito Vaciado En Obra","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.5.2.3","n":4,"t":"PARTIDA","d":"Cemento","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.5.2.4","n":4,"t":"PARTIDA","d":"Vinílico","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.5.2.5","n":4,"t":"PARTIDA","d":"Aluminio","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.5.2.6","n":4,"t":"PARTIDA","d":"Mármol","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.5.2.7","n":4,"t":"PARTIDA","d":"Madera","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.5.2.8","n":4,"t":"PARTIDA","d":"Porcelanato","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.5.2.9","n":4,"t":"PARTIDA","d":"Cerámico","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.5.2.10","n":4,"t":"PARTIDA","d":"Acero Inoxidable","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.5.2.11","n":4,"t":"PARTIDA","d":"Otros","u":"Metro (m)","cat":"OE.3","p":"Contrazocalos"},{"c":"OE.3.6","n":2,"t":"ENCABEZADO","d":"Coberturas","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.6.1","n":3,"t":"PARTIDA","d":"Cobertura De Torta De Barro","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Coberturas"},{"c":"OE.3.6.2","n":3,"t":"PARTIDA","d":"Ladrillo Pastelero Sobre Torta De Barro","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Coberturas"},{"c":"OE.3.6.3","n":3,"t":"PARTIDA","d":"Ladrillo Pastelero Sobre Mortero","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Coberturas"},{"c":"OE.3.6.4","n":3,"t":"PARTIDA","d":"Material Impermeabilizante","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Coberturas"},{"c":"OE.3.6.5","n":3,"t":"PARTIDA","d":"Recubrimientos Sobre Estructuras De Madera, Metal, Etc","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Coberturas"},{"c":"OE.3.6.6","n":3,"t":"PARTIDA","d":"Recubrimientos Con Planchas Metálicas","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Coberturas"},{"c":"OE.3.6.7","n":3,"t":"PARTIDA","d":"Recubrimientos Con Paneles Termo-Acústicos","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Coberturas"},{"c":"OE.3.6.8","n":3,"t":"PARTIDA","d":"Recubrimientos De Manto Asfáltico","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Coberturas"},{"c":"OE.3.6.9","n":3,"t":"PARTIDA","d":"Otros","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Coberturas"},{"c":"OE.3.7","n":2,"t":"ENCABEZADO","d":"Carpinteria De Madera","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.7.1","n":3,"t":"PARTIDA","d":"Puertas","u":"Unidad (Und.)","cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.2","n":3,"t":"PARTIDA","d":"Ventanas","u":"Unidad (Und.)","cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.3","n":3,"t":"PARTIDA","d":"Persianas De Madera","u":"Unidad (Und.)","cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.4","n":3,"t":"PARTIDA","d":"Mamparas","u":null,"cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.5","n":3,"t":"PARTIDA","d":"Forro De Vanos","u":null,"cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.6","n":3,"t":"PARTIDA","d":"Divisiones Para Servicios Higiénicos","u":null,"cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.7","n":3,"t":"PARTIDA","d":"División Ornamental De Ambientes","u":"Unidad (Und.)","cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.8","n":3,"t":"PARTIDA","d":"Tabiques De Madera","u":null,"cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.9","n":3,"t":"PARTIDA","d":"Escaleras De Madera","u":"Unidad (Und.)","cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.10","n":3,"t":"PARTIDA","d":"Barandas","u":"Metro (m)","cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.11","n":3,"t":"PARTIDA","d":"Pasamanos Aislados","u":"Metro (m)","cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.12","n":3,"t":"PARTIDA","d":"Muebles De Cocina Y Similares","u":"Unidad (Und.)","cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.13","n":3,"t":"PARTIDA","d":"Vitrinas","u":"Unidad (Und.)","cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.7.14","n":3,"t":"PARTIDA","d":"Closet","u":null,"cat":"OE.3","p":"Carpinteria De Madera"},{"c":"OE.3.8","n":2,"t":"ENCABEZADO","d":"Carpintería Metálica Y Herrería","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.8.1","n":3,"t":"PARTIDA","d":"Ventanas De Fierro","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.2","n":3,"t":"PARTIDA","d":"Puertas De Fierro","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.3","n":3,"t":"PARTIDA","d":"Mamparas De Fierro","u":null,"cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.4","n":3,"t":"PARTIDA","d":"Ventanas De Aluminio","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.5","n":3,"t":"PARTIDA","d":"Puertas De Aluminio","u":null,"cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.6","n":3,"t":"PARTIDA","d":"Mamparas De Aluminio","u":null,"cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.7","n":3,"t":"PARTIDA","d":"Celosías De Aluminio","u":"Unidad (Und.)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.8","n":3,"t":"PARTIDA","d":"Cortinas Enrollables De Fierro","u":null,"cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.9","n":3,"t":"PARTIDA","d":"Puertas Plegables De Fierro","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.10","n":3,"t":"PARTIDA","d":"Puertas De Plancha Metálica","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.11","n":3,"t":"PARTIDA","d":"Puertas De Fierro Y Malla","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.12","n":3,"t":"PARTIDA","d":"División De Plancha De Acero Galvanizado Para Servicios Higiénicos","u":null,"cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.13","n":3,"t":"PARTIDA","d":"División De Aluminio Para Servicios Higiénicos","u":"Metro Cuadrado (m2)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.14","n":3,"t":"PARTIDA","d":"Barandas Metálicas","u":"Metro (m)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.15","n":3,"t":"PARTIDA","d":"Pasamanos Aislados","u":null,"cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.16","n":3,"t":"PARTIDA","d":"Cercos De Fierro","u":"Metro (m)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.17","n":3,"t":"PARTIDA","d":"Escaleras Metálicas","u":"Unidad (Und.)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.8.18","n":3,"t":"PARTIDA","d":"Elementos Metálicos Especiales","u":"Unidad (Und.)","cat":"OE.3","p":"Carpintería Metálica Y Herrería"},{"c":"OE.3.9","n":2,"t":"ENCABEZADO","d":"Cerrajería","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.9.1","n":3,"t":"PARTIDA","d":"Bisagras","u":null,"cat":"OE.3","p":"Cerrajería"},{"c":"OE.3.9.2","n":3,"t":"PARTIDA","d":"Cerraduras","u":null,"cat":"OE.3","p":"Cerrajería"},{"c":"OE.3.9.3","n":3,"t":"PARTIDA","d":"Sistemas O Mecanismos","u":"Juego (Und.)","cat":"OE.3","p":"Cerrajería"},{"c":"OE.3.9.4","n":3,"t":"PARTIDA","d":"Accesorios De Cierre","u":"Unidad (Und.)","cat":"OE.3","p":"Cerrajería"},{"c":"OE.3.9.5","n":3,"t":"PARTIDA","d":"Accesorios En General","u":"Unidad (Und.)","cat":"OE.3","p":"Cerrajería"},{"c":"OE.3.9.6","n":3,"t":"PARTIDA","d":"Cerrajería Para Muebles","u":null,"cat":"OE.3","p":"Cerrajería"},{"c":"OE.3.10","n":2,"t":"ENCABEZADO","d":"Vidrios, Cristales Y Similares","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.10.1","n":3,"t":"PARTIDA","d":"Espejos","u":"Unidad (Und.)","cat":"OE.3","p":"Vidrios, Cristales Y Similares"},{"c":"OE.3.10.2","n":3,"t":"PARTIDA","d":"Vitral","u":"Unidad (Und.)","cat":"OE.3","p":"Vidrios, Cristales Y Similares"},{"c":"OE.3.10.3","n":3,"t":"PARTIDA","d":"Bloques De Vidrio","u":"Unidad (Und.)","cat":"OE.3","p":"Vidrios, Cristales Y Similares"},{"c":"OE.3.11","n":2,"t":"ENCABEZADO","d":"Pintura","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.11.1","n":3,"t":"PARTIDA","d":"Pintura De Cielos Rasos, Vigas, Columnas Y Paredes","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pintura"},{"c":"OE.3.11.2","n":3,"t":"PARTIDA","d":"Pintura De Puertas","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pintura"},{"c":"OE.3.11.3","n":3,"t":"PARTIDA","d":"Pintura De Ventanas","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pintura"},{"c":"OE.3.11.4","n":3,"t":"PARTIDA","d":"Pintura De Enchapes","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Pintura"},{"c":"OE.3.11.5","n":3,"t":"PARTIDA","d":"Pintura De Contrazócalos Y Barandas","u":"Metro (m)","cat":"OE.3","p":"Pintura"},{"c":"OE.3.11.6","n":3,"t":"PARTIDA","d":"Pintura De Estructuras Metálicas","u":null,"cat":"OE.3","p":"Pintura"},{"c":"OE.3.12","n":2,"t":"ENCABEZADO","d":"Varios, Limpieza, Jardinería","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.12.1","n":3,"t":"PARTIDA","d":"Limpieza Permanente De Obra","u":null,"cat":"OE.3","p":"Varios, Limpieza, Jardinería"},{"c":"OE.3.12.2","n":3,"t":"PARTIDA","d":"Limpieza Final","u":null,"cat":"OE.3","p":"Varios, Limpieza, Jardinería"},{"c":"OE.3.12.3","n":3,"t":"PARTIDA","d":"Limpieza De Vidrios","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Varios, Limpieza, Jardinería"},{"c":"OE.3.12.4","n":3,"t":"PARTIDA","d":"Encerados De Pisos","u":"Metro cuadrado (m2)","cat":"OE.3","p":"Varios, Limpieza, Jardinería"},{"c":"OE.3.12.5","n":3,"t":"PARTIDA","d":"Sembrío De Grass","u":null,"cat":"OE.3","p":"Varios, Limpieza, Jardinería"},{"c":"OE.3.12.6","n":3,"t":"PARTIDA","d":"Trabajos De Jardinería","u":"Metro (m)","cat":"OE.3","p":"Varios, Limpieza, Jardinería"},{"c":"OE.3.13","n":2,"t":"ENCABEZADO","d":"Otros","u":null,"cat":"OE.3","p":"Arquitectura"},{"c":"OE.3.13.1","n":3,"t":"PARTIDA","d":"Podio De Concreto","u":"Metro cúbico (m3)","cat":"OE.3","p":"Otros"},{"c":"OE.4","n":1,"t":"ENCABEZADO","d":"Instalaciones Sanitarias","u":null,"cat":"OE.4","p":null},{"c":"OE.4.1","n":2,"t":"ENCABEZADO","d":"Aparatos Sanitarios Y Accesorios","u":null,"cat":"OE.4","p":"Instalaciones Sanitarias"},{"c":"OE.4.1.1","n":3,"t":"PARTIDA","d":"Suministro De Aparatos Sanitarios","u":"Unidad (Und)","cat":"OE.4","p":"Aparatos Sanitarios Y Accesorios"},{"c":"OE.4.1.2","n":3,"t":"PARTIDA","d":"Suministro De Accesorios","u":"Unidad (Und)","cat":"OE.4","p":"Aparatos Sanitarios Y Accesorios"},{"c":"OE.4.1.3","n":3,"t":"PARTIDA","d":"Instalación De Aparatos Sanitarios","u":"Unidad (Und.)","cat":"OE.4","p":"Aparatos Sanitarios Y Accesorios"},{"c":"OE.4.1.4","n":3,"t":"PARTIDA","d":"Instalación De Accesorios","u":"Unidad (Und.)","cat":"OE.4","p":"Aparatos Sanitarios Y Accesorios"},{"c":"OE.4.2","n":2,"t":"ENCABEZADO","d":"Sistema De Agua Fria","u":null,"cat":"OE.4","p":"Instalaciones Sanitarias"},{"c":"OE.4.2.1","n":3,"t":"PARTIDA","d":"Salida De Agua Fría","u":null,"cat":"OE.4","p":"Sistema De Agua Fria"},{"c":"OE.4.2.2","n":3,"t":"PARTIDA","d":"Redes De Distribución","u":null,"cat":"OE.4","p":"Sistema De Agua Fria"},{"c":"OE.4.2.3","n":3,"t":"PARTIDA","d":"Redes De Alimentación","u":null,"cat":"OE.4","p":"Sistema De Agua Fria"},{"c":"OE.4.2.4","n":3,"t":"PARTIDA","d":"Accesorios De Redes De Agua","u":"Unidad (Und.)","cat":"OE.4","p":"Sistema De Agua Fria"},{"c":"OE.4.2.5","n":3,"t":"PARTIDA","d":"Válvulas","u":"Unidad (Und.)","cat":"OE.4","p":"Sistema De Agua Fria"},{"c":"OE.4.2.6","n":3,"t":"PARTIDA","d":"Almacenamiento De Agua","u":null,"cat":"OE.4","p":"Sistema De Agua Fria"},{"c":"OE.4.2.7","n":3,"t":"PARTIDA","d":"Equipos Y Otras Instalaciones","u":null,"cat":"OE.4","p":"Sistema De Agua Fria"},{"c":"OE.4.3","n":2,"t":"ENCABEZADO","d":"Sistema De Agua Caliente","u":null,"cat":"OE.4","p":"Instalaciones Sanitarias"},{"c":"OE.4.3.1","n":3,"t":"PARTIDA","d":"Salida De Agua Caliente","u":null,"cat":"OE.4","p":"Sistema De Agua Caliente"},{"c":"OE.4.3.2","n":3,"t":"PARTIDA","d":"Redes De Distribución De Agua Caliente","u":null,"cat":"OE.4","p":"Sistema De Agua Caliente"},{"c":"OE.4.3.3","n":3,"t":"PARTIDA","d":"Accesorios De Redes De Agua Caliente","u":"Unidad (Und.)","cat":"OE.4","p":"Sistema De Agua Caliente"},{"c":"OE.4.3.4","n":3,"t":"PARTIDA","d":"Válvulas","u":"Unidad (Und.)","cat":"OE.4","p":"Sistema De Agua Caliente"},{"c":"OE.4.3.5","n":3,"t":"PARTIDA","d":"Equipos De Producción De Agua Caliente","u":null,"cat":"OE.4","p":"Sistema De Agua Caliente"},{"c":"OE.4.4","n":2,"t":"ENCABEZADO","d":"Sistema Contra Incendio","u":null,"cat":"OE.4","p":"Instalaciones Sanitarias"},{"c":"OE.4.4.1","n":3,"t":"PARTIDA","d":"Redes De Alimentación","u":null,"cat":"OE.4","p":"Sistema Contra Incendio"},{"c":"OE.4.4.2","n":3,"t":"PARTIDA","d":"Accesorios","u":"Unidad (Und.)","cat":"OE.4","p":"Sistema Contra Incendio"},{"c":"OE.4.4.3","n":3,"t":"PARTIDA","d":"Suministro E Instalación De Gabinetes Contra Incendio","u":"Unidad (Und.)","cat":"OE.4","p":"Sistema Contra Incendio"},{"c":"OE.4.4.4","n":3,"t":"PARTIDA","d":"Suministro E Instalación De Junta Antisísmica","u":"Unidad (Und.)","cat":"OE.4","p":"Sistema Contra Incendio"},{"c":"OE.4.4.5","n":3,"t":"PARTIDA","d":"Válvulas De Sistema Contra Incendio","u":null,"cat":"OE.4","p":"Sistema Contra Incendio"},{"c":"OE.4.4.6","n":3,"t":"PARTIDA","d":"Instalaciones Especiales","u":"Unidad (Und.)","cat":"OE.4","p":"Sistema Contra Incendio"},{"c":"OE.4.5","n":2,"t":"ENCABEZADO","d":"Sistema De Drenaje Pluvial","u":null,"cat":"OE.4","p":"Instalaciones Sanitarias"},{"c":"OE.4.5.1","n":3,"t":"PARTIDA","d":"Red De Recolección","u":null,"cat":"OE.4","p":"Sistema De Drenaje Pluvial"},{"c":"OE.4.5.2","n":3,"t":"PARTIDA","d":"Accesorios","u":"Unidad (Und.)","cat":"OE.4","p":"Sistema De Drenaje Pluvial"},{"c":"OE.4.6","n":2,"t":"ENCABEZADO","d":"Desagüe Y Ventilación","u":null,"cat":"OE.4","p":"Instalaciones Sanitarias"},{"c":"OE.4.6.1","n":3,"t":"PARTIDA","d":"Salidas De Desagüe","u":null,"cat":"OE.4","p":"Desagüe Y Ventilación"},{"c":"OE.4.6.2","n":3,"t":"PARTIDA","d":"Redes De Derivación","u":null,"cat":"OE.4","p":"Desagüe Y Ventilación"},{"c":"OE.4.6.3","n":3,"t":"PARTIDA","d":"Redes Colectoras","u":null,"cat":"OE.4","p":"Desagüe Y Ventilación"},{"c":"OE.4.6.4","n":3,"t":"PARTIDA","d":"Accesorios De Redes Colectoras","u":"Unidad (Und.)","cat":"OE.4","p":"Desagüe Y Ventilación"},{"c":"OE.4.6.5","n":3,"t":"ENCABEZADO","d":"Cámaras De Inspección","u":null,"cat":"OE.4","p":"Desagüe Y Ventilación"},{"c":"OE.4.6.5.1","n":4,"t":"PARTIDA","d":"Para Cajas De Registro","u":"Unidad (Und.)","cat":"OE.4","p":"Cámaras De Inspección"},{"c":"OE.4.6.5.2","n":4,"t":"PARTIDA","d":"Para Buzones","u":"Unidad (Und.)","cat":"OE.4","p":"Cámaras De Inspección"},{"c":"OE.4.6.6","n":3,"t":"PARTIDA","d":"Instalaciones Especiales","u":null,"cat":"OE.4","p":"Desagüe Y Ventilación"},{"c":"OE.4.7","n":2,"t":"PARTIDA","d":"Varios","u":null,"cat":"OE.4","p":"Instalaciones Sanitarias"},{"c":"OE.5","n":1,"t":"ENCABEZADO","d":"Instalaciones Eléctricas Y Mecánicas","u":null,"cat":"OE.5","p":null},{"c":"OE.5.1","n":2,"t":"PARTIDA","d":"Conexión A La Red Externa De Medidores","u":null,"cat":"OE.5","p":"Instalaciones Eléctricas Y Mecánicas"},{"c":"OE.5.2","n":2,"t":"ENCABEZADO","d":"Salidas Para Alumbrado, Tomacorrientes, Fuerza Y Señales Débiles","u":null,"cat":"OE.5","p":"Instalaciones Eléctricas Y Mecánicas"},{"c":"OE.5.2.1","n":3,"t":"PARTIDA","d":"Salida","u":null,"cat":"OE.5","p":"Salidas Para Alumbrado, Tomacorrientes, Fuerza Y Señales Débiles"},{"c":"OE.5.2.2","n":3,"t":"PARTIDA","d":"Canalizaciones, Conductos O Tuberías","u":null,"cat":"OE.5","p":"Salidas Para Alumbrado, Tomacorrientes, Fuerza Y Señales Débiles"},{"c":"OE.5.2.3","n":3,"t":"PARTIDA","d":"Conductores Y Cables De Energía En Tuberías","u":null,"cat":"OE.5","p":"Salidas Para Alumbrado, Tomacorrientes, Fuerza Y Señales Débiles"},{"c":"OE.5.2.4","n":3,"t":"PARTIDA","d":"Sistemas De Conductos","u":null,"cat":"OE.5","p":"Salidas Para Alumbrado, Tomacorrientes, Fuerza Y Señales Débiles"},{"c":"OE.5.2.5","n":3,"t":"PARTIDA","d":"Instalaciones Expuestas","u":null,"cat":"OE.5","p":"Salidas Para Alumbrado, Tomacorrientes, Fuerza Y Señales Débiles"},{"c":"OE.5.2.6","n":3,"t":"PARTIDA","d":"Tableros Principales","u":"Unidad (Und.)","cat":"OE.5","p":"Salidas Para Alumbrado, Tomacorrientes, Fuerza Y Señales Débiles"},{"c":"OE.5.2.7","n":3,"t":"PARTIDA","d":"Tablero De Distribución","u":null,"cat":"OE.5","p":"Salidas Para Alumbrado, Tomacorrientes, Fuerza Y Señales Débiles"},{"c":"OE.5.2.8","n":3,"t":"PARTIDA","d":"Dispositivos De Maniobra Y Protección","u":null,"cat":"OE.5","p":"Salidas Para Alumbrado, Tomacorrientes, Fuerza Y Señales Débiles"},{"c":"OE.5.3","n":2,"t":"PARTIDA","d":"Instalacion De Pararrayos","u":null,"cat":"OE.5","p":"Instalaciones Eléctricas Y Mecánicas"},{"c":"OE.5.4","n":2,"t":"PARTIDA","d":"Instalación Del Sistema De Puesta A Tierra","u":null,"cat":"OE.5","p":"Instalaciones Eléctricas Y Mecánicas"},{"c":"OE.5.5","n":2,"t":"ENCABEZADO","d":"Artefactos","u":null,"cat":"OE.5","p":"Instalaciones Eléctricas Y Mecánicas"},{"c":"OE.5.5.1","n":3,"t":"PARTIDA","d":"Lámparas","u":"Unidad (Und.)","cat":"OE.5","p":"Artefactos"},{"c":"OE.5.5.2","n":3,"t":"PARTIDA","d":"Reflectores","u":null,"cat":"OE.5","p":"Artefactos"},{"c":"OE.5.6","n":2,"t":"ENCABEZADO","d":"Equipos Electricos Y Mecanicos","u":null,"cat":"OE.5","p":"Instalaciones Eléctricas Y Mecánicas"},{"c":"OE.5.6.1","n":3,"t":"PARTIDA","d":"Bomba Para Agua","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.2","n":3,"t":"PARTIDA","d":"Bombas Para Desagüe (Igual A Bombas Para Agua)","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.3","n":3,"t":"PARTIDA","d":"Otras Bombas","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.4","n":3,"t":"PARTIDA","d":"Grupos Electrógenos","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.5","n":3,"t":"PARTIDA","d":"Sistema De Recirculación","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.6","n":3,"t":"PARTIDA","d":"Ascensores Y Montacargas","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.7","n":3,"t":"PARTIDA","d":"Sistemas De Parlantes","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.8","n":3,"t":"PARTIDA","d":"Sistema De Música Ambiental","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.9","n":3,"t":"PARTIDA","d":"Sistema De Traducción Simultanea","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.10","n":3,"t":"PARTIDA","d":"Sistema De Seguridad","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.11","n":3,"t":"PARTIDA","d":"Proyectores Y Pantallas","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.12","n":3,"t":"PARTIDA","d":"Campanas Extractoras","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.13","n":3,"t":"PARTIDA","d":"Sistema De Vapor","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.14","n":3,"t":"PARTIDA","d":"Sistema De Aire Comprimido","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.15","n":3,"t":"PARTIDA","d":"Sistema De Oxígeno","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.16","n":3,"t":"PARTIDA","d":"Sistema De Ventilación Mecánica","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.17","n":3,"t":"PARTIDA","d":"Sistema De Vacío","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.5.6.18","n":3,"t":"PARTIDA","d":"Sistema De Aire Acondicionado","u":"Unidad (Und.)","cat":"OE.5","p":"Equipos Electricos Y Mecanicos"},{"c":"OE.6","n":1,"t":"ENCABEZADO","d":"Instalaciones De Comunicaciones","u":null,"cat":"OE.6","p":null},{"c":"OE.6.1","n":2,"t":"ENCABEZADO","d":"Cableado Estructurado En Interiores De Edificios","u":null,"cat":"OE.6","p":"Instalaciones De Comunicaciones"},{"c":"OE.6.1.1","n":3,"t":"PARTIDA","d":"Cables En Tuberías","u":null,"cat":"OE.6","p":"Cableado Estructurado En Interiores De Edificios"},{"c":"OE.6.2","n":2,"t":"PARTIDA","d":"Canaletas, Conductos Y/O Tuberías","u":null,"cat":"OE.6","p":"Instalaciones De Comunicaciones"},{"c":"OE.6.3","n":2,"t":"PARTIDA","d":"Salida De Comunicaciones","u":null,"cat":"OE.6","p":"Instalaciones De Comunicaciones"},{"c":"OE.6.4","n":2,"t":"PARTIDA","d":"Conductores De Comunicaciones","u":"Metro (m)","cat":"OE.6","p":"Instalaciones De Comunicaciones"},{"c":"OE.6.5","n":2,"t":"PARTIDA","d":"Patch Panel","u":null,"cat":"OE.6","p":"Instalaciones De Comunicaciones"},{"c":"OE.6.6","n":2,"t":"PARTIDA","d":"Rack De Comunicaciones","u":null,"cat":"OE.6","p":"Instalaciones De Comunicaciones"},{"c":"OE.6.7","n":2,"t":"PARTIDA","d":"Caja De Pase Para Transformador","u":"Unidad (Und.)","cat":"OE.6","p":"Instalaciones De Comunicaciones"},{"c":"OE.7","n":1,"t":"ENCABEZADO","d":"Instalaciones De Gas","u":null,"cat":"OE.7","p":null},{"c":"OE.7.1","n":2,"t":"ENCABEZADO","d":"Tuberías","u":null,"cat":"OE.7","p":"Instalaciones De Gas"},{"c":"OE.7.1.1","n":3,"t":"PARTIDA","d":"Tubería A La Vista","u":null,"cat":"OE.7","p":"Tuberías"},{"c":"OE.7.1.2","n":3,"t":"PARTIDA","d":"Tubería Con Canaleta O Por Conducto:","u":null,"cat":"OE.7","p":"Tuberías"},{"c":"OE.7.1.3","n":3,"t":"PARTIDA","d":"Tubería Montante","u":null,"cat":"OE.7","p":"Tuberías"},{"c":"OE.7.2","n":2,"t":"ENCABEZADO","d":"Artefactos (Gas Licuado De Petróleo Ó Gas Natural Seco)","u":null,"cat":"OE.7","p":"Instalaciones De Gas"},{"c":"OE.7.2.1","n":3,"t":"PARTIDA","d":"Instalación De Un Artefacto","u":null,"cat":"OE.7","p":"Artefactos (Gas Licuado De Petróleo Ó Gas Natural Seco)"},{"c":"OE.7.2.2","n":3,"t":"PARTIDA","d":"Conversión De Un Artefacto","u":null,"cat":"OE.7","p":"Artefactos (Gas Licuado De Petróleo Ó Gas Natural Seco)"},{"c":"OE.7.3","n":2,"t":"PARTIDA","d":"Accesorios","u":null,"cat":"OE.7","p":"Instalaciones De Gas"},{"c":"OE.7.4","n":2,"t":"ENCABEZADO","d":"Ventilaciones","u":null,"cat":"OE.7","p":"Instalaciones De Gas"},{"c":"OE.7.4.1","n":3,"t":"PARTIDA","d":"Ventilación (Superior O Inferior)","u":"Unidad (Und.)","cat":"OE.7","p":"Ventilaciones"},{"c":"OE.7.5","n":2,"t":"ENCABEZADO","d":"Ductos","u":null,"cat":"OE.7","p":"Instalaciones De Gas"},{"c":"OE.7.5.1","n":3,"t":"PARTIDA","d":"Ductos De Evacuación De Humos Para Los Artefactos A Gas","u":null,"cat":"OE.7","p":"Ductos"},{"c":"OE.7.6","n":2,"t":"PARTIDA","d":"Gabinete De Regulación","u":null,"cat":"OE.7","p":"Instalaciones De Gas"},{"c":"HU.1","n":1,"t":"PARTIDA","d":"Obras Provisionales, Trabajos Preliminares, Seguridad Y Salud","u":null,"cat":"HU.1","p":null},{"c":"HU.2","n":1,"t":"ENCABEZADO","d":"Pistas Y Veredas","u":null,"cat":"HU.2","p":null},{"c":"HU.2.1","n":2,"t":"ENCABEZADO","d":"Movimiento De Tierra","u":null,"cat":"HU.2","p":"Pistas Y Veredas"},{"c":"HU.2.1.1","n":3,"t":"PARTIDA","d":"Corte Con Eliminación Lateral","u":null,"cat":"HU.2","p":"Movimiento De Tierra"},{"c":"HU.2.1.2","n":3,"t":"PARTIDA","d":"Cortes Y Rellenos Compensados","u":null,"cat":"HU.2","p":"Movimiento De Tierra"},{"c":"HU.2.1.3","n":3,"t":"PARTIDA","d":"Terraplenes","u":null,"cat":"HU.2","p":"Movimiento De Tierra"},{"c":"HU.2.1.4","n":3,"t":"PARTIDA","d":"Eliminación De Material Excedente","u":null,"cat":"HU.2","p":"Movimiento De Tierra"},{"c":"HU.2.1.5","n":3,"t":"PARTIDA","d":"Refine Del Terraplén","u":null,"cat":"HU.2","p":"Movimiento De Tierra"},{"c":"HU.2.1.6","n":3,"t":"PARTIDA","d":"Escarificado","u":null,"cat":"HU.2","p":"Movimiento De Tierra"},{"c":"HU.2.2","n":2,"t":"ENCABEZADO","d":"Sub-Base Y Base","u":null,"cat":"HU.2","p":"Pistas Y Veredas"},{"c":"HU.2.2.1","n":3,"t":"PARTIDA","d":"Sub-Base","u":null,"cat":"HU.2","p":"Sub-Base Y Base"},{"c":"HU.2.2.2","n":3,"t":"PARTIDA","d":"Base O Afirmado","u":null,"cat":"HU.2","p":"Sub-Base Y Base"},{"c":"HU.2.3","n":2,"t":"ENCABEZADO","d":"Veredas","u":null,"cat":"HU.2","p":"Pistas Y Veredas"},{"c":"HU.2.3.1","n":3,"t":"PARTIDA","d":"Veredas De Asfalto","u":"Metro cuadrado (m2)","cat":"HU.2","p":"Veredas"},{"c":"HU.2.3.2","n":3,"t":"PARTIDA","d":"Veredas Empedradas","u":null,"cat":"HU.2","p":"Veredas"},{"c":"HU.2.3.3","n":3,"t":"PARTIDA","d":"Veredas De Adoquines De Concreto","u":null,"cat":"HU.2","p":"Veredas"},{"c":"HU.2.4","n":2,"t":"ENCABEZADO","d":"Pistas","u":null,"cat":"HU.2","p":"Pistas Y Veredas"},{"c":"HU.2.4.1","n":3,"t":"PARTIDA","d":"Capa De Imprimación","u":"Metro cuadrado (m2)","cat":"HU.2","p":"Pistas"},{"c":"HU.2.4.2","n":3,"t":"PARTIDA","d":"Carpeta Asfáltica","u":"Metro cuadrado (m2)","cat":"HU.2","p":"Pistas"},{"c":"HU.2.4.3","n":3,"t":"PARTIDA","d":"Sellado Asfáltico","u":null,"cat":"HU.2","p":"Pistas"},{"c":"HU.2.4.4","n":3,"t":"ENCABEZADO","d":"Pavimento De Concreto","u":null,"cat":"HU.2","p":"Pistas"},{"c":"HU.2.4.4.1","n":4,"t":"PARTIDA","d":"Dowells","u":"Metro (m)","cat":"HU.2","p":"Pavimento De Concreto"},{"c":"HU.2.4.5","n":3,"t":"PARTIDA","d":"Sellado De Juntas","u":"Metro (m)","cat":"HU.2","p":"Pistas"},{"c":"HU.2.4.6","n":3,"t":"PARTIDA","d":"Pavimento De Adoquines De Concreto","u":null,"cat":"HU.2","p":"Pistas"},{"c":"HU.2.5","n":2,"t":"PARTIDA","d":"Sardineles","u":null,"cat":"HU.2","p":"Pistas Y Veredas"},{"c":"HU.2.6","n":2,"t":"PARTIDA","d":"Bermas","u":null,"cat":"HU.2","p":"Pistas Y Veredas"},{"c":"HU.2.7","n":2,"t":"ENCABEZADO","d":"Jardines Y Otras Obras","u":null,"cat":"HU.2","p":"Pistas Y Veredas"},{"c":"HU.2.7.1","n":3,"t":"ENCABEZADO","d":"Movimiento De Tierra","u":null,"cat":"HU.2","p":"Jardines Y Otras Obras"},{"c":"HU.2.7.1.1","n":4,"t":"PARTIDA","d":"Preparación De Superficie","u":"Metro cúbico (m3)","cat":"HU.2","p":"Movimiento De Tierra"},{"c":"HU.2.7.2","n":3,"t":"PARTIDA","d":"Sembrío De Grass","u":"Metro cuadrado (m2)","cat":"HU.2","p":"Jardines Y Otras Obras"},{"c":"HU.2.7.3","n":3,"t":"PARTIDA","d":"Sembrío De Plantas Y Árboles","u":"Unidad (Und.)","cat":"HU.2","p":"Jardines Y Otras Obras"},{"c":"HU.2.7.4","n":3,"t":"ENCABEZADO","d":"Sembrío De Macizos Y Setos","u":null,"cat":"HU.2","p":"Jardines Y Otras Obras"},{"c":"HU.2.7.4.1","n":4,"t":"PARTIDA","d":"Para Macizos","u":"Metro cuadrado (m2)","cat":"HU.2","p":"Sembrío De Macizos Y Setos"},{"c":"HU.2.7.4.2","n":4,"t":"PARTIDA","d":"Para Setos","u":"Metro (m)","cat":"HU.2","p":"Sembrío De Macizos Y Setos"},{"c":"HU.2.7.5","n":3,"t":"ENCABEZADO","d":"Otras Obras","u":null,"cat":"HU.2","p":"Jardines Y Otras Obras"},{"c":"HU.2.7.5.1","n":4,"t":"PARTIDA","d":"Jardines","u":"Unidad (Und.)","cat":"HU.2","p":"Otras Obras"},{"c":"HU.2.7.5.2","n":4,"t":"PARTIDA","d":"Bancas","u":"Unidad (Und.)","cat":"HU.2","p":"Otras Obras"},{"c":"HU.2.7.5.3","n":4,"t":"PARTIDA","d":"Pozas","u":"Unidad (Und.)","cat":"HU.2","p":"Otras Obras"},{"c":"HU.2.7.5.4","n":4,"t":"PARTIDA","d":"Rosetones","u":"Metro cuadrado (m2)","cat":"HU.2","p":"Otras Obras"},{"c":"HU.2.7.5.5","n":4,"t":"PARTIDA","d":"Empedrado","u":"Metro cuadrado (m2)","cat":"HU.2","p":"Otras Obras"},{"c":"HU.2.7.5.6","n":4,"t":"PARTIDA","d":"Gradas","u":"Metro cuadrado (m2)","cat":"HU.2","p":"Otras Obras"},{"c":"HU.2.7.6","n":3,"t":"PARTIDA","d":"Hitos De Señalización- Señalización De Lotes","u":null,"cat":"HU.2","p":"Jardines Y Otras Obras"},{"c":"HU.2.7.7","n":3,"t":"ENCABEZADO","d":"Obras De Canalización","u":null,"cat":"HU.2","p":"Jardines Y Otras Obras"},{"c":"HU.2.7.7.1","n":4,"t":"PARTIDA","d":"Movimiento De Tierra","u":null,"cat":"HU.2","p":"Obras De Canalización"},{"c":"HU.2.7.7.2","n":4,"t":"PARTIDA","d":"Canalización","u":"Metro (m)","cat":"HU.2","p":"Obras De Canalización"},{"c":"HU.3","n":1,"t":"ENCABEZADO","d":"Infraestructura Sanitaria","u":null,"cat":"HU.3","p":null},{"c":"HU.3.1","n":2,"t":"PARTIDA","d":"Obras Provisionales","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.2","n":2,"t":"PARTIDA","d":"Trabajos Preliminares Complementarios","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.3","n":2,"t":"PARTIDA","d":"Seguridad Y Salud","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.4","n":2,"t":"PARTIDA","d":"Movimiento De Tierras","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.5","n":2,"t":"PARTIDA","d":"Tuberías","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.6","n":2,"t":"PARTIDA","d":"Accesorios","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.7","n":2,"t":"PARTIDA","d":"Válvulas, Grifos Y Medidores","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.8","n":2,"t":"PARTIDA","d":"Cámaras Para Válvulas Y Similares","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.9","n":2,"t":"PARTIDA","d":"Cámaras De Inspección: Buzones, Buzonetas, Cajas, Cámaras De Reunión","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.10","n":2,"t":"PARTIDA","d":"Estaciones De Bombeo, Rebombeo Para Agua Potable Y Aguas Residuales (*)","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.11","n":2,"t":"PARTIDA","d":"Estructuras De Almacenamiento","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.12","n":2,"t":"PARTIDA","d":"Plantas De Tratamiento De Agua Potable","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.13","n":2,"t":"PARTIDA","d":"Plantas De Tratamiento De Aguas Residuales","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.14","n":2,"t":"PARTIDA","d":"Instalaciones Electromecánicas","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.15","n":2,"t":"PARTIDA","d":"Instalaciones Hidraulicas","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.16","n":2,"t":"PARTIDA","d":"Redes Eléctricas Y De Comunicación","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.17","n":2,"t":"PARTIDA","d":"Empalmes","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.18","n":2,"t":"PARTIDA","d":"Pruebas Hidraulicas Y De Calidad","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.19","n":2,"t":"PARTIDA","d":"Pavimentos En Zonas Afectadas","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.3.20","n":2,"t":"PARTIDA","d":"Perforación De Pozos Tubulares","u":null,"cat":"HU.3","p":"Infraestructura Sanitaria"},{"c":"HU.4","n":1,"t":"ENCABEZADO","d":"Infraestructura Electrica","u":null,"cat":"HU.4","p":null},{"c":"HU.4.1","n":2,"t":"PARTIDA","d":"Obras Preliminares","u":null,"cat":"HU.4","p":"Infraestructura Electrica"},{"c":"HU.4.2","n":2,"t":"PARTIDA","d":"Redes Subterráneas","u":null,"cat":"HU.4","p":"Infraestructura Electrica"},{"c":"HU.4.3","n":2,"t":"PARTIDA","d":"Redes Aéreas","u":null,"cat":"HU.4","p":"Infraestructura Electrica"},{"c":"HU.4.4","n":2,"t":"PARTIDA","d":"Subestación De Distribución","u":null,"cat":"HU.4","p":"Infraestructura Electrica"},{"c":"HU.4.5","n":2,"t":"PARTIDA","d":"Instalaciones De Alumbrado Público","u":null,"cat":"HU.4","p":"Infraestructura Electrica"},{"c":"HU.5","n":1,"t":"ENCABEZADO","d":"Infraestructura De Comunicaciones","u":null,"cat":"HU.5","p":null},{"c":"HU.5.1","n":2,"t":"PARTIDA","d":"Planta Externa Telefonica","u":null,"cat":"HU.5","p":"Infraestructura De Comunicaciones"},{"c":"HU.5.2","n":2,"t":"PARTIDA","d":"Estacion Base Celular","u":null,"cat":"HU.5","p":"Infraestructura De Comunicaciones"},{"c":"HU.6","n":1,"t":"ENCABEZADO","d":"Infraestructura De Gas","u":null,"cat":"HU.6","p":null},{"c":"HU.6.1","n":2,"t":"PARTIDA","d":"Tuberías","u":null,"cat":"HU.6","p":"Infraestructura De Gas"},{"c":"HU.6.2","n":2,"t":"PARTIDA","d":"Válvulas","u":null,"cat":"HU.6","p":"Infraestructura De Gas"},{"c":"HU.6.3","n":2,"t":"PARTIDA","d":"Estaciones De Medición Y Regulación","u":"Unidad (Und)","cat":"HU.6","p":"Infraestructura De Gas"},{"c":"HU.6.4","n":2,"t":"PARTIDA","d":"Equipamientos Electromecánicos","u":null,"cat":"HU.6","p":"Infraestructura De Gas"},{"c":"HU.6.5","n":2,"t":"PARTIDA","d":"Redes Eléctricas Y De Comunicación","u":null,"cat":"HU.6","p":"Infraestructura De Gas"},{"c":"HU.6.6","n":2,"t":"PARTIDA","d":"Empalmes","u":null,"cat":"HU.6","p":"Infraestructura De Gas"}];
+
+/* ---------- utilidades ---------- */
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>s==null?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const norm=s=>(s||'').toString().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const uAbbr=u=>{const x=/\(([^)]+)\)/.exec(u||'');return x?x[1].trim():(u||'')};
+const uid=p=>p+Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+
+/* ---------- íconos ---------- */
+const PA={
+menu:'<path d="M4 7h16M4 12h10M4 17h16"/>',
+ruler:'<path d="M3 17 17 3l4 4L7 21z"/><path d="M5 15l2 2M8 12l2 2M11 9l2 2M14 6l2 2"/>',
+helmet:'<path d="M3 17h18M5 17v-3a7 7 0 0 1 14 0v3M12 7v4M9 17v-2h6v2"/>',
+frame:'<path d="M3 21h18M6 21V9M18 21V9M3 9h18M12 9V4M9 4h6"/>',
+home:'<path d="M3 11 12 3l9 8M5 10v11h14V10M10 21v-6h4v6"/>',
+drop:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/>',
+bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>',
+signal:'<path d="M2 9a14 14 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8 16a6 6 0 0 1 8 0M12 19.5h.01"/>',
+flame:'<path d="M12 3c1 4 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-9Z"/>',
+road:'<path d="M7 3 4 21M17 3l3 18M12 4v3M12 11v3M12 18v3"/>',
+chart:'<path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/>',
+building:'<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4M9 9h.01M9 13h.01M9 17h.01"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',palette:'<path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.6-.8 1.6-1.6 0-.9-.6-1.2-.6-2 0-.9.7-1.4 1.6-1.4H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3Z"/><path d="M7.5 11h.01M10 7.5h.01M14.5 7.5h.01"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16v4Z"/><path d="M13.5 6.5l4 4"/>',
+trash:'<path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6"/>',
+copy:'<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>',
+folder:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/>',
+save:'<path d="M12 3v12M7 10l5 5 5-5M4 19h16"/>',
+upload:'<path d="M12 16V4M7 9l5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>',
+printer:'<path d="M6 9V3h12v6"/><rect x="4" y="9" width="16" height="8" rx="1"/><path d="M6 17h12v4H6z"/>',
+list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+info:'<circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/>',
+search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+chev:'<path d="m9 6 6 6-6 6"/>',left:'<path d="m15 6-6 6 6 6"/>',check:'<path d="m5 12 5 5 9-10"/>',moon:'<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>'};
+const I=(k,c='')=>'<svg class="ic '+c+'" viewBox="0 0 24 24">'+PA[k]+'</svg>';
+$$('[data-i]').forEach(e=>e.outerHTML=I(e.dataset.i));
+// [ícono, tono] por especialidad: el ícono de la cabecera cambia con la pestaña activa
+const META={'OE.1':['helmet',35],'OE.2':['frame',215],'OE.3':['home',265],'OE.4':['drop',195],'OE.5':['bolt',45],'OE.6':['signal',285],'OE.7':['flame',12],
+'HU.1':['helmet',35],'HU.2':['road',220],'HU.3':['drop',195],'HU.4':['bolt',45],'HU.5':['signal',285],'HU.6':['flame',12],consolidado:['chart',160],resumen:['ruler',200],def:['building',200]};
+function setMark(k){const m=META[k]||META.def,el=$('#mark');if(el.dataset.k===k)return;el.dataset.k=k;el.style.setProperty('--h',m[1]);el.innerHTML=I(m[0]);el.classList.remove('swap');void el.offsetWidth;el.classList.add('swap')}
+
+/* ---------- catálogo ---------- */
+function buildTree(items){const roots=[],st=[];items.forEach(it=>{const n={...it,children:it.t==='PARTIDA'?null:[]};if(it.n===1){roots.push(n);st[0]=n}else{const p=st[it.n-2];if(p)p.children.push(n);st[it.n-1]=n}});return roots}
+const TREE=buildTree(CATALOGO), TITULOS=CATALOGO.filter(x=>x.n===1), BYC={}, IDX={};
+CATALOGO.forEach((x,i)=>{BYC[x.c]=x;IDX[x.c]=i});
+const ORDER=TITULOS.map(t=>t.c), VIEWS=[...ORDER,'consolidado','resumen'];
+const UNITS=['','Metro (m)','Metro cuadrado (m2)','Metro cúbico (m3)','Kilogramo (kg)','Unidad (Und.)','Global (Glb.)'];
+
+/* dimensiones que aplican según la unidad de la partida */
+const DF={n:['nVeces','N° veces'],l:['largo','Largo'],a:['ancho','Ancho'],h:['alto','Alto']};
+const uKey=u=>{const a=uAbbr(u).toLowerCase().replace('.','');return a==='m2'?'M2':a==='m3'?'M3':a==='m'?'M':a==='kg'?'KG':a==='und'?'UND':a==='glb'?'GLB':''};
+function dimsOf(u){const k=uKey(u);return k==='M2'?['n','l','a']:k==='M'?['n','l']:(k==='UND'||k==='GLB')?['n']:['n','l','a','h']}
+const numOf=v=>(v===''||v==null||isNaN(parseFloat(v)))?null:parseFloat(v);
+/* Parcial como en el Excel: vacío si no hay ninguna medida; una medida en blanco equivale a 1; negativos = deducciones */
+function calc(m){const d=dimsOf(m.unidad);let any=false,txt=false,pr=1;
+  ['n','l','a','h'].forEach(k=>{const raw=m[DF[k][0]];if(raw===''||raw==null)return;const v=parseFloat(raw);if(isNaN(v)){txt=true;return}any=true;if(d.includes(k))pr*=v});
+  return(any&&!txt)?pr:null}
+const nz=m=>{const v=calc(m);return v==null?0:v}, fmt=v=>v==null?'—':v.toFixed(2);
+function estado(m){const k=uKey(m.unidad),ab=uAbbr(m.unidad),v=calc(m),has=f=>numOf(m[f])!=null,hL=has('largo'),hA=has('ancho'),hH=has('alto');
+  if(!['nVeces','largo','ancho','alto'].some(f=>m[f]!==''&&m[f]!=null))return['pend','… Ingresa las medidas'];
+  if(v==null)return['err','✖ Hay texto en las medidas'];
+  if((k==='UND'||k==='GLB')&&(hL||hA||hH))return['warn','⚠ Largo/Ancho/Alto no se usan en '+ab];
+  if(k==='M'&&(hA||hH))return['warn','⚠ Ancho/Alto no se usan en '+ab];
+  if(k==='M2'&&hH)return['warn','⚠ Alto no se usa en '+ab];
+  if(!k)return['info','ℹ Unidad sin definir'];
+  const f=[];if((k==='M'||k==='M2'||k==='M3')&&!hL)f.push('Largo');if((k==='M2'||k==='M3')&&!hA)f.push('Ancho');if(k==='M3'&&!hH)f.push('Alto');
+  if(f.length)return['warn','⚠ Falta '+f.join('/')];
+  return v<0?['ok','✔ OK · deducción']:['ok','✔ OK']}
+const isAlert=m=>{const t=estado(m)[0];return t==='warn'||t==='err'};
+const estHTML=m=>{const e=estado(m),t=e[0];return'<span class="est e-'+t+'" title="'+esc(e[1])+'">'+(t==='ok'?'✔':t==='pend'?'·':esc(e[1]))+'</span>'};
+function stats(p){const ms=p.mediciones,me=ms.filter(m=>calc(m)!=null);
+  return{nm:me.length,np:new Set(me.map(m=>m.codigo)).size,al:ms.filter(isAlert).length,su:new Set(ms.filter(m=>!uKey(m.unidad)).map(m=>m.codigo)).size}}
+const ANC={};(()=>{const st=[];CATALOGO.forEach(x=>{st[x.n-1]=x;st.length=x.n;if(x.t==='PARTIDA')ANC[x.c]=st.slice(0,-1)})})();
+const SHORT={'OE.1':'Obras provisionales','OE.2':'Estructuras','OE.3':'Arquitectura','OE.4':'Inst. sanitarias','OE.5':'Inst. eléct. y mecán.','OE.6':'Inst. comunicaciones','OE.7':'Inst. de gas','HU.1':'Obras provisionales','HU.2':'Pistas y veredas','HU.3':'Infra. sanitaria','HU.4':'Infra. eléctrica','HU.5':'Infra. comunicac.','HU.6':'Infra. de gas'};
+function updateBadges(p){$$('.tab .n').forEach(n=>{const t=n.parentElement.dataset.tab,ms=p.mediciones.filter(m=>m.categoria===t),al=ms.filter(isAlert).length;n.classList.toggle('al',al>0);n.textContent=al?'⚠ '+al:(ms.length||'');n.style.display=ms.length?'':'none'})}
+
+/* ---------- almacenamiento ---------- */
+const LS='metrados_proyectos_v1', LSL='metrados_ultimo_v1';
+let DB=[];try{DB=JSON.parse(localStorage.getItem(LS))||[]}catch(e){}
+const persist=()=>{try{localStorage.setItem(LS,JSON.stringify(DB))}catch(e){}};
+let cur=null;try{cur=localStorage.getItem(LSL)||null}catch(e){}
+if(cur&&!DB.some(p=>p.id===cur))cur=null;
+const setCur=id=>{cur=id;try{localStorage.setItem(LSL,id||'')}catch(e){}};
+const proj=()=>DB.find(p=>p.id===cur);
+let tab=TITULOS[0].c, savedT;
+function touch(p){p.mod=Date.now();persist();const s=$('#saved');s.classList.add('on');clearTimeout(savedT);savedT=setTimeout(()=>s.classList.remove('on'),1500)}
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2000)}
+
+/* ---------- pestañas ---------- */
+function buildTabs(){let h='<div class="ind" id="ind"></div>',g='';
+  TITULOS.forEach(t=>{const gr=t.c.slice(0,2);if(gr!==g){g=gr;h+='<span class="gl">'+(gr==='OE'?'Edificaciones':'Habilitación urbana')+'</span>'}
+    h+='<button type="button" role="tab" class="tab" data-act="tab" data-tab="'+t.c+'" style="--h:'+META[t.c][1]+'" title="'+esc(t.d)+'"><span class="cod">'+t.c+'</span><span>'+esc(SHORT[t.c]||t.d)+'</span><span class="n"></span></button>'});
+  $('#tabbar').innerHTML=h}
+function updateTabs(p){const bar=$('#tabbar');let act;
+  $$('.tab',bar).forEach(b=>{const t=b.dataset.tab,on=t===tab;b.classList.toggle('active',on);b.setAttribute('aria-selected',on);if(on)act=b;
+    });updateBadges(p);
+  if(act){const ind=$('#ind');ind.style.transform='translateX('+act.offsetLeft+'px)';ind.style.width=act.offsetWidth+'px';ind.style.background='hsl('+META[tab][1]+' 55% 42%)';
+    bar.scrollTo({left:act.offsetLeft-(bar.clientWidth-act.offsetWidth)/2,behavior:'smooth'})}
+  const i=ORDER.indexOf(tab);$('#tPrev').disabled=i<=0;$('#tNext').disabled=i<0||i>=ORDER.length-1;if(!act)$('#ind').style.width='0px'}
+function go(t){if(t===tab||!VIEWS.includes(t))return;const dir=VIEWS.indexOf(t)>VIEWS.indexOf(tab)?'R':'L';tab=t;const p=proj();if(p){p.tab=t;persist()}$('#buscador').value='';render(dir)}
+
+/* ---------- árbol del catálogo ---------- */
+const openSt=new Map();
+function nodeHTML(n,f,used){
+  if(n.t==='PARTIDA'){if(f&&!norm(n.d+' '+n.c+' '+(n.p||'')).includes(f))return'';
+    return '<div class="ti part'+(used.has(n.c)?' used':'')+'" data-c="'+n.c+'" style="--lv:'+n.n+'"><b class="cod">'+n.c+'</b><span class="tx">'+esc(n.d)+'</span>'+(n.u?'<span class="u" title="'+esc(n.u)+'">'+esc(uAbbr(n.u))+'</span>':'')+'<span class="pl">'+I('plus','sm')+'</span></div>'}
+  const kids=n.children.map(c=>nodeHTML(c,f,used)).join('');if(f&&!kids)return'';
+  const o=f?true:(openSt.has(n.c)?openSt.get(n.c):n.n<=2);
+  return '<div class="grp'+(o?' open':'')+'" data-c="'+n.c+'"><div class="ti hd lv'+n.n+'">'+I('chev','sm')+'<b class="cod">'+n.c+'</b><span class="tx">'+esc(n.d)+'</span></div><div class="gb"><div class="gi">'+kids+'</div></div></div>'}
+function renderTree(){const p=proj(),root=TREE.find(r=>r.c===tab),as=$('#aside');
+  as.hidden=!p||!root;$('main').classList.toggle('noaside',as.hidden);if(as.hidden)return;
+  const f=norm($('#buscador').value),used=new Set(p.mediciones.map(m=>m.codigo));
+  $('#catTitle').innerHTML='<b class="cod">'+root.c+'</b><span>'+esc(root.d)+'</span>';
+  $('#tree').innerHTML=root.children.map(c=>nodeHTML(c,f,used)).join('')||'<div class="empty sm">Sin resultados.</div>'}
+$('#tree').addEventListener('click',e=>{
+  const pt=e.target.closest('.part');if(pt){addFromCatalog(BYC[pt.dataset.c],pt);return}
+  const hd=e.target.closest('.hd');if(hd){const g=hd.parentElement;openSt.set(g.dataset.c,g.classList.toggle('open'))}});
+$('#buscador').addEventListener('input',renderTree);
+$('#exAll').onclick=()=>$$('#tree .grp').forEach(g=>{g.classList.add('open');openSt.set(g.dataset.c,true)});
+$('#coAll').onclick=()=>$$('#tree .grp').forEach(g=>{g.classList.remove('open');openSt.set(g.dataset.c,false)});
+
+/* ---------- mediciones ---------- */
+function addMed(p,n){const id=uid('m');p.mediciones.push({id,codigo:n.c,descripcion:n.d,unidad:n.u||'',categoria:n.cat,ubicacionElemento:'',nVeces:'',largo:'',ancho:'',alto:'',observaciones:''});touch(p);return id}
+function flashRow(id){const r=$('tr[data-id="'+id+'"]');if(!r)return;const bk=r.closest('.blk');if(bk){bk.classList.remove('collapsed');COLL.delete(tab+bk.dataset.cod)}r.scrollIntoView({block:'center',behavior:'smooth'});r.classList.add('hl');setTimeout(()=>r.classList.remove('hl'),1600)}
+function addFromCatalog(n,el){const p=proj();if(!p)return;const had=p.mediciones.some(m=>m.codigo===n.c);
+  const id=addMed(p,n);openSheet(false);if(el)el.classList.add('used');render(null,{tree:false});flashRow(id);toast(had?'Fila agregada a '+n.c:'Partida '+n.c+' agregada')}
+
+function unitCtl(rows){const u=rows[0].unidad;if(u)return'<span class="pill" title="'+esc(u)+'">'+esc(uAbbr(u))+'</span>';
+  return'<select class="usel" title="Esta partida no trae unidad: elígela para habilitar sus dimensiones">'+UNITS.map(x=>'<option value="'+esc(x)+'">'+(x?esc(uAbbr(x)):'Elegir unidad…')+'</option>').join('')+'</select>'}
+function blockHTML(c,rows,crumb){const n=BYC[c]||{d:rows[0].descripcion},d=dimsOf(rows[0].unidad),tot=rows.reduce((s,m)=>s+nz(m),0);
+  const th=k=>'<th class="num'+(d.includes(k)?'':' na')+'">'+DF[k][1]+'</th>';
+  let h='<div class="blk'+(COLL.has(tab+c)?' collapsed':'')+'" data-cod="'+esc(c)+'"><div class="bh"><div class="bt" data-act="fold" title="Plegar / desplegar">'+I('chev','sm')+'<b class="cod">'+esc(c)+'</b><span class="bn">'+esc(n.d)+(crumb?'<small class="crumb">'+esc(crumb)+'</small>':'')+'</span></div><div class="bm">'+unitCtl(rows)
+   +'<span class="tot"><small>Total</small><b class="tv">'+tot.toFixed(2)+'</b></span><button type="button" class="sm secondary" data-act="addrow">'+I('plus','sm')+'Fila</button>'
+   +'<button type="button" class="del-row" data-act="delp" title="Quitar partida" aria-label="Quitar partida">'+I('trash','sm')+'</button></div></div>'
+   +'<div class="bbody"><div class="tbl-wrap"><table><thead><tr><th>Ubicación / Elemento</th>'+['n','l','a','h'].map(th).join('')+'<th class="num">Parcial</th><th>Estado</th><th>Observaciones</th><th></th></tr></thead><tbody>';
+  rows.forEach(m=>{h+='<tr data-id="'+m.id+'"><td><input class="desc f" data-f="ubicacionElemento" value="'+esc(m.ubicacionElemento)+'" placeholder="Ej. Eje A-B, 1er piso"></td>';
+    ['n','l','a','h'].forEach(k=>{const f=DF[k][0];h+=d.includes(k)?'<td data-l="'+DF[k][1]+'"><input class="f num" data-f="'+f+'" type="number" step="any"'+(k==='n'?' placeholder="1"':'')+' value="'+esc(m[f])+'"></td>':'<td class="nacell"><input disabled tabindex="-1" aria-label="No aplica" placeholder="—"></td>'});
+    h+='<td class="num" data-l="Parcial"><b class="pv'+(calc(m)<0?' neg':'')+'">'+fmt(calc(m))+'</b></td><td class="st" data-l="Estado">'+estHTML(m)+'</td><td data-l="Observaciones"><input class="desc f" data-f="observaciones" value="'+esc(m.observaciones)+'"></td><td><button type="button" class="del-row" data-act="delrow" aria-label="Eliminar fila">'+I('trash','sm')+'</button></td></tr>'});
+  return h+'</tbody></table></div></div></div>'}
+let vmode='med';const COLL=new Set();let lastT=null;
+const subH=a=>'<div class="sh l'+Math.min(a.n,4)+'"><b class="cod">'+esc(a.c)+'</b><span>'+esc(a.d)+'</span></div>';
+const vtoggle=()=>'<div class="vt" role="tablist"><button type="button" class="'+(vmode==='med'?'on':'')+'" data-act="vm" data-v="med">'+I('list','sm')+'Medición</button><button type="button" class="'+(vmode==='con'?'on':'')+'" data-act="vm" data-v="con">'+I('chart','sm')+'Consolidado</button></div>';
+function titleHTML(p,cat){const t=BYC[cat],ms=p.mediciones.filter(m=>m.categoria===cat);
+  const codes=[...new Set(ms.map(m=>m.codigo))].sort((a,b)=>(IDX[a]??1e9)-(IDX[b]??1e9));
+  const hh=META[cat][1];
+  let h='<div class="tview" style="--h:'+hh+'"><div class="thead" style="--h:'+hh+'"><span class="tcode">'+cat+'</span><div class="tinfo"><h2>'+esc(t.d)+'</h2><p>'+codes.length+' partida'+(codes.length===1?'':'s')+' · '+ms.length+' medicion'+(ms.length===1?'':'es')+'</p></div>'+vtoggle()+'</div>';
+  if(vmode==='con')return h+consolidadoHTML(p,cat)+'</div>';
+  if(!codes.length)return h+'<div class="card"><div class="empty">'+I('list')+'Aún no hay partidas en esta especialidad.<br>Elige una del catálogo para empezar a medir.</div></div></div>';
+  const last=[];
+  codes.forEach(c=>{const an=ANC[c]||[];an.forEach((a,x)=>{if(x===1&&last[1]!==a.c){last[1]=a.c;h+=subH(a)}});
+    h+='<div class="lvw">'+blockHTML(c,ms.filter(m=>m.codigo===c),an.slice(2).map(a=>a.d).join(' › '))+'</div>'});
+  return h+'</div>'}
+
+/* ---------- consolidado y resumen ---------- */
+function consolidar(p){const c={};p.mediciones.forEach(m=>{const o=c[m.codigo]||(c[m.codigo]={codigo:m.codigo,descripcion:m.descripcion,unidad:m.unidad,categoria:m.categoria,total:0,n:0,al:0}),v=calc(m);if(v!=null){o.total+=v;o.n++}if(isAlert(m))o.al++});
+  return Object.values(c).filter(o=>o.n||o.al).sort((a,b)=>(IDX[a.codigo]??1e9)-(IDX[b.codigo]??1e9))}
+function consolidadoHTML(p,cat){const all=consolidar(p),it=cat?all.filter(c=>c.categoria===cat):all,
+  S=cat?{np:it.filter(c=>c.n).length,nm:it.reduce((s,c)=>s+c.n,0),al:it.reduce((s,c)=>s+c.al,0)}:stats(p);
+  let h='<div class="card cons">'+(cat?'':'<h2>'+I('chart')+'Consolidado de metrados por partida</h2>');
+  if(!it.length)h+='<div class="empty">'+I('chart')+'Aún no hay mediciones registradas.</div>';
+  else{h+='<p class="sub">Partidas medidas: <b>'+S.np+'</b> · Mediciones: <b>'+S.nm+'</b> · Alertas: <b class="'+(S.al?'bad':'')+'">'+S.al+'</b></p><div class="tbl-wrap"><table class="plain"><thead><tr><th class="num">Ítem</th><th>Código</th><th>'+(cat?'Subtítulo › Partida':'Título › Subtítulo › Partida')+'</th><th>Und.</th><th class="num">Mediciones</th><th class="num">Metrado total</th><th class="num">Alertas</th></tr></thead><tbody>';
+    let i=0;const last=[];
+    it.forEach(c=>{(ANC[c.codigo]||[]).forEach((a,x)=>{if(cat&&x===0)return;if(last[x]!==a.c){last.length=x;last[x]=a.c;h+='<tr class="gh l'+Math.min(a.n,3)+'" style="--h:'+(META[a.c]?META[a.c][1]:(META[c.categoria]||[0,200])[1])+'"><td></td><td class="cod2">'+a.c+'</td><td colspan="5" style="padding-left:'+(12+(a.n-1-(cat?1:0))*14)+'px">'+esc(a.d)+'</td></tr>'}});
+      h+='<tr><td class="num">'+(++i)+'</td><td class="cod2">'+esc(c.codigo)+'</td><td style="padding-left:'+(12+((BYC[c.codigo]||{n:4}).n-1-(cat?1:0))*14)+'px">'+esc(c.descripcion)+'</td><td><span class="pill">'+esc(uAbbr(c.unidad))+'</span></td><td class="num">'+c.n+'</td><td class="num"><b>'+c.total.toFixed(2)+'</b></td><td class="num">'+(c.al?'<span class="est e-warn">⚠ '+c.al+'</span>':'')+'</td></tr>'});
+    h+='</tbody></table></div>'}
+  return h+'<div class="toolbar"><button data-act="xlsx">'+I('save')+'Descargar Excel (.xlsx)</button><button data-act="print">'+I('printer')+'Guardar PDF</button><button class="secondary" data-act="csvc">'+I('save')+'Consolidado CSV</button><button class="secondary" data-act="csvm">'+I('save')+'Planilla CSV</button></div></div>'}
+function resumenHTML(p){const S=stats(p),tot=CATALOGO.filter(x=>x.t==='PARTIDA').length;
+  const fl=(id,l,v,t)=>'<div><label for="'+id+'">'+l+'</label><input id="'+id+'" type="'+(t||'text')+'" value="'+esc(v)+'"></div>';
+  const kp=(l,v,c)=>'<div class="kpi '+(c||'')+'"><b>'+v+'</b><span>'+l+'</span></div>';
+  let h='<div class="card"><h2>'+I('chart')+'Panel de control</h2><div class="kpis">'+kp('Mediciones registradas',S.nm)+kp('Partidas medidas',S.np)+kp('Cobertura',(tot?S.np/tot*100:0).toFixed(0)+'%')+kp('Alertas por revisar',S.al,S.al?'bad':'ok')+kp('Partidas sin unidad',S.su,S.su?'warn':'ok')+'</div></div>'
+   +'<div class="card"><h2>'+I('info')+'Datos del proyecto</h2><div class="three">'+fl('fNombre','Proyecto / Obra',p.nombre)+fl('fExp','Expediente',p.expediente)+fl('fUbic','Ubicación',p.ubicacion)+fl('fDep','Departamento',p.departamento)+fl('fPro','Provincia',p.provincia)+fl('fDis','Distrito',p.distrito)+fl('fCli','Propietario / Entidad',p.cliente)+fl('fElab','Elaborado por',p.elaboradoPor)+fl('fFecha','Fecha',p.fecha,'date')+'</div>'
+   +'<div class="toolbar"><button class="secondary" data-act="savedatos">Guardar datos</button></div></div>'
+   +'<div class="card"><h2>'+I('chart')+'Avance por título</h2><div class="tbl-wrap"><table class="plain"><thead><tr><th>Título</th><th class="num">En catálogo</th><th class="num">Medidas</th><th>Cobertura</th><th class="num">Mediciones</th><th class="num">Alertas</th></tr></thead><tbody>';
+  const T=[0,0,0,0],bar=pc=>'<span class="bar"><i style="width:'+pc.toFixed(0)+'%"></i></span><span class="pct">'+pc.toFixed(0)+'%</span>',al=n=>n?'<span class="est e-warn">⚠ '+n+'</span>':'—';
+  TITULOS.forEach(t=>{const n=CATALOGO.filter(x=>x.t==='PARTIDA'&&x.cat===t.c).length,ms=p.mediciones.filter(m=>m.categoria===t.c),me=ms.filter(m=>calc(m)!=null),md=new Set(me.map(m=>m.codigo)).size,a=ms.filter(isAlert).length;
+    T[0]+=n;T[1]+=md;T[2]+=me.length;T[3]+=a;
+    h+='<tr class="lnk" data-act="tab" data-tab="'+t.c+'"><td><b class="cod2">'+t.c+'</b> '+esc(t.d)+'</td><td class="num">'+n+'</td><td class="num">'+md+'</td><td style="min-width:190px">'+bar(n?md/n*100:0)+'</td><td class="num">'+me.length+'</td><td class="num">'+al(a)+'</td></tr>'});
+  h+='<tr class="tt"><td><b>Total general</b></td><td class="num"><b>'+T[0]+'</b></td><td class="num"><b>'+T[1]+'</b></td><td>'+bar(T[0]?T[1]/T[0]*100:0)+'</td><td class="num"><b>'+T[2]+'</b></td><td class="num">'+al(T[3])+'</td></tr></tbody></table></div></div>'
+   +'<div class="card"><h2>'+I('ruler')+'Criterios de medición</h2><ul class="crit"><li><b>Parcial</b> = N° de veces × Largo × Ancho × Alto, según la unidad: <b>m</b> usa largo; <b>m²</b> largo y ancho; <b>m³</b> largo, ancho y alto; <b>und.</b> y <b>glb.</b> solo el N° de veces. Una medida vacía equivale a 1.</li><li><b>Deducciones:</b> vanos y descuentos se registran con valores negativos.</li><li><b>Estado:</b> ✔ correcta · ⚠ por revisar · ✖ error · ℹ informativa.</li><li><b>Consolidado:</b> suma de los parciales de cada partida. <b>Cobertura</b> = partidas medidas ÷ partidas del catálogo.</li></ul><p class="src">Fuente: Norma Técnica «Metrados para Obras de Edificación y Habilitaciones Urbanas», MVCS.</p></div>';
+  return h}
+
+/* ---------- inicio: proyectos guardados ---------- */
+const hue=p=>[...p.id].reduce((a,c)=>a+c.charCodeAt(0),0)*7%360;
+function rel(ts){if(!ts)return'—';const s=(Date.now()-ts)/1e3;if(s<60)return'hace un momento';if(s<3600)return'hace '+Math.floor(s/60)+' min';if(s<86400)return'hace '+Math.floor(s/3600)+' h';const d=Math.floor(s/86400);return d<30?'hace '+d+(d===1?' día':' días'):new Date(ts).toLocaleDateString('es-PE')}
+function cardHTML(p,i){const ms=p.mediciones||[],parts=new Set(ms.map(m=>m.codigo)).size,cats=[...new Set(ms.map(m=>m.categoria))].sort((a,b)=>ORDER.indexOf(a)-ORDER.indexOf(b));
+  return'<article class="pcard" data-act="open" data-id="'+p.id+'" tabindex="0" style="--h:'+hue(p)+';--i:'+i+'"><div class="pc-top"><span class="pc-ic">'+I('building')+'</span><div class="pc-btns"><button type="button" class="del-row" data-act="dup" data-id="'+p.id+'" title="Duplicar" aria-label="Duplicar">'+I('copy','sm')+'</button><button type="button" class="del-row" data-act="del" data-id="'+p.id+'" title="Eliminar" aria-label="Eliminar">'+I('trash','sm')+'</button></div></div>'
+  +'<h3>'+esc(p.nombre)+'</h3><p class="pc-loc">'+(esc(p.ubicacion)||'Sin ubicación')+'</p><div class="pc-stats"><span><b>'+ms.length+'</b> mediciones</span><span><b>'+parts+'</b> partidas</span></div>'
+  +'<div class="pc-chips">'+cats.slice(0,7).map(c=>'<span style="--h:'+(META[c]?META[c][1]:200)+'">'+esc(c)+'</span>').join('')+'</div><div class="pc-foot"><span>'+(esc(p.elaboradoPor)||'—')+'</span><span>Editado '+rel(p.mod)+'</span></div></article>'}
+function gridHTML(q){const f=norm(q);const l=[...DB].filter(p=>!f||norm(p.nombre+' '+p.ubicacion+' '+p.cliente).includes(f)).sort((a,b)=>(b.mod||0)-(a.mod||0));
+  return'<article class="pcard newc" data-act="new" tabindex="0"><span class="pc-ic">'+I('plus')+'</span><b>Nuevo proyecto</b><span style="font-size:13px">Crea uno desde cero</span></article>'+l.map(cardHTML).join('')}
+function homeHTML(){return'<div class="home"><div class="home-head"><div><h1>Mis proyectos</h1><p>'+(DB.length?DB.length+' guardado'+(DB.length===1?'':'s')+' en este dispositivo':'Aquí aparecerán tus proyectos guardados')+'</p></div><div class="tools">'
+  +(DB.length>3?'<input id="pfilter" class="search" placeholder="Buscar proyecto" aria-label="Buscar proyecto">':'')+'<button class="secondary" data-act="import">'+I('upload')+'Importar</button><button data-act="new">'+I('plus')+'Nuevo proyecto</button></div></div><div class="grid" id="pgrid">'+gridHTML('')+'</div></div>'}
+
+/* ---------- ventanas ---------- */
+const root=$('#modalRoot');
+const modal=h=>{root.innerHTML='<div class="modal-bg"><div class="modal" role="dialog" aria-modal="true">'+h+'</div></div>'};
+const closeModal=()=>{root.innerHTML=''};
+function confirmD(t,msg,ok){return new Promise(r=>{modal('<h2>'+t+'</h2><p class="mp">'+msg+'</p><div class="actions"><button class="secondary" id="mc">Cancelar</button><button class="dangerf" id="mo">'+ok+'</button></div>');$('#mc').onclick=()=>{closeModal();r(false)};$('#mo').onclick=()=>{closeModal();r(true)}})}
+function newModal(){const today=new Date().toISOString().slice(0,10);
+  modal('<h2>Nuevo proyecto</h2><p class="mp">Completa los datos básicos; podrás editarlos luego en “Resumen y datos”.</p>'
+  +'<label for="nN">Nombre del proyecto <i>*</i></label><input id="nN" placeholder="Ej. Vivienda multifamiliar San Isidro" autocomplete="off"><div class="err" id="nErr"></div>'
+  +'<div class="two"><div><label for="nU">Ubicación</label><input id="nU" placeholder="Distrito, provincia"></div><div><label for="nF">Fecha</label><input id="nF" type="date" value="'+today+'"></div></div>'
+  +'<div class="two"><div><label for="nC">Cliente / Propietario</label><input id="nC"></div><div><label for="nE">Elaborado por</label><input id="nE"></div></div>'
+  +'<label>Empezar en</label><div class="seg" id="seg"><button type="button" class="on" data-v="OE.1">Edificaciones<small>OE</small></button><button type="button" data-v="HU.1">Habilitación urbana<small>HU</small></button></div>'
+  +'<div class="actions"><button class="secondary" id="mc">Cancelar</button><button id="mo">'+I('plus')+'Crear proyecto</button></div>');
+  $$('#seg button').forEach(b=>b.onclick=()=>{$$('#seg button').forEach(x=>x.classList.remove('on'));b.classList.add('on')});
+  $('#mc').onclick=closeModal;
+  const crear=()=>{const n=$('#nN').value.trim();if(!n){const e=$('#nErr');e.textContent='Escribe un nombre para el proyecto.';const i=$('#nN');i.classList.remove('shake');void i.offsetWidth;i.classList.add('shake');i.focus();return}
+    const p={id:uid('p'),nombre:n,ubicacion:$('#nU').value.trim(),cliente:$('#nC').value.trim(),elaboradoPor:$('#nE').value.trim(),fecha:$('#nF').value,mediciones:[],mod:Date.now()};
+    DB.push(p);persist();setCur(p.id);tab=$('#seg .on').dataset.v;p.tab=tab;persist();closeModal();$('#buscador').value='';render('F');toast('Proyecto creado')};
+  $('#mo').onclick=crear;$$('.modal input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter')crear()}));$('#nN').focus()}
+
+function refreshChip(p){const c=$('#projChip');c.innerHTML=I('folder','sm')+'<b>'+esc(p.nombre)+'</b>'+(p.ubicacion?'<span>'+esc(p.ubicacion)+'</span>':'')}
+function editModal(p){const f=(id,l,v,t)=>'<div><label for="'+id+'">'+l+'</label><input id="'+id+'" type="'+(t||'text')+'" value="'+esc(v)+'" autocomplete="off"></div>';
+  modal('<h2>Datos del proyecto</h2><p class="mp">Puedes editarlos cuando quieras; tus mediciones no se modifican.</p>'
+  +'<label for="eN">Proyecto / Obra <i>*</i></label><input id="eN" value="'+esc(p.nombre)+'" autocomplete="off"><div class="err" id="eErr"></div>'
+  +'<div class="two">'+f('eExp','Expediente',p.expediente)+f('eFecha','Fecha',p.fecha,'date')+'</div>'
+  +'<div class="two">'+f('eUbic','Ubicación',p.ubicacion)+f('eCli','Propietario / Entidad',p.cliente)+'</div>'
+  +'<div class="two">'+f('eDep','Departamento',p.departamento)+f('ePro','Provincia',p.provincia)+'</div>'
+  +'<div class="two">'+f('eDis','Distrito',p.distrito)+f('eElab','Elaborado por',p.elaboradoPor)+'</div>'
+  +'<div class="actions"><button class="secondary" id="mc">Cancelar</button><button id="mo">'+I('check')+'Guardar cambios</button></div>');
+  $('#mc').onclick=closeModal;
+  const guardar=()=>{const n=$('#eN').value.trim();if(!n){const e=$('#eErr');e.textContent='El proyecto necesita un nombre.';const i=$('#eN');i.classList.remove('shake');void i.offsetWidth;i.classList.add('shake');i.focus();return}
+    p.nombre=n;p.expediente=$('#eExp').value.trim();p.fecha=$('#eFecha').value;p.ubicacion=$('#eUbic').value.trim();p.cliente=$('#eCli').value.trim();p.departamento=$('#eDep').value.trim();p.provincia=$('#ePro').value.trim();p.distrito=$('#eDis').value.trim();p.elaboradoPor=$('#eElab').value.trim();
+    touch(p);closeModal();refreshChip(p);if(tab==='resumen')render(null,{tree:false});toast('Datos actualizados')};
+  $('#mo').onclick=guardar;$$('.modal input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter')guardar()}));$('#eN').focus();$('#eN').select()}
+
+/* ---------- exportar ---------- */
+function dl(name,rows){const csv=rows.map(r=>r.map(c=>'"'+String(c==null?'':c).replace(/"/g,'""')+'"').join(';')).join('\r\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8;'}));a.download=name;a.click()}
+function csvMetrados(p){const rows=[['Título','Ítem','Código','Partida','Unidad','Ubicación/Elemento','N° veces','Largo','Ancho','Alto','Parcial','Estado','Observaciones']];let i=0;
+  p.mediciones.forEach(m=>{const d=dimsOf(m.unidad);rows.push([m.categoria,++i,m.codigo,m.descripcion,uAbbr(m.unidad),m.ubicacionElemento,m.nVeces,d.includes('l')?m.largo:'',d.includes('a')?m.ancho:'',d.includes('h')?m.alto:'',calc(m)==null?'':calc(m).toFixed(2),estado(m)[1],m.observaciones])});
+  dl((p.nombre||'proyecto')+'_planilla_metrados.csv',rows)}
+function csvCons(p){dl((p.nombre||'proyecto')+'_consolidado.csv',[['Título','Código','Partida','Unidad','Mediciones','Metrado total','Alertas'],...consolidar(p).map(c=>[c.categoria,c.codigo,c.descripcion,uAbbr(c.unidad),c.n,c.total.toFixed(2),c.al])])}
+
+/* ---------- exportar a Excel (.xlsx real) y PDF ---------- */
+const crcT=(()=>{const t=[];for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc32=b=>{let c=-1;for(let i=0;i<b.length;i++)c=crcT[(c^b[i])&255]^(c>>>8);return(c^-1)>>>0};
+function zipStore(files){const enc=new TextEncoder(),parts=[],cd=[];let off=0;
+  files.forEach(([name,txt])=>{const nb=enc.encode(name),d=enc.encode(txt),c=crc32(d);
+    const lh=new DataView(new ArrayBuffer(30));lh.setUint32(0,0x04034b50,true);lh.setUint16(4,20,true);lh.setUint16(6,0x0800,true);lh.setUint16(12,0x21,true);lh.setUint32(14,c,true);lh.setUint32(18,d.length,true);lh.setUint32(22,d.length,true);lh.setUint16(26,nb.length,true);
+    parts.push(new Uint8Array(lh.buffer),nb,d);
+    const ch=new DataView(new ArrayBuffer(46));ch.setUint32(0,0x02014b50,true);ch.setUint16(4,20,true);ch.setUint16(6,20,true);ch.setUint16(8,0x0800,true);ch.setUint16(14,0x21,true);ch.setUint32(16,c,true);ch.setUint32(20,d.length,true);ch.setUint32(24,d.length,true);ch.setUint16(28,nb.length,true);ch.setUint32(42,off,true);
+    cd.push(new Uint8Array(ch.buffer),nb);off+=30+nb.length+d.length});
+  const cs=cd.reduce((a,x)=>a+x.length,0),e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cs,true);e.setUint32(16,off,true);
+  return new Blob([...parts,...cd,new Uint8Array(e.buffer)],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'})}
+const colL=i=>{let t='';i++;while(i){const r=(i-1)%26;t=String.fromCharCode(65+r)+t;i=Math.floor((i-1)/26)}return t};
+const xe=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])).replace(/[\x00-\x08\x0b\x0c\x0e-\x1f]/g,'');
+function sheetXML(rows,widths,fr){let x='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0" showGridLines="0">'+(fr?'<pane ySplit="'+fr+'" topLeftCell="A'+(fr+1)+'" activePane="bottomLeft" state="frozen"/>':'')+'</sheetView></sheetViews><cols>'+widths.map((w,i)=>'<col min="'+(i+1)+'" max="'+(i+1)+'" width="'+w+'" customWidth="1"/>').join('')+'</cols><sheetData>';
+  rows.forEach((r,ri)=>{x+='<row r="'+(ri+1)+'">';r.forEach((c,ci)=>{const o=(c!==null&&typeof c==='object')?c:{v:c,s:0},ref=colL(ci)+(ri+1),st=o.s?' s="'+o.s+'"':'';
+    if(o.v===''||o.v==null)x+=o.s?'<c r="'+ref+'"'+st+'/>':'';
+    else if(typeof o.v==='number')x+='<c r="'+ref+'"'+st+'><v>'+o.v+'</v></c>';
+    else x+='<c r="'+ref+'"'+st+' t="inlineStr"><is><t xml:space="preserve">'+xe(o.v)+'</t></is></c>'});x+='</row>'});
+  x+='</sheetData>';if(fr)x+='<autoFilter ref="A'+fr+':'+colL(widths.length-1)+rows.length+'"/>';return x+'</worksheet>'}
+const STYLES='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><numFmts count="1"><numFmt numFmtId="164" formatCode="0.00"/></numFmts><fonts count="4"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FFFFFFFF"/><name val="Calibri"/></font><font><b/><sz val="16"/><color rgb="FF0F766E"/><name val="Calibri"/></font></fonts><fills count="5"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FF0F766E"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFE6F4F2"/></patternFill></fill><fill><patternFill patternType="solid"><fgColor rgb="FFEEF1F5"/></patternFill></fill></fills><borders count="2"><border><left/><right/><top/><bottom/></border><border><left style="thin"><color rgb="FFC9D1DC"/></left><right style="thin"><color rgb="FFC9D1DC"/></right><top style="thin"><color rgb="FFC9D1DC"/></top><bottom style="thin"><color rgb="FFC9D1DC"/></bottom></border></borders><cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="10"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/><xf numFmtId="0" fontId="2" fillId="2" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1"><alignment horizontal="center" vertical="center" wrapText="1"/></xf><xf numFmtId="164" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1"/><xf numFmtId="0" fontId="3" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/><xf numFmtId="0" fontId="1" fillId="3" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="0" fontId="0" fillId="0" borderId="1" xfId="0" applyBorder="1"/><xf numFmtId="164" fontId="1" fillId="4" borderId="1" xfId="0" applyNumberFormat="1" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="0" fontId="1" fillId="4" borderId="1" xfId="0" applyFont="1" applyFill="1" applyBorder="1"/><xf numFmtId="9" fontId="0" fillId="0" borderId="1" xfId="0" applyNumberFormat="1" applyBorder="1"/></cellXfs></styleSheet>';
+function saveBlob(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}
+const byOrd=(a,b)=>(IDX[a]??1e9)-(IDX[b]??1e9);
+function xlsxExport(p){const H=(...a)=>a.map(v=>({v,s:1})),S=stats(p),tot=CATALOGO.filter(x=>x.t==='PARTIDA').length,T=[0,0,0,0];
+  const r1=[[{v:'Planilla de metrados',s:3}],[{v:p.nombre||'',s:4}],[],
+    ...[['Proyecto / Obra',p.nombre],['Expediente',p.expediente],['Ubicación',p.ubicacion],['Departamento',p.departamento],['Provincia',p.provincia],['Distrito',p.distrito],['Propietario / Entidad',p.cliente],['Elaborado por',p.elaboradoPor],['Fecha',p.fecha]].map(([a,b])=>[{v:a,s:5},{v:b||'',s:6}]),[],
+    H('Mediciones registradas','Partidas medidas','Cobertura','Alertas por revisar'),[{v:S.nm,s:6},{v:S.np,s:6},{v:tot?S.np/tot:0,s:9},{v:S.al,s:6}],[],
+    H('Título','Descripción','En catálogo','Medidas','Cobertura','Mediciones','Alertas')];
+  TITULOS.forEach(t=>{const n=CATALOGO.filter(x=>x.t==='PARTIDA'&&x.cat===t.c).length,ms=p.mediciones.filter(m=>m.categoria===t.c),me=ms.filter(m=>calc(m)!=null),md=new Set(me.map(m=>m.codigo)).size,a=ms.filter(isAlert).length;
+    T[0]+=n;T[1]+=md;T[2]+=me.length;T[3]+=a;r1.push([{v:t.c,s:6},{v:t.d,s:6},{v:n,s:6},{v:md,s:6},{v:n?md/n:0,s:9},{v:me.length,s:6},{v:a,s:6}])});
+  r1.push([{v:'Total',s:8},{v:'',s:8},{v:T[0],s:8},{v:T[1],s:8},{v:T[0]?T[1]/T[0]:0,s:9},{v:T[2],s:8},{v:T[3],s:8}]);
+  const r2=[H('Título','Ítem','Código','Partida','Und.','Ubicación / Elemento','N° veces','Largo (m)','Ancho (m)','Alto (m)','Parcial','Estado','Observaciones')];
+  p.mediciones.map((m,i)=>[m,i]).sort((a,b)=>(ORDER.indexOf(a[0].categoria)-ORDER.indexOf(b[0].categoria))||byOrd(a[0].codigo,b[0].codigo)||a[1]-b[1]).forEach(([m],i)=>{
+    const d=dimsOf(m.unidad),nm=(f,k)=>({v:d.includes(k)&&numOf(m[f])!=null?numOf(m[f]):'',s:6}),v=calc(m);
+    r2.push([{v:m.categoria,s:6},{v:i+1,s:6},{v:m.codigo,s:6},{v:m.descripcion,s:6},{v:uAbbr(m.unidad),s:6},{v:m.ubicacionElemento||'',s:6},nm('nVeces','n'),nm('largo','l'),nm('ancho','a'),nm('alto','h'),{v:v==null?'':v,s:2},{v:estado(m)[1],s:6},{v:m.observaciones||'',s:6}])});
+  const r3=[H('Ítem','Código','Título › Subtítulo › Partida','Und.','N° mediciones','Metrado total','Alertas')],last=[];let k=0;
+  consolidar(p).forEach(c=>{(ANC[c.codigo]||[]).forEach((a,x)=>{if(last[x]!==a.c){last.length=x;last[x]=a.c;r3.push([{v:'',s:5},{v:a.c,s:5},{v:'    '.repeat(a.n-1)+a.d,s:5},{v:'',s:5},{v:'',s:5},{v:'',s:5},{v:'',s:5}])}});
+    r3.push([{v:++k,s:6},{v:c.codigo,s:6},{v:'    '.repeat(((BYC[c.codigo]||{n:4}).n)-1)+c.descripcion,s:6},{v:uAbbr(c.unidad),s:6},{v:c.n,s:6},{v:c.total,s:2},{v:c.al||'',s:6}])});
+  const sh=[['Resumen',sheetXML(r1,[26,52,14,14,12,12,12])],['Metrados',sheetXML(r2,[12,7,14,46,8,30,10,10,10,10,12,30,30],1)],['Consolidado',sheetXML(r3,[7,14,70,8,14,16,10])]],X='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+  const files=[['[Content_Types].xml',X+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'+sh.map((_,i)=>'<Override PartName="/xl/worksheets/sheet'+(i+1)+'.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>').join('')+'</Types>'],
+    ['_rels/.rels',X+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'],
+    ['xl/workbook.xml',X+'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'+sh.map((x,i)=>'<sheet name="'+x[0]+'" sheetId="'+(i+1)+'" r:id="rId'+(i+1)+'"/>').join('')+'</sheets></workbook>'],
+    ['xl/_rels/workbook.xml.rels',X+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+sh.map((_,i)=>'<Relationship Id="rId'+(i+1)+'" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet'+(i+1)+'.xml"/>').join('')+'<Relationship Id="rId9" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>'],
+    ['xl/styles.xml',STYLES],...sh.map((x,i)=>['xl/worksheets/sheet'+(i+1)+'.xml',x[1]])];
+  saveBlob((p.nombre||'proyecto')+'_metrados.xlsx',zipStore(files));toast('Excel descargado')}
+function printHTML(p){const S=stats(p),it=consolidar(p),row=(a,b)=>'<tr><th>'+a+'</th><td>'+esc(b||'—')+'</td></tr>';
+  let h='<h1>Planilla de metrados</h1><table class="pd-info">'+row('Proyecto / Obra',p.nombre)+row('Expediente',p.expediente)+row('Ubicación',p.ubicacion)+row('Dpto. / Provincia / Distrito',[p.departamento,p.provincia,p.distrito].filter(Boolean).join(' / '))+row('Propietario / Entidad',p.cliente)+row('Elaborado por',p.elaboradoPor)+row('Fecha',p.fecha)+row('Fecha de impresión',new Date().toLocaleDateString('es-PE'))+'</table><p><b>'+S.nm+'</b> mediciones · <b>'+S.np+'</b> partidas medidas · <b>'+S.al+'</b> alertas</p>';
+  TITULOS.forEach(t=>{const ms=p.mediciones.filter(m=>m.categoria===t.c);if(!ms.length)return;h+='<h2>'+t.c+' · '+esc(t.d)+'</h2>';
+    [...new Set(ms.map(m=>m.codigo))].sort(byOrd).forEach(c=>{const rs=ms.filter(m=>m.codigo===c),d=dimsOf(rs[0].unidad),n=BYC[c]||{d:rs[0].descripcion};
+      h+='<table class="pd-t"><caption><b>'+c+'</b> — '+esc(n.d)+' ('+esc(uAbbr(rs[0].unidad)||'sin unidad')+')</caption><thead><tr><th>Ubicación / Elemento</th><th>N° veces</th><th>Largo</th><th>Ancho</th><th>Alto</th><th>Parcial</th><th>Observaciones</th></tr></thead><tbody>'
+      +rs.map(m=>'<tr><td>'+esc(m.ubicacionElemento)+'</td>'+['nVeces','largo','ancho','alto'].map((f,i)=>'<td class="r">'+(d.includes('nlah'[i])?esc(m[f]):'')+'</td>').join('')+'<td class="r"><b>'+fmt(calc(m))+'</b></td><td>'+esc(m.observaciones)+'</td></tr>').join('')
+      +'<tr class="tot"><td colspan="5" class="r">Total</td><td class="r">'+rs.reduce((a,m)=>a+nz(m),0).toFixed(2)+'</td><td></td></tr></tbody></table>'})});
+  h+='<h2 class="pb">Consolidado de metrados por partida</h2><table class="pd-t"><thead><tr><th>Ítem</th><th>Código</th><th>Partida</th><th>Und.</th><th>Med.</th><th>Metrado total</th></tr></thead><tbody>'+it.map((c,i)=>'<tr><td class="r">'+(i+1)+'</td><td>'+esc(c.codigo)+'</td><td>'+esc(c.descripcion)+'</td><td>'+esc(uAbbr(c.unidad))+'</td><td class="r">'+c.n+'</td><td class="r"><b>'+c.total.toFixed(2)+'</b></td></tr>').join('')+'</tbody></table>'
+   +'<h2>Control y aprobación</h2><table class="pd-t sig"><thead><tr><th>Responsable</th><th>Nombre y apellidos</th><th>Firma y sello</th><th>Fecha</th></tr></thead><tbody><tr><td>Elaborado por</td><td>'+esc(p.elaboradoPor)+'</td><td></td><td></td></tr><tr><td>Revisado por</td><td></td><td></td><td></td></tr><tr><td>Aprobado por</td><td></td><td></td><td></td></tr></tbody></table>';
+  return h}
+function printPDF(p){$('#printDoc').innerHTML=printHTML(p);document.body.classList.add('printing');toast('En la ventana de impresión elige “Guardar como PDF”');setTimeout(()=>window.print(),400)}
+addEventListener('afterprint',()=>document.body.classList.remove('printing'));
+
+/* ---------- render ---------- */
+const content=$('#content');
+function anim(dir){content.classList.remove('inR','inL','inF','go');if(!dir)return;void content.offsetWidth;content.scrollTop=0;content.style.setProperty('--dx',dir==='R'?'18px':dir==='L'?'-18px':'0px');
+  $$('.tview>*,.home-head,:scope>.card',content).forEach((e,i)=>{e.classList.add('rs');e.style.setProperty('--d',Math.min(i,16))});content.classList.add('go')}
+function render(dir,o={}){const p=proj();document.body.dataset.view=p?'project':'home';const chip=$('#projChip');
+  if(!p){openSheet(false);chip.innerHTML='';setMark('def');$('#aside').hidden=true;$('main').classList.add('noaside');content.innerHTML=homeHTML();anim(dir||'F');return}
+  refreshChip(p);chip.dataset.act='editdatos';chip.title='Editar datos del proyecto';chip.style.cursor='pointer';
+  updateTabs(p);setMark(tab);if(ORDER.includes(tab))lastT=tab;
+  $$('#bnav [data-n]').forEach(b=>b.classList.toggle('on',(b.dataset.n==='med'&&ORDER.includes(tab))||(b.dataset.n==='con'&&tab==='consolidado')||(b.dataset.n==='res'&&tab==='resumen')));
+  if(o.tree!==false)renderTree();
+  content.innerHTML=tab==='resumen'?resumenHTML(p):tab==='consolidado'?consolidadoHTML(p):titleHTML(p,tab);anim(dir)}
+
+/* ---------- eventos ---------- */
+content.addEventListener('input',e=>{
+  if(e.target.id==='pfilter'){$('#pgrid').innerHTML=gridHTML(e.target.value);return}
+  const i=e.target.closest('input.f');if(!i)return;const tr=i.closest('tr'),p=proj(),m=p.mediciones.find(x=>x.id===tr.dataset.id);
+  m[i.dataset.f]=i.value;touch(p);{const pv=$('.pv',tr);pv.textContent=fmt(calc(m));pv.classList.toggle('neg',calc(m)<0);$('.st',tr).innerHTML=estHTML(m)}
+  const blk=tr.closest('.blk');$('.tv',blk).textContent=p.mediciones.filter(x=>x.codigo===blk.dataset.cod&&x.categoria===tab).reduce((s,x)=>s+nz(x),0).toFixed(2);updateBadges(p)});
+content.addEventListener('change',e=>{if(!e.target.matches('.usel')||!e.target.value)return;const p=proj(),blk=e.target.closest('.blk');
+  p.mediciones.forEach(m=>{if(m.codigo===blk.dataset.cod&&m.categoria===tab)m.unidad=e.target.value});touch(p);render(null,{tree:false})});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeModal();if(!palPop.hidden)togglePal(false)}
+  if(e.key==='Enter'&&e.target.matches('.pcard'))e.target.click();
+  if(e.altKey&&proj()&&!root.innerHTML&&(e.key==='ArrowRight'||e.key==='ArrowLeft')){const i=ORDER.indexOf(tab)+(e.key==='ArrowRight'?1:-1);if(ORDER[i])go(ORDER[i])}});
+root.addEventListener('mousedown',e=>{if(e.target.classList.contains('modal-bg'))closeModal()});
+document.addEventListener('click',async e=>{const el=e.target.closest('[data-act]');if(!el)return;const a=el.dataset.act,p=proj();
+  if(el.closest('.msheet'))closeModal();
+  if(a==='cat')return openSheet(true);
+  if(a==='scrim')return openSheet(false);
+  if(a==='mmed')return go(lastT||ORDER[0]);
+  if(a==='more')return moreModal();
+  if(a==='vmenu')return toggleV();
+  if(a==='goview'){toggleV(false);return go(el.dataset.t)}
+  if(a==='fold'){const bk=el.closest('.blk'),k=tab+bk.dataset.cod;bk.classList.toggle('collapsed')?COLL.add(k):COLL.delete(k);return}
+  if(a==='pal')return togglePal();
+  if(a==='setpal')return setPal(el.dataset.id);
+  if(a==='setmode')return smooth(()=>setTheme(el.dataset.m,true));
+  if(a==='tab')return go(el.dataset.tab);
+  if(a==='prev'||a==='next')return go(ORDER[ORDER.indexOf(tab)+(a==='next'?1:-1)]);
+  if(a==='new')return newModal();
+  if(a==='home'){setCur(null);render('F');return}
+  if(a==='import')return $('#fileInput').click();
+  if(a==='open'){const q=DB.find(x=>x.id===el.dataset.id);if(!q)return;setCur(q.id);tab=VIEWS.includes(q.tab)?q.tab:TITULOS[0].c;$('#buscador').value='';render('F');return}
+  if(a==='dup'){const o=DB.find(x=>x.id===el.dataset.id),c=JSON.parse(JSON.stringify(o));c.id=uid('p');c.nombre=o.nombre+' (copia)';c.mod=Date.now();DB.push(c);persist();render('F');toast('Proyecto duplicado');return}
+  if(a==='del'){const o=DB.find(x=>x.id===el.dataset.id);if(await confirmD('¿Eliminar proyecto?','Se borrará “'+esc(o.nombre)+'” con todas sus mediciones. No se puede deshacer.','Eliminar')){DB=DB.filter(x=>x.id!==o.id);persist();if(cur===o.id)setCur(null);render('F');toast('Proyecto eliminado')}return}
+  if(!p)return;
+  if(a==='editdatos')return editModal(p);
+  if(a==='vm'){vmode=el.dataset.v;render('F');return}
+  if(a==='export'){const b=new Blob([JSON.stringify(p,null,2)],{type:'application/json'}),l=document.createElement('a');l.href=URL.createObjectURL(b);l.download=(p.nombre||'proyecto')+'.metrados.json';l.click();return}
+  if(a==='xlsx')return xlsxExport(p);if(a==='csvm')return csvMetrados(p);if(a==='csvc')return csvCons(p);if(a==='print')return printPDF(p);
+  if(a==='savedatos'){p.nombre=$('#fNombre').value.trim()||'Proyecto';p.ubicacion=$('#fUbic').value.trim();p.cliente=$('#fCli').value.trim();p.elaboradoPor=$('#fElab').value.trim();p.fecha=$('#fFecha').value;p.expediente=$('#fExp').value.trim();p.departamento=$('#fDep').value.trim();p.provincia=$('#fPro').value.trim();p.distrito=$('#fDis').value.trim();touch(p);render();toast('Datos guardados');return}
+  if(a==='addrow'){const blk=el.closest('.blk'),r=p.mediciones.find(m=>m.codigo===blk.dataset.cod&&m.categoria===tab);const id=addMed(p,{c:r.codigo,d:r.descripcion,u:r.unidad,cat:r.categoria});render(null,{tree:false});flashRow(id);return}
+  if(a==='delrow'){const id=el.closest('tr').dataset.id;p.mediciones=p.mediciones.filter(m=>m.id!==id);touch(p);render(null,{tree:false});return}
+  if(a==='delp'){const c=el.closest('.blk').dataset.cod;if(await confirmD('¿Quitar partida?','Se quitarán todas las filas medidas de '+esc(c)+'.','Quitar')){p.mediciones=p.mediciones.filter(m=>!(m.codigo===c&&m.categoria===tab));touch(p);render()}}});
+$('#fileInput').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=ev=>{try{const p=JSON.parse(ev.target.result);if(!p||!Array.isArray(p.mediciones))throw 0;if(!p.id)p.id=uid('p');p.mod=Date.now();const i=DB.findIndex(x=>x.id===p.id);i>-1?DB[i]=p:DB.push(p);persist();setCur(p.id);tab=VIEWS.includes(p.tab)?p.tab:TITULOS[0].c;render('F');toast('Proyecto importado')}catch(err){toast('Archivo no válido')}};
+  r.readAsText(f);e.target.value=''});
+window.addEventListener('resize',()=>{const p=proj();if(p)updateTabs(p)});
+
+/* ---------- paleta de colores ---------- */
+const palPop=document.createElement('div');palPop.id='palPop';palPop.hidden=true;palPop.setAttribute('role','dialog');palPop.setAttribute('aria-label','Temas de color');document.body.appendChild(palPop);
+const curPal=()=>{let id='jade';try{id=localStorage.getItem('metrados_paleta')||id}catch(e){}return PALS.find(x=>x.id===id)||PALS[0]};
+function renderPal(){const dark=document.documentElement.dataset.theme==='dark',cp=curPal();
+  palPop.innerHTML='<div class="pp-h"><b>Tema de color</b><div class="vt pp-mode"><button type="button" class="'+(dark?'':'on')+'" data-act="setmode" data-m="light">'+I('sun','sm')+'Claro</button><button type="button" class="'+(dark?'on':'')+'" data-act="setmode" data-m="dark">'+I('moon','sm')+'Oscuro</button></div></div><div class="pp-grid">'
+  +PALS.map(P=>{const v=palVars(P,dark),on=P.id===cp.id;return '<button type="button" class="pal'+(on?' on':'')+'" data-act="setpal" data-id="'+P.id+'" aria-pressed="'+on+'"><span class="sw" style="background:'+v['--bg']+'"><i style="background:'+v['--accent']+';flex:2"></i><i style="background:'+v['--cat2']+'"></i><i style="background:'+v['--cat-ink']+'"></i></span><span class="pn">'+P.n+'</span></button>'}).join('')+'</div>'}
+function togglePal(force){const open=force!=null?force:palPop.hidden,b=$('#btnPal');
+  if(open){renderPal();const r=b.getBoundingClientRect();palPop.style.top=(r.bottom+8)+'px';palPop.style.right=Math.max(12,innerWidth-r.right)+'px';palPop.hidden=false;requestAnimationFrame(()=>requestAnimationFrame(()=>palPop.classList.add('on')))}
+  else{palPop.classList.remove('on');setTimeout(()=>{if(!palPop.classList.contains('on'))palPop.hidden=true},220)}
+  b.setAttribute('aria-expanded',open)}
+function setPal(id){smooth(()=>{try{localStorage.setItem('metrados_paleta',id)}catch(e){}applyPal();$$('.pal',palPop).forEach(b=>{const on=b.dataset.id===id;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)})})}
+document.addEventListener('mousedown',e=>{if(!palPop.hidden&&!e.target.closest('#palPop,#btnPal'))togglePal(false)});
+
+function setTheme(t,save){document.documentElement.dataset.theme=t;if(save)try{localStorage.setItem('metrados_tema',t)}catch(e){}
+  $('#btnTheme').innerHTML=I(t==='dark'?'sun':'moon')+'<span class="lbl">'+(t==='dark'?'Claro':'Oscuro')+'</span>';applyPal();if(palPop&&!palPop.hidden)renderPal()}
+setTheme(document.documentElement.dataset.theme==='dark'?'dark':'light');
+document.addEventListener('click',e=>{if(e.target.closest('[data-act=theme]'))smooth(()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark',true))});
+let _pt;addEventListener('beforeprint',()=>{_pt=document.documentElement.dataset.theme;document.documentElement.dataset.theme='light';applyPal()});addEventListener('afterprint',()=>{if(_pt){document.documentElement.dataset.theme=_pt;applyPal()}});
+const vPop=document.createElement('div');vPop.id='vPop';vPop.hidden=true;vPop.setAttribute('role','menu');document.body.appendChild(vPop);
+function renderV(){const p=proj();if(!p)return;const S=stats(p),it=(id,ic,t,s)=>'<button type="button" class="vi'+(tab===id?' on':'')+'" role="menuitem" data-act="goview" data-t="'+id+'">'+I(ic)+'<span><b>'+t+'</b><small>'+s+'</small></span></button>';
+  vPop.innerHTML=it('consolidado','chart','Consolidado',S.np+' partidas · '+S.nm+' mediciones')+it('resumen','info','Resumen y datos','Panel, avance y datos del proyecto'+(S.al?' · '+S.al+' alertas':''))}
+function toggleV(force){const open=force!=null?force:vPop.hidden,b=$('#btnV');
+  if(open){renderV();const r=b.getBoundingClientRect();vPop.style.top=(r.bottom+8)+'px';vPop.style.left=Math.max(12,r.left)+'px';vPop.hidden=false;requestAnimationFrame(()=>requestAnimationFrame(()=>vPop.classList.add('on')));$('#vmenuWrap').classList.add('seen');try{localStorage.setItem('metrados_vm','1')}catch(e){}}
+  else{vPop.classList.remove('on');setTimeout(()=>{if(!vPop.classList.contains('on'))vPop.hidden=true},230)}b.setAttribute('aria-expanded',open)}
+document.addEventListener('mousedown',e=>{if(!vPop.hidden&&!e.target.closest('#vPop,#btnV'))toggleV(false)});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!vPop.hidden)toggleV(false)});
+try{if(localStorage.getItem('metrados_vm'))$('#vmenuWrap').classList.add('seen')}catch(e){}
+setTimeout(()=>{const h=$('#vhint');h&&h.remove()},9500);
+(function(){const b=document.body,i=$('#intro'),done=()=>b.classList.remove('boot');
+  if(!i||matchMedia('(prefers-reduced-motion:reduce)').matches){i&&i.remove();done();return}
+  $('#inMark').innerHTML=I('ruler');const out=()=>{i.classList.add('out');done();setTimeout(()=>i.remove(),900)};
+  setTimeout(out,1300);i.onclick=out})();
+function openSheet(o){$('#aside').classList.toggle('open',o);$('#scrim').classList.toggle('on',o);document.body.classList.toggle('lock',o)}
+function moreModal(){const it=(a,ic,t)=>'<button type="button" class="vi" data-act="'+a+'">'+I(ic)+'<span><b>'+t+'</b></span></button>';
+  modal('<h2>Más opciones</h2><div class="msheet">'+it('home','folder','Mis proyectos')+it('editdatos','edit','Datos del proyecto')+it('xlsx','save','Descargar Excel (.xlsx)')+it('print','printer','Guardar PDF')+it('import','upload','Importar proyecto')+'</div>')}
+(function(){let x0,y0,t0,ok;
+  content.addEventListener('touchstart',e=>{const t=e.touches[0];x0=t.clientX;y0=t.clientY;t0=Date.now();ok=innerWidth<=860&&ORDER.includes(tab)&&!e.target.closest('input,select,.tbl-wrap')},{passive:true});
+  content.addEventListener('touchend',e=>{if(!ok)return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;
+    if(Math.abs(dx)>80&&Math.abs(dy)<45&&Date.now()-t0<600){const n=ORDER[ORDER.indexOf(tab)+(dx<0?1:-1)];n&&go(n)}},{passive:true})})();
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol))addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+buildTabs();
+if(cur){const p=proj();if(VIEWS.includes(p.tab))tab=p.tab}
+render('F');
+</script>
+</body>
+</html>
